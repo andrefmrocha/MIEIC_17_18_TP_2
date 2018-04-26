@@ -5,9 +5,20 @@
 #ifndef MIEIC_17_18_TP_2_DICTIONARY_H
 #define MIEIC_17_18_TP_2_DICTIONARY_H
 
+#include <string>
+#include <iostream>
+#include <map>
+#include <vector>
+#include <fstream>
+using namespace std;
 
 class Dictionary {
+public:
+    Dictionary();
+    Dictionary(string name);
 
+private:
+    map<string, vector<string>> synonymDic;
 };
 
 
