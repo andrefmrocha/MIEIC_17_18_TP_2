@@ -136,3 +136,13 @@ void Board::clear()
         }
     }
 }
+void Board::eraseWord(string word)
+{
+    for (int i = 0; i < wordPos.size(); ++i)
+    {
+        if(wordPos[i].first == word)
+        {
+            wordPos.erase(wordPos.begin() + i);
+        }
+    }
+}

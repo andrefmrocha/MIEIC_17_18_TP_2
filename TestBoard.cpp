@@ -5,7 +5,10 @@
 
 int main () {
     Board b1 (5, 5);
+//    b1.board_show();
+    b1.addWord("AbV", "Meias");
+    b1.addWord("BaV", "Fuck");
     b1.board_show();
-    int x;
-    cin >> x;
-};
+    b1.eraseWord("Fuck");
+    b1.board_show();
+}

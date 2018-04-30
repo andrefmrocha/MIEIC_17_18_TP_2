@@ -19,6 +19,7 @@ public:
     void clear();
     bool addWord(string position, string word);
     void writeWord(string position, string word);
+    void eraseWord(string word);
 private:
     int lines;
     int columns;
