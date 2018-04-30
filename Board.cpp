@@ -102,6 +102,16 @@ void Board::writeWord(string position, string word)
     char direc = position[2];
     if(direc == 'V')
     {
+        if(pos_h != 0)
+        {
+            if(board[pos_h-1][pos_v] =='.')
+                board[pos_h-1][pos_v] = '#';
+        }
+        if((pos_h + word.size()) <= lines)
+        {
+            if(board[pos_h+(word.size())][pos_v] == '.')
+                board[pos_h+(word.size())][pos_v] = '#';
+        }
         for (auto i: word)
         {
             board[pos_h][pos_v] = i;
@@ -110,6 +120,16 @@ void Board::writeWord(string position, string word)
     }
     else
     {
+        if(pos_v != 0)
+        {
+            if(board[pos_h][pos_v-1] == '.')
+                board[pos_h][pos_v-1] = '#';
+        }
+        if((pos_h + word.size()) <= columns)
+        {
+            if(board[pos_h][pos_v+(word.size())] =='.')
+                board[pos_h][pos_v+(word.size())] = '#';
+        }
         for (auto i: word)
         {
             board[pos_h][pos_v] = i;
