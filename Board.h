@@ -14,11 +14,16 @@ class Board {
 public:
     Board();
     Board(unsigned int lines, unsigned int columns);
-   void board_show();
+    void board_show();
+    void writeAllWords();
+    void clear();
+    bool addWord(string position, string word);
+    void writeWord(string position, string word);
 private:
     int lines;
     int columns;
     vector<vector <char>> board;
+    vector<pair<string, string>> wordPos;
 };
 
 
