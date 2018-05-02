@@ -5,6 +5,7 @@
 #ifndef PROJETO_2_BOARD_H
 #define PROJETO_2_BOARD_H
 
+#include "unix_colors.h"
 #include <iostream>
 #include <string>
 #include <vector>

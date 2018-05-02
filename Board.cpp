@@ -19,12 +19,14 @@
 void Board::board_show()    //All the words are written in their positions in order to show it to the user
 {
     writeAllWords();
+    setcolor(BLACK,CYAN_B);
     for (int i = 0; i < lines; i++) {
         for (int j = 0; j < columns; j++) {
             cout << board.at(i).at(j) << "  ";
         }
         cout << endl;
     }
+    setcolor(NO_COLOR);
     clear();            //After showing it, the board itself is cleared
 }
 
@@ -35,7 +37,8 @@ void Board::board_show()    //All the words are written in their positions in or
  * related to its position
  * @param position
  * @param word
- * @return true if word if word is valid for the selected position
+ * @return true if word
+ * is valid for the selected position
  **************************************************************/
 bool Board::addWord(string position, string word)    // Adds the word to the board, returns false if it can't
 {
