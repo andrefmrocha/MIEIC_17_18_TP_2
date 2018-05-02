@@ -17,7 +17,7 @@ public:
     Dictionary();
     Dictionary(string name);
 
-private:
+protected:
     map<string, vector<string>> synonymDic;
 };
 
