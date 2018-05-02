@@ -1,0 +1,8 @@
+//
+// Created by joaom on 02-05-2018.
+//
+
+#ifndef PROJETO_2_WINDOWS_COLORS_H
+#define PROJETO_2_WINDOWS_COLORS_H
+
+#endif //PROJETO_2_WINDOWS_COLORS_H
