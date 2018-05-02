@@ -463,3 +463,8 @@ CMakeLists.txt
 PROG_2017-2018_Trabalho-2-v03_EN.pdf
 dic.txt
 synonyms_WINDOWS.txt
+ConsoleApplication1.vcxproj
+ConsoleApplication1.vcxproj.filters
+stdafx.cpp
+stdafx.h
+targetver.h

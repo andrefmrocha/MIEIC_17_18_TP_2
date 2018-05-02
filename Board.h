@@ -15,12 +15,14 @@ public:
     Board();
     Board(unsigned int lines, unsigned int columns);
     void board_show();
-    void writeAllWords();
-    void clear();
     bool addWord(string position, string word);
-    void writeWord(string position, string word);
     void eraseWord(string word);
+    void helpWord(string position);
 private:
+    void clear();
+    void writeAllWords();
+    void writeWord(string position, string word);
+    bool wildcardMatch(const char *str, const char *strWild);
     int lines;
     int columns;
     vector<vector <char>> board;
