@@ -12,7 +12,7 @@
 class cwcreator: public Board, public Dictionary
 {
 public:
-    cwcreator(int lines, int columns): Board(lines,columns){};
+    cwcreator(int lines, int columns): Board(lines,columns), Dictionary(){};
     bool helpWord(string position);
 
 private:
