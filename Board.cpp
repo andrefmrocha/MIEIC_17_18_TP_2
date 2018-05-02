@@ -20,9 +20,17 @@ Board::Board(unsigned int lines, unsigned int columns) {
 void Board::board_show()    //All the words are written in their positions in order to show it to the user
 {
     writeAllWords();
-    setcolor(BLACK,LIGHTGRAY);
+    setcolor(RED);
+	cout << "  ";
+	for (int i2 = 0; i2 < columns; i2++) {
+		cout << (char)(i2 + 97) << "  ";
+	}
+	cout << endl;
     for (int i = 0; i < lines; i++) {
-        for (int j = 0; j < columns; j++) {
+		setcolor(RED);
+		cout << (char)(i + 65) << " ";
+		for (int j = 0; j < columns; j++) {
+			setcolor(BLACK, LIGHTGRAY);
 			if (board.at(i).at(j) == '#') {
 				setcolor(WHITE, BLACK);
 				cout << board.at(i).at(j) << "  ";
@@ -30,6 +38,7 @@ void Board::board_show()    //All the words are written in their positions in or
 			}
             else cout << board.at(i).at(j) << "  ";
         }
+		setcolor(WHITE, BLACK);
         cout << endl;
     }
 	setcolor(WHITE, BLACK);
