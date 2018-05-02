@@ -1,7 +1,7 @@
 //
 // Created by andrefmrocha on 02-05-2018.
 //
-
+#include "stdafx.h"
 #include "cwcreator.h"
 /*cwcreator::cwcreator()
 {
@@ -133,4 +133,18 @@ void cwcreator::wildcardWords(string word, vector<string> &possiblewords)
             possiblewords.push_back(i.first);
         }
     }
+}
+
+void cwcreator::board_save(string filename) {
+	ofstream outfile(filename);
+	outfile << "THIS IS GOING TO DISPLAY THE DICTIONARY FILENAME" << endl;
+	for (int i = 0; i < lines; i++) {
+		for (int j = 0; j < columns; j++) {
+			outfile << board.at(i).at(j) << "  ";
+		}
+		outfile << endl;
+	}
+	for (int i2 = 0; i2 < wordPos.size(); i2++) {
+		outfile << wordPos.at(i2).first << " " << wordPos.at(i2).second << endl;
+	}
 }

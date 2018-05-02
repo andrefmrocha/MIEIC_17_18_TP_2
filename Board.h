@@ -11,7 +11,7 @@
 // WINDOWS specific
 #include "windows_colors.h"
 #endif
-
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -29,12 +29,12 @@ protected:
     int lines;
     int columns;
     vector<vector <char>> board;
+	vector<pair<string, string>> wordPos;
 
 private:
     void clear();
     void writeAllWords();
     void writeWord(string position, string word);
-    vector<pair<string, string>> wordPos;
 };
 
 

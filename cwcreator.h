@@ -14,6 +14,7 @@ class cwcreator: public Board, public Dictionary
 public:
     cwcreator(int lines, int columns): Board(lines,columns), Dictionary(){};
     bool helpWord(string position);
+	void board_save(string filename);
 
 private:
     bool wildcardMatch(const char *str, const char *strWild);
