@@ -4,8 +4,14 @@
 
 #ifndef PROJETO_2_BOARD_H
 #define PROJETO_2_BOARD_H
-
+#ifdef __UNIX__
+// UNIX specific
 #include "unix_colors.h"
+#else 
+// WINDOWS specific
+#include "windows_colors.h"
+#endif
+
 #include <iostream>
 #include <string>
 #include <vector>

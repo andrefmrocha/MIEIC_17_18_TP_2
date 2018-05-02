@@ -1,7 +1,7 @@
 //
 // Created by joaom on 26-04-2018.
 //
-
+#include "stdafx.h"
 #include "Board.h"
 
  Board::Board(unsigned int lines, unsigned int columns) {
@@ -19,14 +19,19 @@
 void Board::board_show()    //All the words are written in their positions in order to show it to the user
 {
     writeAllWords();
-    setcolor(BLACK,CYAN_B);
+    setcolor(BLACK,LIGHTGRAY);
     for (int i = 0; i < lines; i++) {
         for (int j = 0; j < columns; j++) {
-            cout << board.at(i).at(j) << "  ";
+			if (board.at(i).at(j) == '#') {
+				setcolor(WHITE, BLACK);
+				cout << board.at(i).at(j) << "  ";
+				setcolor(BLACK, LIGHTGRAY);
+			}
+            else cout << board.at(i).at(j) << "  ";
         }
         cout << endl;
     }
-    setcolor(NO_COLOR);
+	setcolor(WHITE, BLACK);
     clear();            //After showing it, the board itself is cleared
 }
 
