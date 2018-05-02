@@ -18,16 +18,16 @@ public:
     void board_show();
     bool addWord(string position, string word);
     void eraseWord(string word);
-    bool helpWord(string position);
+
+protected:
+    int lines;
+    int columns;
+    vector<vector <char>> board;
+
 private:
     void clear();
     void writeAllWords();
     void writeWord(string position, string word);
-    void wildcardWords(string word, vector<string> &possiblewords);
-    bool wildcardMatch(const char *str, const char *strWild);
-    int lines;
-    int columns;
-    vector<vector <char>> board;
     vector<pair<string, string>> wordPos;
 };
 
