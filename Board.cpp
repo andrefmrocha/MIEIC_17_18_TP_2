@@ -4,7 +4,9 @@
 
 #include "Board.h"
 
- Board::Board(unsigned int lines, unsigned int columns) {
+typedef char ;
+
+Board::Board(unsigned int lines, unsigned int columns) {
     this->lines=lines;
     this->columns=columns;
     vector<char> cenas;
@@ -200,11 +202,43 @@ void Board::eraseWord(string word)
         }
     }
 }
-void Board::helpWord(string position)
+bool Board::helpWord(string position)
 {
-    int pos_v = static_cast<int>(position[1]-'a');  //save both positions as integers
+    if(position.size() > 3) //Checks if the position argument was passed correctly
+    {
+        cout << "Too many positional arguments." << endl;
+        return false;
+    }
+    int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
     int pos_h = static_cast<int>(position[0]-'A');
-    char direc = position[2]; 
+    char direc = position[2];   // The direction is saved as a char
+    if(pos_h > lines || pos_v > columns || (direc != 'V' && direc !='H'))   //Checks if all the arguments are valid for the given board
+    {
+        cout << "Wrong Position" << endl;
+        return false;
+    }
+    string wildcardWord;
+    vector<string> possibleWords;
+    if(direc == 'V')
+    {
+        for(pos_h; pos_h < lines; pos_h++)
+        {
+            if(board[pos_h][pos_v] >= 'A' && board[pos_h][pos_v] <= 'Z')
+            {
+                wildcardWord.push_back(board[pos_h][pos_v]);
+                wildcardWords(wildcardWord,possibleWords);
+            }
+            else if(board[pos_h][pos_v] == '#')
+            {
+                break;
+            }
+            else
+            {
+                wildcardWord.push_back('?');
+                wildcardWords(wildcardWord,possibleWords);
+            }
+        }
+    }
 }
 
 bool Board::wildcardMatch(const char *str, const char *strWild)
