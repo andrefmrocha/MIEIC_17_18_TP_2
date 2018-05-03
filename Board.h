@@ -30,10 +30,11 @@ protected:
     int columns;
     vector<vector <char>> board;
 	vector<pair<string, string>> wordPos;
+	void writeAllWords();
+	void clear();
 
 private:
-    void clear();
-    void writeAllWords();
+    
     void writeWord(string position, string word);
 };
 

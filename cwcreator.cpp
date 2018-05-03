@@ -136,15 +136,18 @@ void cwcreator::wildcardWords(string word, vector<string> &possiblewords)
 }
 
 void cwcreator::board_save(string filename) {
+	writeAllWords();
 	ofstream outfile(filename);
-	outfile << "THIS IS GOING TO DISPLAY THE DICTIONARY FILENAME" << endl;
+	outfile << "THIS IS GOING TO DISPLAY THE DICTIONARY FILENAME" << endl << endl;
 	for (int i = 0; i < lines; i++) {
 		for (int j = 0; j < columns; j++) {
 			outfile << board.at(i).at(j) << "  ";
 		}
 		outfile << endl;
 	}
+	outfile << endl;
 	for (int i2 = 0; i2 < wordPos.size(); i2++) {
 		outfile << wordPos.at(i2).first << " " << wordPos.at(i2).second << endl;
 	}
+	clear();
 }

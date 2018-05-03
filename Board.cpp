@@ -37,7 +37,6 @@ void Board::board_show()    //All the words are written in their positions in or
 			}
             else cout << board.at(i).at(j) << "  ";
         }
-		setcolor(WHITE, BLACK);
         cout << endl;
     }
 	setcolor(WHITE, BLACK);
