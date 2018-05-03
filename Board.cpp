@@ -1,7 +1,6 @@
 //
 // Created by joaom on 26-04-2018.
 //
-#include "stdafx.h"
 #include "Board.h"
 
 
@@ -81,16 +80,15 @@ bool Board::addWord(string position, string word)    // Adds the word to the boa
         }
         else
         {
-            int hori = pos_h;
             for(auto i: word)
             {
-                if(board[hori][pos_v] != '.' && board[hori][pos_v] != i)    //If any of positions of the board are
+                if(board[pos_h][pos_v] != '.' && board[pos_h][pos_v] != i)    //If any of positions of the board are
                 {                                                           // taken with letters different from the word
                     cout << "Word unfitting for this position" << endl;     // it is ignored
                     clear();
                     return false;
                 }
-                hori++;
+                pos_h++;
             }
         }
     }
@@ -104,16 +102,15 @@ bool Board::addWord(string position, string word)    // Adds the word to the boa
         }
         else
         {
-            int verti = pos_v;
             for(auto i: word)
             {
-                if(board[pos_h][verti] != '.' && board[pos_h][verti]!= i)
+                if(board[pos_h][pos_v] != '.' && board[pos_h][pos_v]!= i)
                 {
                     cout << "Word unfitting for this position" << endl;
                     clear();
                     return false;
                 }
-                verti++;
+                pos_v++;
             }
         }
     }
@@ -140,7 +137,7 @@ void Board::writeWord(string position, string word)
             if(board[pos_h-1][pos_v] =='.')
                 board[pos_h-1][pos_v] = '#';    //Checks if there's space before the word to write a '#'
         }
-        if((pos_h + word.size()) <= lines)
+        if((pos_h + word.size()) < lines)
         {
             if(board[pos_h+(word.size())][pos_v] == '.')
                 board[pos_h+(word.size())][pos_v] = '#';    //Checks if there's space after the word to write a '#
@@ -158,7 +155,7 @@ void Board::writeWord(string position, string word)
             if(board[pos_h][pos_v-1] == '.')
                 board[pos_h][pos_v-1] = '#';
         }
-        if((pos_h + word.size()) <= columns)
+        if((pos_h + word.size()) < columns)
         {
             if(board[pos_h][pos_v+(word.size())] =='.')
                 board[pos_h][pos_v+(word.size())] = '#';
