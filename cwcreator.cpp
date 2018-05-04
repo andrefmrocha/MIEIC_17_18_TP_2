@@ -137,7 +137,6 @@ void cwcreator::wildcardWords(string word, vector<string> &possiblewords)
 }
 
 void cwcreator::board_save(string filename) {
-	writeAllWords();
 	ofstream outfile(filename);
 	outfile << "THIS IS GOING TO DISPLAY THE DICTIONARY FILENAME" << endl << endl;
 	for (int i = 0; i < lines; i++) {

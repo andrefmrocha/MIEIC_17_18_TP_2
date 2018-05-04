@@ -23,7 +23,7 @@ public:
     Board(unsigned int lines, unsigned int columns);
     void board_show();
     void eraseWord(string word);
-
+	void finishBoard();
 protected:
     int lines;
     int columns;

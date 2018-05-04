@@ -138,3 +138,17 @@ void Board::eraseWord(string word)
         }
     }
 }
+
+void Board::finishBoard()
+{
+    writeAllWords();
+    for(auto & i: board)
+    {
+        for(auto & j: i)
+        {
+            if(j == '.')
+                j = '#';
+        }
+
+    }
+}
