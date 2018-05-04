@@ -14,11 +14,13 @@ using namespace std;
 
 class Dictionary {
 public:
-    Dictionary();
     Dictionary(string name);
 
 protected:
-    map<string, vector<string>> synonymDic;
+    bool isWordinDict(string word) const;
+    map<string, vector<string>> synonymDict;
+private:
+    long words;
 };
 
 

@@ -22,7 +22,6 @@ public:
     Board();
     Board(unsigned int lines, unsigned int columns);
     void board_show();
-    bool addWord(string position, string word);
     void eraseWord(string word);
 
 protected:

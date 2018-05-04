@@ -6,7 +6,9 @@
 
 int main()
 {
-    cwcreator cw(10,10);
-    cw.addWord("AbV", "Meia");
+    int a;
+    cwcreator cw(10,10,"dic.txt");
+    cw.addWord("AbV", "Dissemble");
     cw.board_show();
+    cin >> a;
 }

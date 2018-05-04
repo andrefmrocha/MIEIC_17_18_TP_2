@@ -12,7 +12,8 @@
 class cwcreator: public Board, public Dictionary
 {
 public:
-    cwcreator(int lines, int columns): Board(lines,columns), Dictionary(){};
+    cwcreator(int lines, int columns, string infile): Board(lines,columns), Dictionary(infile){};
+	bool addWord(string position, string word);
     bool helpWord(string position);
 	void board_save(string filename);
 

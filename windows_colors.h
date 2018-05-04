@@ -7,10 +7,11 @@
 #include <iostream> 
 #include <ctime> 
 #include <cstdlib>
-#include <windows.h>
+//#include <windows.h>
 using namespace std;
 //COLOR CODES: 
-#define BLACK 0 
+#define BLACK 0
+#define BLACK_B 0
 #define BLUE 1 
 #define GREEN 2 
 #define CYAN 3 

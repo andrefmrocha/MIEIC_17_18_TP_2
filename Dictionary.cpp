@@ -4,16 +4,14 @@
 #include "stdafx.h"
 #include "Dictionary.h"
 
-Dictionary::Dictionary()
+Dictionary::Dictionary(string name)
 {
-    string inName;
-    cout << "Please specify the name of the dictionary: ";
-    cin >> inName;
-    ifstream infile("dic.txt"); // Name for testing purposes
+    ifstream infile(name);
     string savingString;
     if(!infile.is_open())
     {
-        cout << "File not opened";
+        cout << "File not opened" << endl;
+        words = -1;
     }
     while(getline(infile, savingString))
     {
@@ -26,6 +24,7 @@ Dictionary::Dictionary()
             if(i == ':')
             {
                 key = savingWord;
+                words++;
                 savingWord.clear();
             }
             if (i == ',' || i == '\r')
@@ -41,6 +40,18 @@ Dictionary::Dictionary()
         if(!savingWord.empty())
             synVec.push_back(savingWord);
 //        synVec.push_back(savingWord);
-        synonymDic.insert(pair<string, vector<string>>(key, synVec));
+        synonymDict.insert(pair<string, vector<string>>(key, synVec));
     }
+}
+
+bool Dictionary::isWordinDict(string word) const
+{
+    for(auto i: synonymDict)
+    {
+        if(i.first == word)
+        {
+            return true;
+        }
+    }
+    return false;
 }
