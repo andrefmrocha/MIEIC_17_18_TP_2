@@ -4,7 +4,7 @@
 
 #ifndef PROJETO_2_BOARD_H
 #define PROJETO_2_BOARD_H
-#ifdef __UNIX__
+#ifdef __unix__
 // UNIX specific
 #include "unix_colors.h"
 #else 
