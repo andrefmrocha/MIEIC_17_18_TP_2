@@ -23,29 +23,35 @@ Dictionary::Dictionary(string name)
         {
             if(i == ':')
             {
+//                toUpper(savingWord);
                 key = savingWord;
                 words++;
                 savingWord.clear();
             }
             if (i == ',' || i == '\r')
             {
+//                toUpper(savingWord);
                 synVec.push_back(savingWord);
                 savingWord.clear();
             }
             if (i != ' ' && i != ',' && i != ':')
             {
-                savingWord.push_back(i);
+                savingWord.push_back(toupper(i));
             }
         }
         if(!savingWord.empty())
+        {
+            toUpper(savingWord);
             synVec.push_back(savingWord);
+        }
 //        synVec.push_back(savingWord);
         synonymDict.insert(pair<string, vector<string>>(key, synVec));
     }
 }
 
-bool Dictionary::isWordinDict(string word) const
+bool Dictionary::isWordinDict(string word)
 {
+//    toUpper(word);
     for(auto i: synonymDict)
     {
         if(i.first == word)
@@ -54,4 +60,12 @@ bool Dictionary::isWordinDict(string word) const
         }
     }
     return false;
+}
+
+void Dictionary::toUpper(string &word)
+{
+    for(auto &i: word)
+    {
+        toupper(i);
+    }
 }

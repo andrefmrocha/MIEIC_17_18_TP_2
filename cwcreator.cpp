@@ -25,6 +25,7 @@ bool cwcreator::helpWord(string position)
     }
     string wildcardWord;
     vector<string> possibleWords;
+    writeAllWords();
     if(direc == 'V')
     {
         for(pos_h; pos_h < lines; pos_h++)
@@ -170,6 +171,7 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
         cout << "Too many positional arguments." << endl;
         return false;
     }
+
     if(!isWordinDict(word))
     {
         cout << "Word is not in the dictionary." << endl;

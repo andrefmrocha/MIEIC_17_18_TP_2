@@ -40,7 +40,7 @@ void Board::board_show()    //All the words are written in their positions in or
         setcolor(BLACK_B, BLACK_B);
         cout << endl;
     }
-	setcolor(WHITE, BLACK);
+	setcolor(WHITE, BLACK_B);
     clear();            //After showing it, the board itself is cleared
 }
 
@@ -81,7 +81,7 @@ void Board::writeWord(string position, string word)
             if(board[pos_h][pos_v-1] == '.')
                 board[pos_h][pos_v-1] = '#';
         }
-        if((pos_h + word.size()) < columns)
+        if((pos_h + word.size()) <= columns)
         {
             if(board[pos_h][pos_v+(word.size())] =='.')
                 board[pos_h][pos_v+(word.size())] = '#';

@@ -17,7 +17,8 @@ public:
     Dictionary(string name);
 
 protected:
-    bool isWordinDict(string word) const;
+    void toUpper(string &word);
+    bool isWordinDict(string word);
     map<string, vector<string>> synonymDict;
 private:
     long words;
