@@ -18,7 +18,7 @@ using namespace std;
 #define BLUE "\033[0;34m"
 #define MAGENTA "\033[0;35m"
 #define CYAN "\033[0;36m"
-#define LIGHTGRAY "\033[0;37m"
+//#define LIGHTGRAY "\033[0;37m"
 #define DARKGRAY "\033[1;30m"
 #define LIGHTRED "\033[1;31m"
 #define LIGHTGREEN "\033[1;32m"
@@ -35,7 +35,7 @@ using namespace std;
 #define BLUE_B "\033[0;44m"
 #define MAGENTA_B "\033[0;45m"
 #define CYAN_B "\033[0;46m"
-#define WHITE_B "\033[1;47m"
+#define LIGHTGRAY "\033[1;47m"
 void gotoxy(int x, int y);
 void clrscr(void);
 void setcolor(string color);

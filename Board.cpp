@@ -31,12 +31,13 @@ void Board::board_show()    //All the words are written in their positions in or
 		for (int j = 0; j < columns; j++) {
 			setcolor(BLACK, LIGHTGRAY);
 			if (board.at(i).at(j) == '#') {
-				setcolor(WHITE, BLACK);
+				setcolor(WHITE, BLACK_B);
 				cout << board.at(i).at(j) << "  ";
 				setcolor(BLACK, LIGHTGRAY);
 			}
             else cout << board.at(i).at(j) << "  ";
         }
+        setcolor(BLACK_B, BLACK_B);
         cout << endl;
     }
 	setcolor(WHITE, BLACK);
