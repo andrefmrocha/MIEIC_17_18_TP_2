@@ -4,7 +4,12 @@
 //#include "stdafx.h"
 #include "Board.h"
 
-
+Board::Board()
+{
+    lines = 0;
+    columns = 0;
+    finished = false;
+}
 Board::Board(unsigned int lines, unsigned int columns) {
     this->lines=lines;
     this->columns=columns;
@@ -15,11 +20,26 @@ Board::Board(unsigned int lines, unsigned int columns) {
     for (int j = 0; j < lines; j++){
         board.push_back(vec_columns);
     }
+    finished = false;
+}
+
+void Board::resizeBoard(unsigned int lines, unsigned int columns)
+{
+    this->lines=lines;
+    this->columns=columns;
+    board.clear();
+    vector<char> cenas;
+    for (int i = 0; i < columns; i++) {
+        cenas.push_back('.');
+    }
+    for (int j = 0; j < lines; j++){
+        board.push_back(cenas);
+    }
 }
 
 void Board::board_show()    //All the words are written in their positions in order to show it to the user
 {
-    writeAllWords();
+    fillBoard();
     setcolor(RED);
 	cout << "  ";
 	for (int i2 = 0; i2 < columns; i2++) {
@@ -144,14 +164,120 @@ bool Board::eraseWord(string word)
 
 void Board::finishBoard()
 {
-    writeAllWords();
-    for(auto & i: board)
-    {
-        for(auto & j: i)
-        {
-            if(j == '.')
-                j = '#';
-        }
+    finished = true;
+}
 
+void Board::fillBoard()
+{
+    writeAllWords();
+    if(finished)
+    {
+        for(auto & i: board)
+        {
+            for(auto & j: i)
+            {
+                if(j == '.')
+                    j = '#';
+            }
+
+        }
     }
+}
+
+int Board::countLine(string savingString)
+{
+    int num = 0;
+    for(auto i: savingString)
+    {
+        if( (i >= 'A' && i <= 'Z') || i == '#' || i == '.')
+            num++;
+    }
+    return num;
+}
+bool Board::readFile(string iname)
+{
+    ifstream infile(iname);
+    if(!infile.is_open())
+    {
+        cout << "File not found. " << endl;
+        return false;
+    }
+    string savingString, word, position, extract;
+    int lines = 0, columns = 0;
+    while (getline(infile, savingString))
+    {
+        if(savingString.empty()) // Introduzir o que vai estar escrito
+        {
+            finished = false;
+            break;
+        }
+        if(savingString == " ")
+        {
+            finished = true;
+            break;
+        }
+    }
+    while (getline(infile,savingString))
+    {
+        if (!savingString.empty())
+        {
+            lines++;
+            if(columns == 0)
+            {
+                columns = countLine(savingString);
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
+    while (getline(infile, savingString))
+    {
+        for(auto i: savingString)
+        {
+            if(i == ' ')
+            {
+                word = extract;
+                extract.clear();
+            }
+            else
+            {
+                extract.push_back(i);
+            }
+
+        }
+        position = extract;
+        extract.clear();
+        wordPos.push_back(pair<string, string>(word, position));
+    }
+    this->columns = columns;
+    this->lines = lines;
+    resizeBoard(lines, columns);
+}
+
+void Board::board_save(string filename)
+{
+    fillBoard();
+    ofstream outfile(filename);
+    outfile << "THIS IS GOING TO DISPLAY THE DICTIONARY FILENAME" << endl;
+    if(finished)
+    {
+        outfile << static_cast<char>(32) << endl;
+    }
+    else
+    {
+        outfile << endl;
+    }
+    for (int i = 0; i < lines; i++) {
+        for (int j = 0; j < columns; j++) {
+            outfile << board.at(i).at(j) << "  ";
+        }
+        outfile << endl;
+    }
+    outfile << endl;
+    for (int i2 = 0; i2 < wordPos.size(); i2++) {
+        outfile << wordPos.at(i2).first << " " << wordPos.at(i2).second << endl;
+    }
+    clear();
 }

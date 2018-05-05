@@ -25,7 +25,7 @@ bool cwcreator::helpWord(string position)
     }
     string wildcardWord;
     vector<string> possibleWords;
-    writeAllWords();
+    fillBoard();
     if(direc == 'V')
     {
         for(pos_h; pos_h < lines; pos_h++)
@@ -136,21 +136,7 @@ void cwcreator::wildcardWords(string word, vector<string> &possiblewords)
     }
 }
 
-void cwcreator::board_save(string filename) {
-	ofstream outfile(filename);
-	outfile << "THIS IS GOING TO DISPLAY THE DICTIONARY FILENAME" << endl << endl;
-	for (int i = 0; i < lines; i++) {
-		for (int j = 0; j < columns; j++) {
-			outfile << board.at(i).at(j) << "  ";
-		}
-		outfile << endl;
-	}
-	outfile << endl;
-	for (int i2 = 0; i2 < wordPos.size(); i2++) {
-		outfile << wordPos.at(i2).first << " " << wordPos.at(i2).second << endl;
-	}
-	clear();
-}
+
 
 
 /*************************************************************
@@ -184,7 +170,7 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
         cout << endl << "Wrong Position" << endl << endl;
         return false;
     }
-    writeAllWords();    //Writes the words in the board in order to analyze if the new word was given a valid position
+    fillBoard();    //Writes the words in the board in order to analyze if the new word was given a valid position
     if(direc == 'V')
     {
         if((pos_h + word.size()) > lines )  //In case there isn't enough space on the board, the word is ignored

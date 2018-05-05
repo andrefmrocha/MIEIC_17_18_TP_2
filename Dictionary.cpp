@@ -13,40 +13,44 @@ Dictionary::Dictionary(string name)
         cout << endl << "File not opened" << endl;
         words = -1;
     }
-    while(getline(infile, savingString))
+    else
     {
-        if(savingString.empty())
-            continue;
-        string key, savingWord;
-        vector<string> synVec;
-        for(auto i: savingString)
+        while(getline(infile, savingString))
         {
-            if(i == ':')
+            if(savingString.empty())
+                continue;
+            string key, savingWord;
+            vector<string> synVec;
+            for(auto i: savingString)
             {
+                if(i == ':')
+                {
 //                toUpper(savingWord);
-                key = savingWord;
-                words++;
-                savingWord.clear();
+                    key = savingWord;
+                    words++;
+                    savingWord.clear();
+                }
+                if (i == ',' || i == '\r')
+                {
+//                toUpper(savingWord);
+                    synVec.push_back(savingWord);
+                    savingWord.clear();
+                }
+                if (i != ' ' && i != ',' && i != ':')
+                {
+                    savingWord.push_back(toupper(i));
+                }
             }
-            if (i == ',' || i == '\r')
+            if(!savingWord.empty())
             {
-//                toUpper(savingWord);
+                toUpper(savingWord);
                 synVec.push_back(savingWord);
-                savingWord.clear();
             }
-            if (i != ' ' && i != ',' && i != ':')
-            {
-                savingWord.push_back(toupper(i));
-            }
-        }
-        if(!savingWord.empty())
-        {
-            toUpper(savingWord);
-            synVec.push_back(savingWord);
-        }
 //        synVec.push_back(savingWord);
-        synonymDict.insert(pair<string, vector<string>>(key, synVec));
+            synonymDict.insert(pair<string, vector<string>>(key, synVec));
+        }
     }
+    dictName = name;
 }
 
 bool Dictionary::isWordinDict(string word)

@@ -3,12 +3,16 @@
 //
 
 #include "cwcreator.h"
+#include "cwplayer.h"
 
 int main()
 {
-    int a;
-    cwcreator cw(10,10,"dic.txt");
-    cw.addWord("AbV", "Dissemble");
+    cwcreator board(10,10,"dic.txt");
+    board.addWord("AbV","DISSEMBLE");
+    board.addWord("BaH", "DISSEMBLE");
+//    board.finishBoard();
+    board.board_save("meias.txt");
+    cwplayer cw;
+    cw.readFile("meias.txt");
     cw.board_show();
-    cin >> a;
 }

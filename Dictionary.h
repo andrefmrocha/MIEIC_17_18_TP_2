@@ -21,7 +21,7 @@ protected:
     void toUpper(string &word);
     bool isWordinDict(string word);
     map<string, vector<string>> synonymDict;
-	
+    string dictName;
 private:
     long words;
 };

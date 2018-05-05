@@ -21,19 +21,23 @@ class Board {
 public:
     Board();
     Board(unsigned int lines, unsigned int columns);
+    void resizeBoard(unsigned int lines, unsigned int columns);
     void board_show();
     bool eraseWord(string word);
 	void finishBoard();
+    void board_save(string filename);
+    bool readFile(string iname);
 protected:
     int lines;
     int columns;
     vector<vector <char>> board;
-	vector<pair<string, string>> wordPos;
-	void writeAllWords();
-	void clear();
-
+    vector<pair<string, string>> wordPos;
+    void writeAllWords();
+    void clear();
+    int countLine(string savingString);
+    void fillBoard();
 private:
-    
+    bool finished;
     void writeWord(string position, string word);
 };
 
