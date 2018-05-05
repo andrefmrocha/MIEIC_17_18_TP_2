@@ -102,7 +102,7 @@ void Board::writeWord(string position, string word)
             if(board[pos_h][pos_v-1] == '.')
                 board[pos_h][pos_v-1] = '#';
         }
-        if((pos_h + word.size()) <= columns)
+        if((pos_h + word.size()) < columns)
         {
             if(board[pos_h][pos_v+(word.size())] =='.')
                 board[pos_h][pos_v+(word.size())] = '#';
