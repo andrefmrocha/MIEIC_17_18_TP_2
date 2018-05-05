@@ -1,27 +1,81 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "cwcreator.h"
+
+//String manipulation function that makes the program case insensitive by receiving the user input,
+// whether its capitalized or not and alters it so be readble by the program functions
+
+void UpperInput(string &input) {
+	for (int i = 0; i < input.length(); i++) {
+		input[i] = toupper(input[i]);  //goes through the string using toupper to every character belonging to the string
+	}
+}
+
+bool validDic(cwcreator board) {
+	if (board.getWords() == -1)
+		return false;
+	else return true;
+}
+
 void createpuzzle() {
 	for (int i = 0; i < 55; i++)
 		cout << "-";
 	cout << endl << "CREATE PUZZLE" << endl;
 	for (int i = 0; i < 55; i++)
 		cout << "-";
-	cout << endl << "Board size (lines columns) ? ";
+	bool valid = false; // boolean to be used as a flag for incorrect input
 	int l, c;
-	cin >> l >> c;
-	cwcreator b1(l, c);  //creates a new board with the user specified settings
+	string dicfile;  //will receive the dictionary file name specified by the user
+	do {
+		cout << endl << "Board size (lines columns) ? ";
+		cin >> l >> c;
+		cout << endl << "Dictionary file name ? ";
+		cin >> dicfile;
+		cwcreator dummyb(l, c, dicfile);  //creates a dummy board with the
+		valid = validDic(dummyb); //validates the dictionary 
+	} while (!valid);
+	cwcreator brd(l, c, dicfile);
 	cout << endl;
-	b1.board_show();
+	brd.board_show();
+	cout << endl;
 	string pos, word;
 	do {
-		cout << "Position(LCD / CTRL - Z = stop) ? ";
+		cout << endl << "Position(LCD / CTRL - Z = stop) ? ";
 		cin >> pos;
 		if (cin.eof())
 			break;
-		cout << "Word ( - = remove / ? = help ) ? ";
+		cout << endl << "Word ( - = remove / ? = help ) ? ";
 		cin >> word;
-		b1.addWord(pos, word);
-		b1.board_show();
+		if (word == "-") {
+			string toerase;
+			do {
+				cout << endl << "Which word do you want to erase ? ( X = back ) ";
+				cin >> toerase;
+				UpperInput(toerase);
+				if (toerase == "X")
+					break;
+				cout << endl;
+			} while (!brd.eraseWord(toerase));
+			cout << endl << endl;
+			brd.board_show();
+			cout << endl;
+			continue;
+		}
+		else if (word == "?") {
+			string hpos;
+			do {
+				cout << "Which position do you need help for ?  ( LCD / X = back ) ";
+				cin >> hpos;
+				if (hpos == "X" || hpos == "x")
+					break;
+				cout << endl;
+			} while (!brd.helpWord(hpos));
+			cout << "Word ? ";
+			cin >> word;
+		}
+		UpperInput(word);
+		if (!brd.addWord(pos, word))
+			continue;
+		brd.board_show();
 		cout << endl;
 	} while (true);
 }

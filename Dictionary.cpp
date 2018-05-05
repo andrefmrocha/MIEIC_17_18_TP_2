@@ -1,7 +1,7 @@
 //
 // Created by andrefmrocha on 26-04-2018.
 //
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "Dictionary.h"
 
 Dictionary::Dictionary(string name)
@@ -10,7 +10,7 @@ Dictionary::Dictionary(string name)
     string savingString;
     if(!infile.is_open())
     {
-        cout << "File not opened" << endl;
+        cout << endl << "File not opened" << endl;
         words = -1;
     }
     while(getline(infile, savingString))
@@ -68,4 +68,8 @@ void Dictionary::toUpper(string &word)
     {
         toupper(i);
     }
+}
+
+long Dictionary::getWords() {
+	return words;
 }

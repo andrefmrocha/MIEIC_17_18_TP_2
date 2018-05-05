@@ -15,11 +15,13 @@ using namespace std;
 class Dictionary {
 public:
     Dictionary(string name);
+	long getWords();
 
 protected:
     void toUpper(string &word);
     bool isWordinDict(string word);
     map<string, vector<string>> synonymDict;
+	
 private:
     long words;
 };

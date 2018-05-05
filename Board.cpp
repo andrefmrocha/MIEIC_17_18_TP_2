@@ -1,18 +1,19 @@
 //
 // Created by joaom on 26-04-2018.
 //
+//#include "stdafx.h"
 #include "Board.h"
 
 
 Board::Board(unsigned int lines, unsigned int columns) {
     this->lines=lines;
     this->columns=columns;
-    vector<char> cenas;
+    vector<char> vec_columns;
      for (int i = 0; i < columns; i++) {
-        cenas.push_back('.');
+        vec_columns.push_back('.');
     }
     for (int j = 0; j < lines; j++){
-        board.push_back(cenas);
+        board.push_back(vec_columns);
     }
 }
 
@@ -128,15 +129,17 @@ void Board::clear()
  * delete a selected word from vector of pairs.
  * @param word
  */
-void Board::eraseWord(string word)
+bool Board::eraseWord(string word)
 {
     for (int i = 0; i < wordPos.size(); ++i)
     {
         if(wordPos[i].first == word)
         {
             wordPos.erase(wordPos.begin() + i);
+			return true;
         }
     }
+	return false;
 }
 
 void Board::finishBoard()

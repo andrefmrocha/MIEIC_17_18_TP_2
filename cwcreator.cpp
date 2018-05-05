@@ -1,7 +1,7 @@
 //
 // Created by andrefmrocha on 02-05-2018.
 //
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "cwcreator.h"
 /*cwcreator::cwcreator()
 {
@@ -12,7 +12,7 @@ bool cwcreator::helpWord(string position)
 {
     if(position.size() > 3) //Checks if the position argument was passed correctly
     {
-        cout << "Too many positional arguments." << endl;
+        cout << endl << "Too many positional arguments." << endl << endl;
         return false;
     }
     int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
@@ -20,7 +20,7 @@ bool cwcreator::helpWord(string position)
     char direc = position[2];   // The direction is saved as a char
     if(pos_h > lines || pos_v > columns || (direc != 'V' && direc !='H'))   //Checks if all the arguments are valid for the given board
     {
-        cout << "Wrong Position" << endl;
+        cout << endl << "Wrong Position" << endl << endl;
         return false;
     }
     string wildcardWord;
@@ -68,7 +68,7 @@ bool cwcreator::helpWord(string position)
     }
     if(!possibleWords.empty())
     {
-        cout << "Lista de palavras possíveis: " << endl;
+        cout << endl << "Lista de palavras possíveis: " << endl << endl;
         for(int i = 0; i < possibleWords.size(); ++i)
         {
             cout << i+1 << " - " << possibleWords[i] << endl;
@@ -167,13 +167,13 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
 {
     if(position.size() > 3) //Checks if the position argument was passed correctly
     {
-        cout << "Too many positional arguments." << endl;
+        cout  << endl << "Too many positional arguments." <<endl << endl;
         return false;
     }
 
     if(!isWordinDict(word))
     {
-        cout << "Word is not in the dictionary." << endl;
+        cout << endl << "Word is not in the dictionary." << endl << endl;
         return false;
     }
     int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
@@ -181,7 +181,7 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
     char direc = position[2];   // The direction is saved as a char
     if(pos_h > lines || pos_v > columns || (direc != 'V' && direc !='H'))   //Checks if all the arguments are valid for the given board
     {
-        cout << "Wrong Position" << endl;
+        cout << endl << "Wrong Position" << endl << endl;
         return false;
     }
     writeAllWords();    //Writes the words in the board in order to analyze if the new word was given a valid position
@@ -189,7 +189,7 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
     {
         if((pos_h + word.size()) > lines )  //In case there isn't enough space on the board, the word is ignored
         {
-            cout << "Not enough space" << endl;
+            cout << endl << "Not enough space" << endl << endl;
             clear();
             return false;
         }
@@ -199,7 +199,7 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
             {
                 if(board[pos_h][pos_v] != '.' && board[pos_h][pos_v] != i)    //If any of positions of the board are
                 {                                                           // taken with letters different from the word
-                    cout << "Word unfitting for this position" << endl;     // it is ignored
+                    cout  << endl << "Word unfitting for this position" << endl << endl;     // it is ignored
                     clear();
                     return false;
                 }
@@ -211,7 +211,7 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
     {
         if((pos_v + word.size()) > columns)
         {
-            cout << "Not enough space." << endl;
+            cout << endl << "Not enough space." << endl << endl;
             clear();
             return false;
         }
@@ -221,7 +221,7 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
             {
                 if(board[pos_h][pos_v] != '.' && board[pos_h][pos_v]!= i)
                 {
-                    cout << "Word unfitting for this position" << endl;
+                    cout << endl << "Word unfitting for this position" << endl<< endl;
                     clear();
                     return false;
                 }
