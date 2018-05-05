@@ -61,14 +61,8 @@ void createpuzzle() {
 			continue;
 		}
 		else if (word == "?") {
-			string hpos;
-			do {
-				cout << "Which position do you need help for ?  ( LCD / X = back ) ";
-				cin >> hpos;
-				if (hpos == "X" || hpos == "x")
-					break;
-				cout << endl;
-			} while (!brd.helpWord(hpos));
+			 if (!brd.helpWord(pos))
+				continue;
 			cout << "Word ? ";
 			cin >> word;
 		}

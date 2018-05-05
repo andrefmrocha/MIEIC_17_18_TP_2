@@ -1,7 +1,7 @@
 //
 // Created by joaom on 02-05-2018.
 //
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "windows_colors.h"
 void clrscr(void) {
 	COORD coordScreen = { 0, 0 }; // upper left corner

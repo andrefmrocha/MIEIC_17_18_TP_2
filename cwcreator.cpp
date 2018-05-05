@@ -219,3 +219,40 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
     clear();    //The words are removed from the board once again
     return true; //A true boolean is passed on, in order for it to know the word was stored
 }
+
+string cwcreator::getDictName() {
+	string b000_009 = "b00";
+	string b00"b0";
+	string "b";
+	ifstream someboard();
+	return dictName;
+}
+
+string cwcreator::getBoardName() {
+	return "o";
+}
+void cwcreator::board_save()
+{
+	fillBoard();
+	ofstream outfile(getBoardName());
+	outfile << dictName << endl;
+	if (finished)
+	{
+		outfile << static_cast<char>(32) << endl;
+	}
+	else
+	{
+		outfile << endl;
+	}
+	for (int i = 0; i < lines; i++) {
+		for (int j = 0; j < columns; j++) {
+			outfile << board.at(i).at(j) << "  ";
+		}
+		outfile << endl;
+	}
+	outfile << endl;
+	for (int i2 = 0; i2 < wordPos.size(); i2++) {
+		outfile << wordPos.at(i2).first << " " << wordPos.at(i2).second << endl;
+	}
+	clear();
+}

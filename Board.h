@@ -25,7 +25,6 @@ public:
     void board_show();
     bool eraseWord(string word);
 	void finishBoard();
-    void board_save(string filename);
     bool readFile(string iname);
 protected:
     int lines;
@@ -36,8 +35,9 @@ protected:
     void clear();
     int countLine(string savingString);
     void fillBoard();
+	bool finished;
 private:
-    bool finished;
+    
     void writeWord(string position, string word);
 };
 

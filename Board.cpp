@@ -102,7 +102,7 @@ void Board::writeWord(string position, string word)
             if(board[pos_h][pos_v-1] == '.')
                 board[pos_h][pos_v-1] = '#';
         }
-        if((pos_h + word.size()) <= columns)
+        if((pos_h + word.size()) < columns)
         {
             if(board[pos_h][pos_v+(word.size())] =='.')
                 board[pos_h][pos_v+(word.size())] = '#';
@@ -254,30 +254,4 @@ bool Board::readFile(string iname)
     this->columns = columns;
     this->lines = lines;
     resizeBoard(lines, columns);
-}
-
-void Board::board_save(string filename)
-{
-    fillBoard();
-    ofstream outfile(filename);
-    outfile << "THIS IS GOING TO DISPLAY THE DICTIONARY FILENAME" << endl;
-    if(finished)
-    {
-        outfile << static_cast<char>(32) << endl;
-    }
-    else
-    {
-        outfile << endl;
-    }
-    for (int i = 0; i < lines; i++) {
-        for (int j = 0; j < columns; j++) {
-            outfile << board.at(i).at(j) << "  ";
-        }
-        outfile << endl;
-    }
-    outfile << endl;
-    for (int i2 = 0; i2 < wordPos.size(); i2++) {
-        outfile << wordPos.at(i2).first << " " << wordPos.at(i2).second << endl;
-    }
-    clear();
 }
