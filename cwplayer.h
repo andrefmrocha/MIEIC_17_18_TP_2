@@ -18,14 +18,15 @@ class cwplayer: public Board, public Dictionary
 public:
     cwplayer(string name): Board(), Dictionary(name){};
     void startGame();
+    bool addPlayerWord(string position, string word);
+    void game_show();
 private:
     void spacing(int word);
-    void game_show();
     void prepareBoard();
     void sepWords();
     vector<pair<string, string>> vertiWord;
     vector<pair<string, string>> horiWord;
-
+    vector<pair<string, string>> userWordPos;
 };
 
 

@@ -16,6 +16,9 @@ int main()
     cwplayer cw("dic.txt");
     cw.readFile("meias.txt");
     cw.startGame();
+    cw.addPlayerWord("BaH", "DISSEMBLE");
+    cw.addPlayerWord("CjV", "DEVOUR");
+    cw.game_show();
     string a;
     cin >> a;
 }

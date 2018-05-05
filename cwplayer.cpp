@@ -95,3 +95,73 @@ void cwplayer::game_show()
     }
     setcolor(WHITE, BLACK_B);
 }
+
+bool cwplayer::addPlayerWord(string position, string word)
+{
+    if(position.size() > 3) //Checks if the position argument was passed correctly
+    {
+        cout << endl << "Too many positional arguments." << endl << endl;
+        return false;
+    }
+    int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
+    int pos_h = static_cast<int>(position[0]-'A');
+    char direc = position[2];   // The direction is saved as a char
+    if(pos_h > lines || pos_v > columns || (direc != 'V' && direc !='H'))   //Checks if all the arguments are valid for the given board
+    {
+        cout << endl << "Wrong Position" << endl << endl;
+        return false;
+    }
+    if(direc == 'V')
+    {
+        if((pos_h + word.size()) > lines )  //In case there isn't enough space on the board, the word is ignored
+        {
+            cout << endl << "Not enough space" << endl << endl;
+            clear();
+            return false;
+        }
+        else
+        {
+            for(auto i: word)
+            {
+                if(board[pos_h][pos_v] != '.' && board[pos_h][pos_v] != i)    //If any of positions of the board are
+                {                                                           // taken with letters different from the word
+                    cout  << endl << "Word unfitting for this position" << endl << endl;     // it is ignored
+                    clear();
+                    return false;
+                }
+                else
+                {
+                    board[pos_h][pos_v] = i;
+                }
+                pos_h++;
+            }
+        }
+    }
+    else    //The same process is repeated for an horizontal word
+    {
+        if((pos_v + word.size()) > columns)
+        {
+            cout << endl << "Not enough space." << endl << endl;
+            clear();
+            return false;
+        }
+        else
+        {
+            for(auto i: word)
+            {
+                if(board[pos_h][pos_v] != '.' && board[pos_h][pos_v]!= i)
+                {
+                    cout << endl << "Word unfitting for this position" << endl<< endl;
+                    clear();
+                    return false;
+                }
+                else
+                {
+                    board[pos_h][pos_v] = i;
+                }
+                pos_v++;
+            }
+        }
+    }
+    userWordPos.push_back(pair<string, string>(word, position));
+}
