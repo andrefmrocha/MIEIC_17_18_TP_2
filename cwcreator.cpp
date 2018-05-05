@@ -1,7 +1,7 @@
 //
 // Created by andrefmrocha on 02-05-2018.
 //
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "cwcreator.h"
 /*cwcreator::cwcreator()
 {
@@ -221,20 +221,66 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
 }
 
 string cwcreator::getDictName() {
-	string b000_009 = "b00";
-	string b00"b0";
-	string "b";
-	ifstream someboard();
 	return dictName;
 }
 
 string cwcreator::getBoardName() {
-	return "o";
+	string b000_009 = "b00";
+	string b010_099 = "b0";
+	string b100_999 = "b";
+	string ext = ".txt";
+	string cvti;
+	string filename;
+	bool flag = false;
+	for (int i = 1; i < 10; i++) {
+		cvti = to_string(i);
+		filename = b000_009 + cvti + ext;
+		ifstream checkfile(filename);
+		if (checkfile.is_open())
+			continue;
+		else
+			flag = true;
+		break;
+	}
+	if (!flag) {
+		for (int i = 10; i < 100; i++) {
+			cvti = to_string(i);
+			filename = b010_099 + cvti + ext;
+			ifstream checkfile(filename);
+			if (checkfile.is_open())
+				continue;
+			else
+				flag = true;
+			break;
+		}
+	}
+	if (!flag) {
+		for (int i = 100; i < 1000; i++) {
+			cvti = to_string(i);
+			filename = b100_999 + cvti + ext;
+			ifstream checkfile(filename);
+			if (checkfile.is_open())
+				continue;
+			else
+				flag = true;
+			break;
+		}
+	}
+	if (flag)
+		return filename;
+	else {
+		cout << "A new board cannot be created, please select an already created puzzle." << endl;
+		return "error";
+	}
 }
+
 void cwcreator::board_save()
 {
 	fillBoard();
-	ofstream outfile(getBoardName());
+	string boardname = getBoardName();
+	if (boardname == "error")
+		return;
+	ofstream outfile(boardname);
 	outfile << dictName << endl;
 	if (finished)
 	{

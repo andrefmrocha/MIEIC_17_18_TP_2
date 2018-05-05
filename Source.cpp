@@ -1,4 +1,4 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "cwcreator.h"
 
 //String manipulation function that makes the program case insensitive by receiving the user input,
@@ -72,6 +72,22 @@ void createpuzzle() {
 		brd.board_show();
 		cout << endl;
 	} while (true);
+	cout << "Do you wish to save your board or exit the program (and lose all progress)? ( S = save / X = exit) ";
+	string ans;
+	bool valinput = true;
+	do {
+		cin >> ans;
+		UpperInput(ans);
+		if (ans == "S") {
+			brd.board_save();
+			valinput = true;
+		}
+		else if (ans == "X")
+			return;
+		else
+			valinput = false;
+			cout << endl << "Incorrect input, please answer again: ";
+	} while (!valinput);
 }
 
 void resumepuzzle() {}
