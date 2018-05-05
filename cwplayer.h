@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 #include "Board.h"
 #include "Dictionary.h"
 
@@ -20,6 +21,7 @@ public:
     void startGame();
     bool addPlayerWord(string position, string word);
     void game_show();
+    bool checkBoard();
 private:
     void spacing(int word);
     void prepareBoard();

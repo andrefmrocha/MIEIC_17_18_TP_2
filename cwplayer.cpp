@@ -165,3 +165,10 @@ bool cwplayer::addPlayerWord(string position, string word)
     }
     userWordPos.push_back(pair<string, string>(word, position));
 }
+
+bool cwplayer::checkBoard()
+{
+    sort(userWordPos.begin(), userWordPos.end());
+    sort(wordPos.begin(), wordPos.end());
+    return userWordPos==wordPos;
+}
