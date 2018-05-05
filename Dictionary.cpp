@@ -41,7 +41,7 @@ Dictionary::Dictionary(string name)
                     savingWord.push_back(toupper(i));
                 }
             }
-            if(!savingWord.empty())
+            if(!savingWord.empty() && savingWord != "\r")
             {
                 toUpper(savingWord);
                 synVec.push_back(savingWord);
@@ -76,4 +76,12 @@ void Dictionary::toUpper(string &word)
 
 long Dictionary::getWords() {
 	return words;
+}
+
+string Dictionary::randomsynDict(string word)
+{
+    vector<string> synonymVec = synonymDict[word];
+    srand(time(NULL));
+    size_t index = rand() % synonymVec.size();
+    return synonymVec[index];
 }

@@ -10,9 +10,12 @@ int main()
     cwcreator board(10,10,"dic.txt");
     board.addWord("AbV","DISSEMBLE");
     board.addWord("BaH", "DISSEMBLE");
-//    board.finishBoard();
+    board.addWord("CjV", "DEVOUR");
+    board.finishBoard();
     board.board_save("meias.txt");
-    cwplayer cw;
+    cwplayer cw("dic.txt");
     cw.readFile("meias.txt");
-    cw.board_show();
+    cw.startGame();
+    string a;
+    cin >> a;
 }

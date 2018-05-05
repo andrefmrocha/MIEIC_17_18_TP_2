@@ -10,6 +10,8 @@
 #include <map>
 #include <vector>
 #include <fstream>
+#include <ctime>
+
 using namespace std;
 
 class Dictionary {
@@ -17,10 +19,11 @@ public:
     Dictionary(string name);
 	long getWords();
 
+    map<string, vector<string>> synonymDict;
 protected:
     void toUpper(string &word);
     bool isWordinDict(string word);
-    map<string, vector<string>> synonymDict;
+    string randomsynDict(string word);
     string dictName;
 private:
     long words;

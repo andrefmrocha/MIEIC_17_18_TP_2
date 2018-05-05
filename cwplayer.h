@@ -9,12 +9,22 @@
 #include <string>
 #include <vector>
 #include "Board.h"
+#include "Dictionary.h"
+
 using namespace std;
 
-class cwplayer: public Board
+class cwplayer: public Board, public Dictionary
 {
 public:
-    cwplayer(): Board(){};
+    cwplayer(string name): Board(), Dictionary(name){};
+    void startGame();
+private:
+    void spacing(int word);
+    void game_show();
+    void prepareBoard();
+    void sepWords();
+    vector<pair<string, string>> vertiWord;
+    vector<pair<string, string>> horiWord;
 
 };
 
