@@ -18,7 +18,16 @@ int main()
     cw.startGame();
     cw.addPlayerWord("BaH", "DISSEMBLE");
     cw.addPlayerWord("CjV", "DEVOUR");
+    cw.addPlayerWord("AbV","DISSEMBLE");
     cw.game_show();
+    if(cw.checkBoard())
+    {
+        cout << "The board was sucessfully filled! Congratulations!" << endl;
+    }
+    else
+    {
+        cout << "The board was not sucessfully filled" << endl;
+    }
     string a;
     cin >> a;
 }
