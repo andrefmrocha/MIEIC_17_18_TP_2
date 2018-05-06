@@ -12,22 +12,5 @@ int main()
     board.addWord("BaH", "DISSEMBLE");
     board.addWord("CjV", "DEVOUR");
     board.finishBoard();
-    board.board_save("meias.txt");
-    cwplayer cw("dic.txt");
-    cw.readFile("meias.txt");
-    cw.startGame();
-    cw.addPlayerWord("BaH", "DISSEMBLE");
-    cw.addPlayerWord("CjV", "DEVOUR");
-    cw.addPlayerWord("AbV","DISSEMBLE");
-    cw.game_show();
-    if(cw.checkBoard())
-    {
-        cout << "The board was sucessfully filled! Congratulations!" << endl;
-    }
-    else
-    {
-        cout << "The board was not sucessfully filled" << endl;
-    }
-    string a;
-    cin >> a;
+    board.board_save();
 }
