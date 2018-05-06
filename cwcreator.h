@@ -12,13 +12,14 @@
 class cwcreator: public Board, public Dictionary
 {
 public:
+    cwcreator();
     cwcreator(int lines, int columns, string infile): Board(lines,columns), Dictionary(infile){};
 	bool addWord(string position, string word);
     bool helpWord(string position);
 	string getDictName();
 	void board_save();
 	string getBoardName();
-
+    void getDic(string name);
 private:
     bool wildcardMatch(const char *str, const char *strWild);
     void wildcardWords(string word, vector<string> &possiblewords);

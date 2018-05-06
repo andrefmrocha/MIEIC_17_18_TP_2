@@ -302,3 +302,19 @@ void cwcreator::board_save()
 	}
 	clear();
 }
+
+void cwcreator::getDic(string name)
+{
+    ifstream infile(name);
+    if(!infile.is_open())
+    {
+        cout << "File not found. " << endl;
+        return false;
+    }
+    else
+    {
+        string savingString;
+        getline(infile, savingString);
+        dictName = savingString;
+    }
+}

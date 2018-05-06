@@ -16,9 +16,10 @@ using namespace std;
 
 class Dictionary {
 public:
+    Dictionary();
     Dictionary(string name);
 	long getWords();
-
+    void openDict(string name);
     map<string, vector<string>> synonymDict;
 protected:
     void toUpper(string &word);
