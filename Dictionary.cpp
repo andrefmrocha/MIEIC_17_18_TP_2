@@ -3,7 +3,7 @@
 //
 #include "stdafx.h"
 #include "Dictionary.h"
-
+//looool
 Dictionary::Dictionary(string name)
 {
     ifstream infile(name);

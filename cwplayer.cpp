@@ -172,3 +172,38 @@ bool cwplayer::checkBoard()
     sort(wordPos.begin(), wordPos.end());
     return userWordPos==wordPos;
 }
+
+bool cwplayer::removePlayerWord(string word)
+{
+    for(int i = 0; i < userWordPos.size(); i++)
+    {
+        if(userWordPos[i].first == word)
+        {
+            removeWord(userWordPos[i].second, word.size());
+            userWordPos.erase(userWordPos.begin() + i);
+            return true;
+        }
+    }
+    return false;
+}
+
+void cwplayer::removeWord(string position, int size)
+{
+    int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
+    int pos_h = static_cast<int>(position[0]-'A');
+    char direc = position[2];   //Saves the direction as a char
+    if(direc == 'V')
+    {
+        for(int i = 0; i < size; i ++)
+        {
+            board[pos_h + i][pos_v] = '.';
+        }
+    }
+    else
+    {
+        for(int i = 0; i < size; i ++)
+        {
+            board[pos_h][pos_v+i] = '.';
+        }
+    }
+}

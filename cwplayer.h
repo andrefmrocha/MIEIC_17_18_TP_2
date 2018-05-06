@@ -22,10 +22,12 @@ public:
     bool addPlayerWord(string position, string word);
     void game_show();
     bool checkBoard();
+    bool removePlayerWord(string word);
 private:
     void spacing(int word);
     void prepareBoard();
     void sepWords();
+    void removeWord(string position, int size);
     vector<pair<string, string>> vertiWord;
     vector<pair<string, string>> horiWord;
     vector<pair<string, string>> userWordPos;
