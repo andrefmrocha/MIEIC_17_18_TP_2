@@ -3,11 +3,13 @@
 //
 #include "stdafx.h"
 #include "cwcreator.h"
-/*cwcreator::cwcreator()
+/*
+cwcreator::cwcreator()
 {
     Dictionary();
     Board();
-}*/
+}
+*/
 bool cwcreator::helpWord(string position)
 {
     if(position.size() > 3) //Checks if the position argument was passed correctly
@@ -298,7 +300,7 @@ void cwcreator::board_save()
 	}
 	outfile << endl;
 	for (int i2 = 0; i2 < wordPos.size(); i2++) {
-		outfile << wordPos.at(i2).first << " " << wordPos.at(i2).second << endl;
+		outfile << wordPos.at(i2).second << " " << wordPos.at(i2).first << endl;
 	}
 	clear();
 }
@@ -309,7 +311,7 @@ void cwcreator::getDic(string name)
     if(!infile.is_open())
     {
         cout << "File not found. " << endl;
-        return false;
+        return;
     }
     else
     {

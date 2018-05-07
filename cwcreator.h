@@ -12,7 +12,7 @@
 class cwcreator: public Board, public Dictionary
 {
 public:
-    cwcreator();
+	cwcreator() :Dictionary(), Board() {};
     cwcreator(int lines, int columns, string infile): Board(lines,columns), Dictionary(infile){};
 	bool addWord(string position, string word);
     bool helpWord(string position);

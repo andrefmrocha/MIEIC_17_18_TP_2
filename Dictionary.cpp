@@ -6,7 +6,7 @@
 //looool
 Dictionary::Dictionary()
 {
-    dictName = 0;
+    dictName = "0";
 }
 Dictionary::Dictionary(string name)
 {

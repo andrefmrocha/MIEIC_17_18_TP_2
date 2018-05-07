@@ -16,25 +16,7 @@ bool validDic(cwcreator board) {
 	else return true;
 }
 
-void createpuzzle() {
-	for (int i = 0; i < 55; i++)
-		cout << "-";
-	cout << endl << "CREATE PUZZLE" << endl;
-	for (int i = 0; i < 55; i++)
-		cout << "-";
-	bool valid = false; // boolean to be used as a flag for incorrect input
-	int l, c;
-	string dicfile;  //will receive the dictionary file name specified by the user
-	do {
-		cout << endl << "Board size (lines columns) ? ";
-		cin >> l >> c;
-		cout << endl << "Dictionary file name ? ";
-		cin >> dicfile;
-		cwcreator dummyb(l, c, dicfile);  //creates a dummy board with the
-		valid = validDic(dummyb); //validates the dictionary 
-	} while (!valid);
-	cwcreator brd(l, c, dicfile);
-	cout << endl;
+void constructboard(cwcreator brd) {
 	brd.board_show();
 	cout << endl;
 	string pos, word;
@@ -61,7 +43,7 @@ void createpuzzle() {
 			continue;
 		}
 		else if (word == "?") {
-			 if (!brd.helpWord(pos))
+			if (!brd.helpWord(pos))
 				continue;
 			cout << "Word ? ";
 			cin >> word;
@@ -72,7 +54,8 @@ void createpuzzle() {
 		brd.board_show();
 		cout << endl;
 	} while (true);
-	cout << "Do you wish to save your board or exit the program (and lose all progress)? ( S = save / X = exit) ";
+	cin.clear();
+	cout << endl << "Do you wish to save your board or exit the program (and lose all progress)? ( S = save / X = exit) ";
 	string ans;
 	bool valinput = true;
 	do {
@@ -80,17 +63,55 @@ void createpuzzle() {
 		UpperInput(ans);
 		if (ans == "S") {
 			brd.board_save();
+			cout << endl << "Saved successfully!" << endl;
 			valinput = true;
 		}
 		else if (ans == "X")
 			return;
-		else
+		else {
 			valinput = false;
 			cout << endl << "Incorrect input, please answer again: ";
+		}
 	} while (!valinput);
 }
+void createpuzzle() {
+	for (int i = 0; i < 55; i++)
+		cout << "-";
+	cout << endl << "CREATE PUZZLE" << endl;
+	for (int i = 0; i < 55; i++)
+		cout << "-";
+	bool valid = false; // boolean to be used as a flag for incorrect input
+	int l, c;
+	string dicfile;  //will receive the dictionary file name specified by the user
+	do {
+		cout << endl << "Board size (lines columns) ? ";
+		cin >> l >> c;
+		cout << endl << "Dictionary file name ? ";
+		cin >> dicfile;
+		cwcreator dummyb(l, c, dicfile);  //creates a dummy board with the
+		valid = validDic(dummyb); //validates the dictionary 
+	} while (!valid);
+	cwcreator brd(l, c, dicfile);
+	cout << endl;
+	constructboard(brd);
+}
 
-void resumepuzzle() {}
+void resumepuzzle() {
+	cout << "Which board do you want to resume (bXXX.txt - from 001 to 999) ? ";
+	string boardname;
+	cwcreator resboard;
+	do {
+		cin >> boardname;
+		if (!resboard.readFile(boardname)) {
+			cout << endl << "The name written is not valid. Please write again: ";
+			continue;
+		}
+		else {
+			constructboard(resboard);
+			break;
+		}
+	} while (true);
+}
 
 //just a function to present the first program and its instructions to the user
 void introduction() {
@@ -103,13 +124,14 @@ void introduction() {
 	cout << " Specify the text file where the dictionary is from." << endl;
 	cout << "2 - Board size (lines columns):" << endl;
 	cout << " Choose how many lines and columns the board will have." << endl;
-	cout << "3 - Position (LCD / CTRL-Z = stop ):" << endl;
-	cout << " LCD stands for Line Column and Direction." << endl;
+	cout << "3 - Position (LcD / CTRL-Z = stop ):" << endl;
+	cout << " LCD stands for Line column and Direction." << endl;
+	cout << " E.g.: AaV - Line A, column a and vertical direction." << endl;
 	cout << "4 - Word ( - = remove / ? = help ):" << endl;
 	cout << " Choose the word you want to insert in the board " << endl;
-	cout << "or choose an alternative option, to remove a word " << endl;
-	cout << "from the board writing '-' or if you're in a dead end," << endl;
-	cout << "ask for a possible word with the help option '?'." << endl << endl;
+	cout << " or choose an alternative option, to remove a word " << endl;
+	cout << " from the board writing '-' or if you're in a dead" << endl;
+	cout << " end, ask for a possible word with the help option '?'." << endl << endl;
 }
 
 int main() {
@@ -123,7 +145,9 @@ int main() {
 	cin >> op;
 	switch (op) {
 	case 1: createpuzzle();
+		break;
 	case 2: resumepuzzle();
+		break;
 	case 0: return 0;
 	}
 }
