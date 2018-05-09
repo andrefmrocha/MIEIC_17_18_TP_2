@@ -18,7 +18,6 @@ class Dictionary {
 public:
     Dictionary(string name);
 	long getWords();
-
     map<string, vector<string>> synonymDict;
 protected:
     void toUpper(string &word);
