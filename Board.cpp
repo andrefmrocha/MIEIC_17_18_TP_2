@@ -245,7 +245,7 @@ bool Board::readFile(string iname)
         {
             if(i == ' ')
             {
-                word = extract;
+                position = extract;
                 extract.clear();
             }
             else
@@ -254,7 +254,7 @@ bool Board::readFile(string iname)
             }
 
         }
-        position = extract;
+        word = extract;
         extract.clear();
         wordPos.push_back(pair<string, string>(word, position));
     }
