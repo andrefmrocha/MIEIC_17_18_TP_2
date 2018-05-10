@@ -20,6 +20,7 @@ public:
     Dictionary(string name);
 	long getWords();
     void openDict(string name);
+    void getDict(string iname);
     map<string, vector<string>> synonymDict;
 protected:
     void toUpper(string &word);

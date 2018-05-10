@@ -93,3 +93,11 @@ string Dictionary::randomsynDict(string word)
     size_t index = rand() % synonymVec.size();
     return synonymVec[index];
 }
+
+void Dictionary::getDict(string iname)
+{
+    ifstream infile(iname);
+    string dictName;
+    getline(infile, dictName);
+    openDict(dictName);
+}
