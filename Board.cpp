@@ -164,6 +164,13 @@ bool Board::eraseWord(string word)
 
 void Board::finishBoard()
 {
+    for (auto i: wordPos)
+    {
+        if(i.second[3] == 'F')
+        {
+            return;
+        }
+    }
     finished = true;
 }
 
@@ -254,4 +261,22 @@ bool Board::readFile(string iname)
     this->columns = columns;
     this->lines = lines;
     resizeBoard(lines, columns);
+}
+
+bool Board::positionalCheck(string position)
+{
+    if(position.size() > 3) //Checks if the position argument was passed correctly
+    {
+        cout  << endl << "Too many positional arguments." <<endl << endl;
+        return false;
+    }
+    int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
+    int pos_h = static_cast<int>(position[0]-'A');
+    char direc = position[2];   // The direction is saved as a char
+    if(pos_h > lines || pos_v > columns || (direc != 'V' && direc !='H'))   //Checks if all the arguments are valid for the given board
+    {
+        cout << endl << "Wrong Position" << endl << endl;
+        return false;
+    }
+
 }

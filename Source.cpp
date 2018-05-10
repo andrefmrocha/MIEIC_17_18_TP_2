@@ -89,7 +89,7 @@ void createpuzzle() {
 		cout << endl << "Dictionary file name ? ";
 		cin >> dicfile;
 		cwcreator dummyb(l, c, dicfile);  //creates a dummy board with the
-		valid = validDic(dummyb); //validates the dictionary 
+		valid = validDic(dummyb); //validates the dictionary
 	} while (!valid);
 	cwcreator brd(l, c, dicfile);
 	cout << endl;

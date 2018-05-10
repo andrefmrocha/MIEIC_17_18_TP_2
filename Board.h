@@ -22,9 +22,10 @@ public:
     Board();
     Board(unsigned int lines, unsigned int columns);
     void resizeBoard(unsigned int lines, unsigned int columns);
+    void finishBoard();
+    bool positionalCheck(string position);
     void board_show();
     bool eraseWord(string word);
-	void finishBoard();
     bool readFile(string iname);
 protected:
     int lines;

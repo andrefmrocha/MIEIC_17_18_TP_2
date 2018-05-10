@@ -3,13 +3,11 @@
 //
 #include "stdafx.h"
 #include "cwcreator.h"
-/*
-cwcreator::cwcreator()
+/*cwcreator::cwcreator()
 {
     Dictionary();
     Board();
-}
-*/
+}*/
 bool cwcreator::helpWord(string position)
 {
     if(position.size() > 3) //Checks if the position argument was passed correctly
@@ -153,25 +151,18 @@ void cwcreator::wildcardWords(string word, vector<string> &possiblewords)
  **************************************************************/
 bool cwcreator::addWord(string position, string word)    // Adds the word to the board, returns false if it can't
 {
-    if(position.size() > 3) //Checks if the position argument was passed correctly
+    UpperInput(word);
+    if(isWordinDict(word))
     {
-        cout  << endl << "Too many positional arguments." <<endl << endl;
-        return false;
+       position.push_back('T');
     }
-
-    if(!isWordinDict(word))
+    else
     {
-        cout << endl << "Word is not in the dictionary." << endl << endl;
-        return false;
+        position.push_back('F');
     }
     int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
     int pos_h = static_cast<int>(position[0]-'A');
     char direc = position[2];   // The direction is saved as a char
-    if(pos_h > lines || pos_v > columns || (direc != 'V' && direc !='H'))   //Checks if all the arguments are valid for the given board
-    {
-        cout << endl << "Wrong Position" << endl << endl;
-        return false;
-    }
     fillBoard();    //Writes the words in the board in order to analyze if the new word was given a valid position
     if(direc == 'V')
     {
@@ -318,5 +309,11 @@ void cwcreator::getDic(string name)
         string savingString;
         getline(infile, savingString);
         dictName = savingString;
+    }
+}
+
+void UpperInput(string &input) {
+    for (int i = 0; i < input.length(); i++) {
+        input[i] = toupper(input[i]);  //goes through the string using toupper to every character belonging to the string
     }
 }
