@@ -296,22 +296,6 @@ void cwcreator::board_save()
 	clear();
 }
 
-void cwcreator::getDic(string name)
-{
-    ifstream infile(name);
-    if(!infile.is_open())
-    {
-        cout << "File not found. " << endl;
-        return;
-    }
-    else
-    {
-        string savingString;
-        getline(infile, savingString);
-        dictName = savingString;
-    }
-}
-
 void UpperInput(string &input) {
     for (int i = 0; i < input.length(); i++) {
         input[i] = toupper(input[i]);  //goes through the string using toupper to every character belonging to the string

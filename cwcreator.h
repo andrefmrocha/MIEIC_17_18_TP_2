@@ -20,7 +20,6 @@ public:
 	string getDictName();
 	void board_save();
 	string getBoardName();
-    void getDic(string name);
 private:
     bool wildcardMatch(const char *str, const char *strWild);
     void wildcardWords(string word, vector<string> &possiblewords);
