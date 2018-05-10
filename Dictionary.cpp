@@ -4,7 +4,15 @@
 #include "stdafx.h"
 #include "Dictionary.h"
 //looool
+Dictionary::Dictionary()
+{
+    dictName = "0";
+}
 Dictionary::Dictionary(string name)
+{
+    openDict(name);
+}
+void Dictionary::openDict(string name)
 {
     ifstream infile(name);
     string savingString;

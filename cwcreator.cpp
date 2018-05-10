@@ -137,6 +137,8 @@ void cwcreator::wildcardWords(string word, vector<string> &possiblewords)
 }
 
 
+
+
 /*************************************************************
  * ******************** addWord ******************************
  * addWord method has the purpose of checking if a word is valid for the given position by the user
@@ -289,9 +291,25 @@ void cwcreator::board_save()
 	}
 	outfile << endl;
 	for (int i2 = 0; i2 < wordPos.size(); i2++) {
-		outfile << wordPos.at(i2).first << " " << wordPos.at(i2).second << endl;
+		outfile << wordPos.at(i2).second << " " << wordPos.at(i2).first << endl;
 	}
 	clear();
+}
+
+void cwcreator::getDic(string name)
+{
+    ifstream infile(name);
+    if(!infile.is_open())
+    {
+        cout << "File not found. " << endl;
+        return;
+    }
+    else
+    {
+        string savingString;
+        getline(infile, savingString);
+        dictName = savingString;
+    }
 }
 
 void UpperInput(string &input) {
