@@ -151,7 +151,6 @@ void cwcreator::wildcardWords(string word, vector<string> &possiblewords)
  **************************************************************/
 bool cwcreator::addWord(string position, string word)    // Adds the word to the board, returns false if it can't
 {
-    UpperInput(word);
     if(isWordinDict(word))
     {
        position.push_back('T');
@@ -294,10 +293,4 @@ void cwcreator::board_save()
 		outfile << wordPos.at(i2).second << " " << wordPos.at(i2).first << endl;
 	}
 	clear();
-}
-
-void UpperInput(string &input) {
-    for (int i = 0; i < input.length(); i++) {
-        input[i] = toupper(input[i]);  //goes through the string using toupper to every character belonging to the string
-    }
 }

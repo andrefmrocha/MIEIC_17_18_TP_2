@@ -26,13 +26,25 @@ void constructboard(cwcreator brd) {
 		if (cin.eof())
 			break;
 		cout << endl << "Word ( - = remove / ? = help ) ? ";
-		cin >> word;
+		do {
+			cin >> word;
+			if (cin.eof())
+				cin.clear();
+			else break;
+		} while (true);
 		if (word == "-") {
 			string toerase;
 			do {
 				cout << endl << "Which word do you want to erase ? ( X = back ) ";
-				cin >> toerase;
-				UpperInput(toerase);
+				do {
+					cin >> toerase;
+					if (cin.eof())
+						cin.clear();
+					else {
+						UpperInput(toerase);
+						break;
+					}
+				} while (true);
 				if (toerase == "X")
 					break;
 				cout << endl;
@@ -46,7 +58,12 @@ void constructboard(cwcreator brd) {
 			if (!brd.helpWord(pos))
 				continue;
 			cout << "Word ? ";
-			cin >> word;
+			do {
+				cin >> word;
+				if (cin.eof())
+					cin.clear();
+				else break;
+			} while (true);
 		}
 		UpperInput(word);
 		if (!brd.addWord(pos, word))
@@ -55,25 +72,40 @@ void constructboard(cwcreator brd) {
 		cout << endl;
 	} while (true);
 	cin.clear();
-	cout << endl << "Do you wish to save your board or exit the program (and lose all progress)? ( S = save / X = exit) ";
+	cout << endl << "Do you wish to save your board, finish the board or exit without saving (and lose all progress) ?" << endl;
+	cout << "(S = save and resume later / F = finish / X = exit) ";
 	string ans;
 	bool valinput = true;
 	do {
-		cin >> ans;
+		do {
+			cin >> ans;
+			if (cin.eof())
+				cin.clear();
+			else break;
+		} while (true);
 		UpperInput(ans);
 		if (ans == "S") {
 			brd.board_save();
 			cout << endl << "Saved successfully!" << endl;
 			valinput = true;
 		}
-		else if (ans == "X")
+		else if (ans == "F") {
+			brd.finishBoard();
+			brd.board_save();
+			cout << endl << "Finished! " << endl;
 			return;
+		}
+		else if (ans == "X") {
+			cout << "Exiting..." << endl<< endl;
+			return;
+		}
 		else {
 			valinput = false;
 			cout << endl << "Incorrect input, please answer again: ";
 		}
 	} while (!valinput);
 }
+
 void createpuzzle() {
 	for (int i = 0; i < 55; i++)
 		cout << "-";
@@ -85,9 +117,25 @@ void createpuzzle() {
 	string dicfile;  //will receive the dictionary file name specified by the user
 	do {
 		cout << endl << "Board size (lines columns) ? ";
-		cin >> l >> c;
+		do {
+			cin >> l;
+			if (cin.eof())
+				cin.clear();
+			else break;
+		} while (true);
+		do {
+			cin >> c;
+			if (cin.eof())
+				cin.clear();
+			else break;
+		} while (true);
 		cout << endl << "Dictionary file name ? ";
-		cin >> dicfile;
+		do {
+			cin >> dicfile;
+			if (cin.eof())
+				cin.clear();
+			else break;
+		} while (true);
 		cwcreator dummyb(l, c, dicfile);  //creates a dummy board with the
 		valid = validDic(dummyb); //validates the dictionary
 	} while (!valid);
@@ -101,12 +149,18 @@ void resumepuzzle() {
 	string boardname;
 	cwcreator resboard;
 	do {
-		cin >> boardname;
+		do {
+			cin >> boardname;
+			if (cin.eof())
+				cin.clear();
+			else break;
+		} while (true);		
 		if (!resboard.readFile(boardname)) {
 			cout << endl << "The name written is not valid. Please write again: ";
 			continue;
 		}
 		else {
+			resboard.getDict(boardname);
 			constructboard(resboard);
 			break;
 		}
@@ -138,16 +192,26 @@ int main() {
 	introduction();
 	for (int i2 = 0; i2 < 55; i2++)
 		cout << "-";
-	cout << endl << "OPTIONS :" << endl << "1 - Create puzzle" << endl;
-	cout << "2 - Resume puzzle" << endl << "0 - Exit" << endl;
-	cout << endl << "Option ? ";
-	int op;
-	cin >> op;
-	switch (op) {
-	case 1: createpuzzle();
-		break;
-	case 2: resumepuzzle();
-		break;
-	case 0: return 0;
-	}
+	bool flag = true;
+	do {
+		cout << endl << "OPTIONS :" << endl << "1 - Create puzzle" << endl;
+		cout << "2 - Resume puzzle" << endl << "0 - Exit" << endl;
+		cout << endl << "Option ? ";
+		int op;
+		do {
+			cin >> op;
+			if (cin.eof())
+				cin.clear();
+			else break;
+		} while (true);
+		switch (op) {
+		case 1: createpuzzle();
+			break;
+		case 2: resumepuzzle();
+			break;
+		case 0: flag = false;
+			break;
+		}
+	} while (flag);
+	return 0;
 }

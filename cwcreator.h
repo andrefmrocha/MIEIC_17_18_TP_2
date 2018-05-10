@@ -8,7 +8,6 @@
 
 #include "Board.h"
 #include "Dictionary.h"
-void UpperInput(string &input);
 
 class cwcreator: public Board, public Dictionary
 {
