@@ -261,6 +261,7 @@ bool Board::readFile(string iname)
     this->columns = columns;
     this->lines = lines;
     resizeBoard(lines, columns);
+	return true;
 }
 
 bool Board::positionalCheck(string position)

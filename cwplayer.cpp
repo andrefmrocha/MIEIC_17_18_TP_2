@@ -1,7 +1,7 @@
 //
 // Created by andrefmrocha on 04-05-2018.
 //
-
+#include "stdafx.h"
 #include "cwplayer.h"
 void cwplayer::prepareBoard()
 {
@@ -206,4 +206,23 @@ void cwplayer::removeWord(string position, int size)
             board[pos_h][pos_v+i] = '.';
         }
     }
+}
+
+bool cwplayer::helpPlayerword(string position) {
+	string word;
+	bool flag = false;
+	for (auto i : userWordPos) {
+		if (i.second == position) {
+			word = i.first;
+			flag = true;
+			break;
+		}
+	}
+	if (!flag) {
+		cout << "The word was not found." << endl;
+		return flag;
+	}
+	string randsyn = randomsynDict(word);
+	cout << "A clue for this word is: " << randsyn; // falta lidar com casos onde nao ha sinonimo
+	return flag;
 }

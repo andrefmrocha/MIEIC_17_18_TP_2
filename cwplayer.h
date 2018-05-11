@@ -17,12 +17,13 @@ using namespace std;
 class cwplayer: public Board, public Dictionary
 {
 public:
-    cwplayer(string name): Board(), Dictionary(name){};
+    cwplayer(): Board(), Dictionary(){};
     void startGame();
     bool addPlayerWord(string position, string word);
     void game_show();
     bool checkBoard();
     bool removePlayerWord(string word);
+	bool helpPlayerword(string position);
 private:
     void spacing(int word);
     void prepareBoard();

@@ -14,6 +14,7 @@ public:
     Player(string name);
     unsigned long finishGame();
     void updateTime();
+	string GetName();
 private:
     string playerName;
     unsigned long playerTime;

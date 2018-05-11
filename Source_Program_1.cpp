@@ -156,7 +156,7 @@ void resumepuzzle() {
 			else break;
 		} while (true);		
 		if (!resboard.readFile(boardname)) {
-			cout << endl << "The name written is not valid. Please write again: ";
+			cout << "Please write again: ";
 			continue;
 		}
 		else {
