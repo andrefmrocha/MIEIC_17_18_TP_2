@@ -7,7 +7,9 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#ifdef __unix__
 #include <unistd.h>
+#endif
 using namespace std;
 // TEXT COLOR CODES
 #define NO_COLOR "\033[0m"

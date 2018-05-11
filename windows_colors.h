@@ -7,7 +7,10 @@
 #include <iostream> 
 #include <ctime> 
 #include <cstdlib>
+#ifdef __WIN32__
 #include <windows.h>
+#endif
+
 using namespace std;
 //COLOR CODES: 
 #define BLACK 0

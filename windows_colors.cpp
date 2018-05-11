@@ -3,6 +3,7 @@
 //
 #include "stdafx.h"
 #include "windows_colors.h"
+#ifdef __WIN32__
 void clrscr(void) {
 	COORD coordScreen = { 0, 0 }; // upper left corner
 	DWORD cCharsWritten;
@@ -40,3 +41,4 @@ void clrscr(void) {
 			SetConsoleTextAttribute(hCon, color | BACKGROUND_BLUE | BACKGROUND_GREEN |
 				BACKGROUND_RED); 
 	}
+#endif
