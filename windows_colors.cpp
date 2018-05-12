@@ -3,7 +3,8 @@
 //
 #include "stdafx.h"
 #include "windows_colors.h"
-#ifdef __WIN32__
+#ifdef __unix__
+#else
 void clrscr(void) {
 	COORD coordScreen = { 0, 0 }; // upper left corner
 	DWORD cCharsWritten;

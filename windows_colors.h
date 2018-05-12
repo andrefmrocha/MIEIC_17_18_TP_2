@@ -7,7 +7,8 @@
 #include <iostream> 
 #include <ctime> 
 #include <cstdlib>
-#ifdef __WIN32__
+#ifdef __unix__
+#else
 #include <windows.h>
 #endif
 
