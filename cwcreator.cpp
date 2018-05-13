@@ -70,6 +70,8 @@ bool cwcreator::helpWord(string position)
     {
         int i = 1;
         char choice;
+		bool flag = true;
+		bool valid = false;
         do
         {   do
             {
@@ -79,24 +81,25 @@ bool cwcreator::helpWord(string position)
                 possibleWords.erase(possibleWords.begin()+index);
                 i++;
             }while (i % 10);
-            cout << "Would you like more options? (Y/N)";
-            cin >> choice;
-            bool valid = false;
-            if(choice == 'Y' || choice == 'N')
-            {
-                valid = true;
-            }
-            while(!valid)
-            {
-                cout << "Not a valid option. Please choose again(Y/N)";
-                cin >> choice;
-            }
-            if(choice == 'N')
-            {
-                break;
-            }
-
-        }while(true);
+			cout << endl << "Would you like more options? (Y/N)";
+			do {
+				cin >> choice;
+				if (cin.eof()) {
+					cin.clear();
+					continue;
+				}
+				if (choice == 'Y' || choice == 'y' )
+				{
+					break;
+				}
+				if (choice == 'N' || choice == 'n')
+				{
+					flag = false;
+					break;
+				}
+				cout << endl << "Not a valid option. Please choose again(Y/N)";
+			} while (true);
+        }while(flag);
     }
 }
 
@@ -322,6 +325,9 @@ void cwcreator::board_save()
 		outfile << wordPos.at(i2).second.substr(0,3) << " " << wordPos.at(i2).first << endl;
 	}
 	clear();
+	if (checkFinished())
+		cout << endl << "Finished! " << endl;
+	else cout << endl << "Saved successfuly! " << endl;
 }
 
 void cwcreator::checkWords()

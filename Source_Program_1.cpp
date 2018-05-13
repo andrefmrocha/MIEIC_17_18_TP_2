@@ -23,8 +23,14 @@ void constructboard(cwcreator brd) {
 	do {
 		cout << endl << "Position(LCD / CTRL - Z = stop) ? ";
 		cin >> pos;
-		if (cin.eof())
+		if (cin.eof()) {
+			cin.clear();
 			break;
+		}
+		else if (!brd.positionalCheck(pos)) {
+			cout << endl;
+			continue;
+		}
 		cout << endl << "Word ( - = remove / ? = help ) ? ";
 		do {
 			cin >> word;
@@ -88,13 +94,11 @@ void constructboard(cwcreator brd) {
 		UpperInput(ans);
 		if (ans == "S") {
 			brd.board_save();
-			cout << endl << "Saved successfully!" << endl;
 			valinput = true;
 		}
 		else if (ans == "F") {
 			brd.finishBoard();
 			brd.board_save();
-			cout << endl << "Finished! " << endl;
 			return;
 		}
 		else if (ans == "X") {
@@ -167,6 +171,11 @@ void resumepuzzle() {
 		}
 		else {
 			resboard.getDict(boardname);
+			if (resboard.checkFinished()) {
+				cout << endl << "This board is finished, it can't be modified." << endl;
+				return;
+			}
+			resboard.checkWords();
 			constructboard(resboard);
 			break;
 		}
