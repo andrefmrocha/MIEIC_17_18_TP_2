@@ -30,6 +30,7 @@ public:
 	void fillBoard();
 	void setBoardname(string bname);
 	string giveBoardName();
+	bool checkFinished();
 protected:
     int lines;
     int columns;

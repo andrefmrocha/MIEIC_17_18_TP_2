@@ -291,3 +291,8 @@ void Board::setBoardname(string bname) {
 string Board::giveBoardName() {
 	return boardname;
 }
+
+bool Board::checkFinished()
+{
+    return finished;
+}

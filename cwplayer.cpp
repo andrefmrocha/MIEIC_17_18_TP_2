@@ -112,6 +112,17 @@ bool cwplayer::addPlayerWord(string position, string word)
         cout << endl << "Wrong Position" << endl << endl;
         return false;
     }
+    for(auto i:wordPos)
+    {
+        if(i.second == position)
+        {
+            if(i.first.size() != word.size())
+            {
+                cout << "Word is unfitting for the given space." << endl;
+                return false;
+            }
+        }
+    }
     if(direc == 'V')
     {
         if((pos_h + word.size()) > lines )  //In case there isn't enough space on the board, the word is ignored
@@ -171,7 +182,25 @@ bool cwplayer::checkBoard()
 {
     sort(userWordPos.begin(), userWordPos.end());
     sort(wordPos.begin(), wordPos.end());
-    return userWordPos==wordPos;
+    if(userWordPos.size()!= wordPos.size())
+    {
+//        cout << "Not all spaces are yet filled" << endl;
+        return false;
+    }
+    bool flag = true;
+    for(int i = 0; i < userWordPos.size())
+    {
+        if(userWordPos[i].first == userWordPos[i].first)
+        {
+            continue;
+        }
+        else
+        {
+//            cout << "The word " << userWordPos[i].first << "is not correct" << endl;
+            flag = false;
+        }
+    }
+    return flag;
 }
 
 bool cwplayer::removePlayerWord(string word)

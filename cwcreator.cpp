@@ -323,3 +323,14 @@ void cwcreator::board_save()
 	}
 	clear();
 }
+
+void cwcreator::checkWords()
+{
+    for(auto i: wordPos)
+    {
+        if(isWordinDict(i.first))
+            i.second.push_back('T');
+        else
+            i.second.push_back('F');
+    }
+}
