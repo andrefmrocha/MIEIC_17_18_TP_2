@@ -68,14 +68,20 @@ void playgame(cwplayer game, Player p1, string board) {
 	do {
 		cout << endl << "Position(LCD / CTRL - Z = stop) ? ";
 		cin >> pos;
-		if (cin.eof())
+		if (cin.eof()) {
+			cin.clear();
 			break;
+		}
+		else if (!game.positionalCheck(pos)) {
+			cout << endl;
+			continue;
+		}
 		cout << endl << "Word ( - = remove / ? = help ) ? ";
 		do {
 			cin >> word;
 			if (cin.eof())
 				cin.clear();
-			if (word == "x" || word == "X") {
+			else if (word == "x" || word == "X") {
 				cout << "You lose all progress, are you sure you want to exit? (Enter Y to confirm): ";
 				cin >> confirm;
 				UpperInput(confirm);
@@ -106,7 +112,11 @@ void playgame(cwplayer game, Player p1, string board) {
 			continue;
 		}
 		else if (word == "?") {
-			if (!game.helpPlayerword(pos)) //needs changing - help function
+			if (game.getNumHints() == p1.getDifficulty()) {
+				cout << "You reached the limit of hints allowed, no more help now :( " << endl;
+				continue;
+			}
+			else if (!game.helpPlayerword(pos)) 
 				continue;
 			else {
 				cout << "Word ? ";
@@ -196,7 +206,18 @@ int main() {
 		}
 		else break;
 	} while (true);
-	Player p1(playername);
+	int dif;
+	cout << "How many hints do you want to use ? ";
+	do {
+		cin >> dif;
+		if (cin.eof())
+		{
+			cin.clear();
+			continue;
+		}
+		else break;
+	} while (true);
+	Player p1(playername,dif);
 	string board;
 	cwplayer game1;
 	cout << endl << "What board do you want play in ? ";
@@ -217,6 +238,10 @@ int main() {
 		}
 		else {
 			game1.getDict(board);
+			if (!game1.checkFinished()) {
+				cout << endl << "This board isn't finished, you can't play in it." << endl;
+				continue; 
+			}
 			break;
 		}
 	} while (true);

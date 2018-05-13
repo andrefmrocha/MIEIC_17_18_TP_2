@@ -188,7 +188,7 @@ bool cwplayer::checkBoard()
         return false;
     }
     bool flag = true;
-    for(int i = 0; i < userWordPos.size())
+    for(int i = 0; i < userWordPos.size();i++)
     {
         if(userWordPos[i].first == userWordPos[i].first)
         {
