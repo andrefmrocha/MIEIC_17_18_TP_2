@@ -30,6 +30,8 @@ void constructboard(cwcreator brd) {
 			cin >> word;
 			if (cin.eof())
 				cin.clear();
+			else if (word == "x" || word == "X")
+				break;
 			else break;
 		} while (true);
 		if (word == "-") {
@@ -73,7 +75,7 @@ void constructboard(cwcreator brd) {
 	} while (true);
 	cin.clear();
 	cout << endl << "Do you wish to save your board, finish the board or exit without saving (and lose all progress) ?" << endl;
-	cout << "(S = save and resume later / F = finish / X = exit) ";
+	cout << " (S = save and resume later / F = finish / X = exit) ";
 	string ans;
 	bool valinput = true;
 	do {
@@ -134,6 +136,8 @@ void createpuzzle() {
 			cin >> dicfile;
 			if (cin.eof())
 				cin.clear();
+			if (dicfile == "x" || dicfile == "X")
+				return;
 			else break;
 		} while (true);
 		cwcreator dummyb(l, c, dicfile);  //creates a dummy board with the
@@ -153,6 +157,8 @@ void resumepuzzle() {
 			cin >> boardname;
 			if (cin.eof())
 				cin.clear();
+			else if (boardname == "x" || boardname == "X")
+				return;
 			else break;
 		} while (true);		
 		if (!resboard.readFile(boardname)) {
@@ -185,7 +191,8 @@ void introduction() {
 	cout << " Choose the word you want to insert in the board " << endl;
 	cout << " or choose an alternative option, to remove a word " << endl;
 	cout << " from the board writing '-' or if you're in a dead" << endl;
-	cout << " end, ask for a possible word with the help option '?'." << endl << endl;
+	cout << " end, ask for a possible word with the help option '?'." << endl;
+	cout << "5 - Enter X to go back (NOTE: you may lose your progress). " << endl << endl;
 }
 
 int main() {
