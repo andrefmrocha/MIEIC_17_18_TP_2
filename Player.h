@@ -11,10 +11,12 @@ using namespace std;
 class Player
 {
 public:
-    Player(string name);
+    Player(string name, int difficulty);
     unsigned long finishGame();
     void updateTime();
 	string GetName();
+	void updateDifficulty(int number);
+	int getDifficulty();
 private:
     string playerName;
     unsigned long playerTime;
