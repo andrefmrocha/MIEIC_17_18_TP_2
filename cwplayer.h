@@ -24,6 +24,9 @@ public:
     bool checkBoard();
     bool removePlayerWord(string word);
 	bool helpPlayerword(string position);
+	string findPosition(string word);
+	int getNumHints();
+	void NumHintsInc();
 private:
     void spacing(int word);
     void prepareBoard();
@@ -32,6 +35,7 @@ private:
     vector<pair<string, string>> vertiWord;
     vector<pair<string, string>> horiWord;
     vector<pair<string, string>> userWordPos;
+	int numhints;
 };
 
 

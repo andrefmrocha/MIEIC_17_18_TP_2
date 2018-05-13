@@ -20,6 +20,7 @@ void cwplayer::prepareBoard()
 
 void cwplayer::startGame()
 {
+	numhints = 0;
     prepareBoard();
     game_show();
     cout << "HORIZONTAL";
@@ -210,8 +211,9 @@ void cwplayer::removeWord(string position, int size)
 
 bool cwplayer::helpPlayerword(string position) {
 	string word;
+	NumHintsInc();
 	bool flag = false;
-	for (auto i : userWordPos) {
+	for (auto i : wordPos) {
 		if (i.second == position) {
 			word = i.first;
 			flag = true;
@@ -223,6 +225,24 @@ bool cwplayer::helpPlayerword(string position) {
 		return flag;
 	}
 	string randsyn = randomsynDict(word);
-	cout << "A clue for this word is: " << randsyn; // falta lidar com casos onde nao ha sinonimo
+	cout << "A clue for this word is: " << randsyn << endl;
 	return flag;
+}
+
+string cwplayer::findPosition(string word) {
+	bool flag = false;
+	for (auto i : userWordPos) {
+		if (i.first == word) {
+			return i.second;
+		}
+	}
+	return "1";
+}
+
+int cwplayer::getNumHints() {
+	return numhints;
+}
+
+void cwplayer::NumHintsInc() {
+	numhints += 1;
 }
