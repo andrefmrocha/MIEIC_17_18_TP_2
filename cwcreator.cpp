@@ -68,11 +68,35 @@ bool cwcreator::helpWord(string position)
     }
     if(!possibleWords.empty())
     {
-        cout << endl << "Lista de palavras possíveis: " << endl << endl;
-        for(int i = 0; i < possibleWords.size(); ++i)
-        {
-            cout << i+1 << " - " << possibleWords[i] << endl;
-        }
+        int i = 1;
+        char choice;
+        do
+        {   do
+            {
+                srand(time(NULL)+i);
+                unsigned long index = rand() % possibleWords.size();
+                cout << i << "-" << possibleWords[index] << endl;
+                possibleWords.erase(possibleWords.begin()+index);
+                i++;
+            }while (i % 10);
+            cout << "Would you like more options? (Y/N)";
+            cin >> choice;
+            bool valid = false;
+            if(choice == 'Y' || choice == 'N')
+            {
+                valid = true;
+            }
+            while(!valid)
+            {
+                cout << "Not a valid option. Please choose again(Y/N)";
+                cin >> choice;
+            }
+            if(choice == 'N')
+            {
+                break;
+            }
+
+        }while(true);
     }
 }
 

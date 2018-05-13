@@ -18,6 +18,7 @@ public:
 private:
     string playerName;
     unsigned long playerTime;
+    int difficulty;
 };
 
 

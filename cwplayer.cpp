@@ -20,7 +20,7 @@ void cwplayer::prepareBoard()
 
 void cwplayer::startGame()
 {
-	numhints = 0;
+	numHints = 0;
     prepareBoard();
     game_show();
     cout << "HORIZONTAL";
@@ -240,9 +240,9 @@ string cwplayer::findPosition(string word) {
 }
 
 int cwplayer::getNumHints() {
-	return numhints;
+	return numHints;
 }
 
 void cwplayer::NumHintsInc() {
-	numhints += 1;
+	numHints += 1;
 }

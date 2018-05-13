@@ -8,6 +8,7 @@
 
 #include "Board.h"
 #include "Dictionary.h"
+#include <ctime>
 
 class cwcreator: public Board, public Dictionary
 {

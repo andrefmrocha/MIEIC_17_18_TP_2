@@ -35,7 +35,7 @@ private:
     vector<pair<string, string>> vertiWord;
     vector<pair<string, string>> horiWord;
     vector<pair<string, string>> userWordPos;
-	int numhints;
+	int numHints;
 };
 
 
