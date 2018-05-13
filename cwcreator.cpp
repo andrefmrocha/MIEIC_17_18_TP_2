@@ -217,6 +217,9 @@ string cwcreator::getDictName() {
 }
 
 string cwcreator::getBoardName() {
+	string boardattr = giveBoardName();
+	if (!(boardattr == ""))
+		return boardattr;
 	string b000_009 = "b00";
 	string b010_099 = "b0";
 	string b100_999 = "b";
@@ -258,8 +261,10 @@ string cwcreator::getBoardName() {
 			break;
 		}
 	}
-	if (flag)
+	if (flag) {
+		setBoardname(filename);
 		return filename;
+	}
 	else {
 		cout << "A new board cannot be created, please select an already created puzzle." << endl;
 		return "error";
@@ -290,7 +295,7 @@ void cwcreator::board_save()
 	}
 	outfile << endl;
 	for (int i2 = 0; i2 < wordPos.size(); i2++) {
-		outfile << wordPos.at(i2).second << " " << wordPos.at(i2).first << endl;
+		outfile << wordPos.at(i2).second.substr(0,3) << " " << wordPos.at(i2).first << endl;
 	}
 	clear();
 }

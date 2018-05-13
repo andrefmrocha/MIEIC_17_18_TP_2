@@ -21,6 +21,7 @@ Board::Board(unsigned int lines, unsigned int columns) {
         board.push_back(vec_columns);
     }
     finished = false;
+	boardname = "";
 }
 
 void Board::resizeBoard(unsigned int lines, unsigned int columns)
@@ -261,6 +262,7 @@ bool Board::readFile(string iname)
     this->columns = columns;
     this->lines = lines;
     resizeBoard(lines, columns);
+	boardname = iname;
 	return true;
 }
 
@@ -280,4 +282,12 @@ bool Board::positionalCheck(string position)
         return false;
     }
 
+}
+
+void Board::setBoardname(string bname) {
+	boardname = bname;
+}
+
+string Board::giveBoardName() {
+	return boardname;
 }

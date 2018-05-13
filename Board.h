@@ -28,6 +28,8 @@ public:
     bool eraseWord(string word);
     bool readFile(string iname);
 	void fillBoard();
+	void setBoardname(string bname);
+	string giveBoardName();
 protected:
     int lines;
     int columns;
@@ -36,10 +38,9 @@ protected:
     void writeAllWords();
     void clear();
     int countLine(string savingString);
-    
 	bool finished;
 private:
-    
+	string boardname;
     void writeWord(string position, string word);
 };
 

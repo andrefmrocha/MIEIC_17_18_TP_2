@@ -19,6 +19,7 @@ public:
 	string getDictName();
 	void board_save();
 	string getBoardName();
+	
 private:
     bool wildcardMatch(const char *str, const char *strWild);
     void wildcardWords(string word, vector<string> &possiblewords);
