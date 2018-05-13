@@ -184,7 +184,7 @@ bool cwplayer::checkBoard()
     sort(wordPos.begin(), wordPos.end());
     if(userWordPos.size()!= wordPos.size())
     {
-//        cout << "Not all spaces are yet filled" << endl;
+        cout << "Not all spaces are yet filled" << endl;
         return false;
     }
     bool flag = true;
@@ -196,7 +196,7 @@ bool cwplayer::checkBoard()
         }
         else
         {
-//            cout << "The word " << userWordPos[i].first << "is not correct" << endl;
+            cout << "The word " << userWordPos[i].first << "is not correct" << endl;
             flag = false;
         }
     }
