@@ -3,11 +3,6 @@
 //
 #include "stdafx.h"
 #include "cwcreator.h"
-/*cwcreator::cwcreator()
-{
-    Dictionary();
-    Board();
-}*/
 bool cwcreator::helpWord(string position)
 {
     if(position.size() > 3) //Checks if the position argument was passed correctly
@@ -18,11 +13,6 @@ bool cwcreator::helpWord(string position)
     int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
     int pos_h = static_cast<int>(position[0]-'A');
     char direc = position[2];   // The direction is saved as a char
-    if(pos_h > lines || pos_v > columns || (direc != 'V' && direc !='H'))   //Checks if all the arguments are valid for the given board
-    {
-        cout << endl << "Wrong Position" << endl << endl;
-        return false;
-    }
     string wildcardWord;
     vector<string> possibleWords;
     fillBoard();

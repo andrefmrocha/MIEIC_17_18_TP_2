@@ -268,9 +268,9 @@ bool Board::readFile(string iname)
 
 bool Board::positionalCheck(string position)
 {
-    if(position.size() > 3) //Checks if the position argument was passed correctly
+    if(position.size() == 3) //Checks if the position argument was passed correctly
     {
-        cout  << endl << "Too many positional arguments." <<endl << endl;
+        cout  << endl << "Insufficient positional arguments." <<endl << endl;
         return false;
     }
     int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
