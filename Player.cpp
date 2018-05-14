@@ -4,11 +4,22 @@
 #include "stdafx.h"
 #include "Player.h"
 
-Player::Player(string name, int difficulty)
+Player::Player(string name, char difficulty)
 {
     playerName = name;
     playerTime = time(NULL);
-    this->difficulty = difficulty;
+    switch (difficulty)
+    {
+        case 'E':
+            this->difficulty = 5;
+            break;
+        case 'N':
+            this->difficulty = 3;
+            break;
+        case 'H':
+            this->difficulty = 1;
+            break;
+    }
 }
 
 void Player::updateTime()

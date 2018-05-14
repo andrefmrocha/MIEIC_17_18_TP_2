@@ -3,7 +3,7 @@
 //
 #include "stdafx.h"
 #include "Dictionary.h"
-//looool
+
 Dictionary::Dictionary()
 {
     dictName = "0";
@@ -35,7 +35,6 @@ void Dictionary::openDict(string name)
                 {
 //                toUpper(savingWord);
                     key = savingWord;
-                    words++;
                     savingWord.clear();
                 }
                 if (i == ',' || i == '\r')
@@ -55,6 +54,7 @@ void Dictionary::openDict(string name)
                 synVec.push_back(savingWord);
             }
 //        synVec.push_back(savingWord);
+            words++;
             synonymDict.insert(pair<string, vector<string>>(key, synVec));
         }
     }

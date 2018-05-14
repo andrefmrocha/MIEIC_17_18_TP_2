@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "cwplayer.h"
 #include "Player.h"
+#ifdef __unix__
+string eof = "CTRL - D";
+#else
+string eof = "CTRL - Z";
+#endif
 
 //String manipulation function that makes the program case insensitive by receiving the user input,
 // whether its capitalized or not and alters it so be readble by the program functions
@@ -64,9 +69,8 @@ void finishplay(cwplayer game, Player p1,string dest) {
 void playgame(cwplayer game, Player p1, string board) {
 	string pos, word;
 	string confirm;
-	bool flag;
 	do {
-		cout << endl << "Position(LCD / CTRL - Z = stop) ? ";
+		cout << endl << "Position(LCD / " << eof << " = stop) ? ";
 		cin >> pos;
 		if (cin.eof()) {
 			cin.clear();
@@ -206,16 +210,22 @@ int main() {
 		}
 		else break;
 	} while (true);
-	int dif;
-	cout << "How many hints do you want to use ? ";
+	char dif;
+	cout << "Select a difficulty: Easy(E), Normal(N), Hard(H)";
 	do {
 		cin >> dif;
+		toupper(dif);
 		if (cin.eof())
 		{
 			cin.clear();
 			continue;
 		}
-		else break;
+		else if(dif == 'E' || dif == 'N' || dif == 'H')
+		    break;
+		else
+        {
+            cout << "That is not a possible difficulty. Please enter again: ";
+        }
 	} while (true);
 	Player p1(playername,dif);
 	string board;

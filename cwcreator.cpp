@@ -71,7 +71,6 @@ bool cwcreator::helpWord(string position)
         int i = 1;
         char choice;
 		bool flag = true;
-		bool valid = false;
         do
         {   do
             {

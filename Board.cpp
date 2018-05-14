@@ -281,6 +281,11 @@ bool Board::positionalCheck(string position)
         cout << endl << "Wrong Position" << endl << endl;
         return false;
     }
+    if(board[pos_h][pos_v] == '#')
+    {
+        cout << "Invalid postion" << endl << endl;
+        return false;
+    }
 
 }
 

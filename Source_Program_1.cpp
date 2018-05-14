@@ -1,5 +1,11 @@
+#include <climits>
 #include "stdafx.h"
 #include "cwcreator.h"
+#ifdef __unix__
+string eof = "CTRL - D";
+#else
+string eof = "CTRL - Z";
+#endif
 
 //String manipulation function that makes the program case insensitive by receiving the user input,
 // whether its capitalized or not and alters it so be readble by the program functions
@@ -21,7 +27,7 @@ void constructboard(cwcreator brd) {
 	cout << endl;
 	string pos, word;
 	do {
-		cout << endl << "Position(LCD / CTRL - Z = stop) ? ";
+		cout << endl << "Position(LCD / " << eof <<" = stop) ? ";
 		cin >> pos;
 		if (cin.eof()) {
 			cin.clear();
@@ -123,27 +129,22 @@ void createpuzzle() {
 	string dicfile;  //will receive the dictionary file name specified by the user
 	do {
 		cout << endl << "Board size (lines columns) ? ";
-		do {
-			cin >> l;
-			if (cin.eof())
-				cin.clear();
-			else break;
-		} while (true);
-		do {
-			cin >> c;
-			if (cin.eof())
-				cin.clear();
-			else break;
-		} while (true);
+        while (!(cin >> l))
+        {
+            cin.clear(); // clear the error flags
+            cin.ignore(INT_MAX, '\n'); // discard the row
+        }
+        while (!(cin >> c))
+        {
+            cin.clear(); // clear the error flags
+            cin.ignore(INT_MAX, '\n'); // discard the row
+        }
 		cout << endl << "Dictionary file name ? ";
-		do {
-			cin >> dicfile;
-			if (cin.eof())
-				cin.clear();
-			if (dicfile == "x" || dicfile == "X")
-				return;
-			else break;
-		} while (true);
+        cin >> dicfile;
+		if (cin.eof())
+		    cin.clear();
+		if (dicfile == "x" || dicfile == "X")
+		    return;
 		cwcreator dummyb(l, c, dicfile);  //creates a dummy board with the
 		valid = validDic(dummyb); //validates the dictionary
 	} while (!valid);
@@ -193,7 +194,7 @@ void introduction() {
 	cout << " Specify the text file where the dictionary is from." << endl;
 	cout << "2 - Board size (lines columns):" << endl;
 	cout << " Choose how many lines and columns the board will have." << endl;
-	cout << "3 - Position (LcD / CTRL-Z = stop ):" << endl;
+	cout << "3 - Position (LcD / " << eof << " = stop ):" << endl;
 	cout << " LCD stands for Line column and Direction." << endl;
 	cout << " E.g.: AaV - Line A, column a and vertical direction." << endl;
 	cout << "4 - Word ( - = remove / ? = help ):" << endl;
