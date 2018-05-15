@@ -8,7 +8,7 @@ Player::Player(string name, char difficulty)
 {
     playerName = name;
     playerTime = time(NULL);
-    switch (difficulty)
+    switch (difficulty) //The difficulty is chosen
     {
         case 'E':
             this->difficulty = 5;
@@ -22,26 +22,47 @@ Player::Player(string name, char difficulty)
     }
 }
 
+/***************************************
+ ****************updateTime*************
+ * Method to update user Time.
+ */
 void Player::updateTime()
 {
     playerTime = time(NULL) - playerTime;
 }
 
+/***************************************
+ ****************updateTime*************
+ * Method to finish the user's game.
+ * @return the number of seconds used
+ */
 unsigned long Player::finishGame()
 {
     updateTime();
     return playerTime;
 }
 
+/***********************************
+ ***************GetName*************
+ * @return the name of the player
+ */
 string Player:: GetName() {
 	return playerName;
 }
 
+/***************************************
+ ****************updateTime*************
+ * Method to update Player Difficulty.
+ */
 void Player::updateDifficulty(int number)
 {
     difficulty = number;
 }
 
+/***********************************
+ ***************GetName*************
+ * @return the difficulty chosen
+ */
 int Player::getDifficulty()
 {
     return difficulty;

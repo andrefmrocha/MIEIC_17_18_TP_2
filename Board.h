@@ -38,7 +38,7 @@ protected:
     vector<pair<string, string>> wordPos;
     void writeAllWords();
     void clear();
-    int countLine(string savingString);
+    int countColumn(string savingString);
 	bool finished;
 private:
 	string boardname;

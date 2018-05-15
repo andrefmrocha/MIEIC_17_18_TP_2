@@ -3,6 +3,14 @@
 //
 #include "stdafx.h"
 #include "cwcreator.h"
+
+/************************************************
+ **********************helpWord******************
+ * The helpWord method is used to check for
+ * possible words to be used in the given space
+ * @param position
+ * @return if it's a fitting position
+ */
 bool cwcreator::helpWord(string position)
 {
     if(position.size() > 3) //Checks if the position argument was passed correctly
@@ -20,23 +28,23 @@ bool cwcreator::helpWord(string position)
     {
         for(pos_h; pos_h < lines; pos_h++)
         {
-            if(board[pos_h][pos_v] >= 'A' && board[pos_h][pos_v] <= 'Z')
+            if(board[pos_h][pos_v] >= 'A' && board[pos_h][pos_v] <= 'Z')//If a letter was found
             {
-                wildcardWord.push_back(board[pos_h][pos_v]);
-                wildcardWords(wildcardWord,possibleWords);
+                wildcardWord.push_back(board[pos_h][pos_v]); //The letter is saved
+                wildcardWords(wildcardWord,possibleWords); //and the word vector is searched once more
             }
             else if(board[pos_h][pos_v] == '#')
             {
-                break;
+                break; //If it's found a '#', the search is over
             }
             else
             {
-                wildcardWord.push_back('?');
+                wildcardWord.push_back('?'); //If there's a blank space, a '?' is written
                 wildcardWords(wildcardWord,possibleWords);
             }
         }
     }
-    else
+    else //The same process is done horizontally
     {
         for(pos_v; pos_v < columns; pos_v++)
         {
@@ -68,9 +76,9 @@ bool cwcreator::helpWord(string position)
                 unsigned long index = rand() % possibleWords.size();
                 cout << i << "-" << possibleWords[index] << endl;
                 possibleWords.erase(possibleWords.begin()+index);
-                i++;
+                i++; //Synonyms are randomyl chosen and removed in order to prevent repetitiveness
             }while (i % 10);
-			cout << endl << "Would you like more options? (Y/N)";
+			cout << endl << "Would you like more options? (Y/N)"; //The user is asked if he wants more words
 			do {
 				cin >> choice;
 				if (cin.eof()) {
@@ -87,11 +95,19 @@ bool cwcreator::helpWord(string position)
 					break;
 				}
 				cout << endl << "Not a valid option. Please choose again(Y/N)";
-			} while (true);
+			} while (true); //If the option is not valid, the user is asked again
         }while(flag);
     }
 }
-
+/*****************************************************************
+ ***************************wildcardMatch*************************
+ * The wildcardMatch method was given in the previous work and
+ * its function is to compare if a string meets the criteria given
+ * by a sequence of '?', '*', or letters.
+ * @param str
+ * @param strWild
+ * @return if a word is valid
+ */
 bool cwcreator::wildcardMatch(const char *str, const char *strWild)
 {
     // We have a special case where string is empty ("") and the mask is "*".
@@ -140,7 +156,13 @@ bool cwcreator::wildcardMatch(const char *str, const char *strWild)
     // Have a match? Only if both are at the end...
     return !*str && !*strWild;
 }
-
+/*********************************************************************
+ *****************************wildcardWords***************************
+ * The wildcardWords is used to run the wildcardMatch method through
+ * all the words in the dictionary.
+ * @param word
+ * @param possiblewords
+ */
 void cwcreator::wildcardWords(string word, vector<string> &possiblewords)
 {
     for(auto i: synonymDict)
@@ -169,11 +191,11 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
 {
     if(isWordinDict(word))
     {
-       position.push_back('T');
+       position.push_back('T'); //If the word is in the dictionary, a 'T is added to the positional string
     }
     else
     {
-        position.push_back('F');
+        position.push_back('F'); //If the word is not in the dictionary, a 'F is added to the positional string
     }
     int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
     int pos_h = static_cast<int>(position[0]-'A');
@@ -227,7 +249,10 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
     clear();    //The words are removed from the board once again
     return true; //A true boolean is passed on, in order for it to know the word was stored
 }
-
+/******************************************************************
+ **************************getDictName*****************************
+ * @return the name of the dictionary
+ */
 string cwcreator::getDictName() {
 	return dictName;
 }
@@ -287,17 +312,22 @@ string cwcreator::getBoardName() {
 	}
 }
 
+/******************************************************************
+ **************************board_save******************************
+ * The board_save method saves the board, the dictionary and the
+ * the words used in a .txt file for future use.
+ */
 void cwcreator::board_save()
 {
-	fillBoard();
-	string boardname = getBoardName();
+	fillBoard(); // The board is prepared to be written
+	string boardname = getBoardName(); // The name is chosen
 	if (boardname == "error")
 		return;
-	ofstream outfile(boardname);
-	outfile << dictName << endl;
+	ofstream outfile(boardname); //The file is opened
+	outfile << dictName << endl; //The name of the dictionary is stored
 	if (finished)
 	{
-		outfile << static_cast<char>(32) << endl;
+		outfile << static_cast<char>(32) << endl; //If the board is finished a space is placed on the second line
 	}
 	else
 	{
@@ -307,18 +337,23 @@ void cwcreator::board_save()
 		for (int j = 0; j < columns; j++) {
 			outfile << board.at(i).at(j) << "  ";
 		}
-		outfile << endl;
+		outfile << endl; //The board is written on the file
 	}
 	outfile << endl;
 	for (int i2 = 0; i2 < wordPos.size(); i2++) {
 		outfile << wordPos.at(i2).second.substr(0,3) << " " << wordPos.at(i2).first << endl;
-	}
-	clear();
+	} //The words are written on the file
+	clear(); //The actual board is cleared
 	if (checkFinished())
 		cout << endl << "Finished! " << endl;
 	else cout << endl << "Saved successfuly! " << endl;
 }
 
+/********************************************************
+ ***********************checkWords***********************
+ * The checkWords method checks which words are valid
+ * or not given the dictionary.
+ */
 void cwcreator::checkWords()
 {
     for(auto i: wordPos)

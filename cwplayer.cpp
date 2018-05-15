@@ -3,6 +3,11 @@
 //
 #include "stdafx.h"
 #include "cwplayer.h"
+/*****************************************
+ ****************prepareBoard*************
+ * The prepareBoard method prepares the
+ * the board for the beggining of the game
+ */
 void cwplayer::prepareBoard()
 {
     fillBoard();
@@ -18,15 +23,21 @@ void cwplayer::prepareBoard()
     }
 }
 
+/*******************************************
+ ****************startGame******************
+ * The startGame method is used to first
+ * initiliaze a game for the user to play.
+ */
+
 void cwplayer::startGame()
 {
-	numHints = 0;
+	numHints = 0; //The number of hints is initialized as 0
     prepareBoard();
-    game_show();
+    game_show(); //The board is shown
     cout << "HORIZONTAL";
     spacing(10);
     cout << "VERTICAL" << endl;
-    sepWords();
+    sepWords(); //The words are separated into two groups: horizontal and vertical
     for(int i = 0; i < vertiWord.size() || i < horiWord.size(); i++)
     {
         if(i < horiWord.size())
@@ -47,9 +58,16 @@ void cwplayer::startGame()
         }
         cout << endl;
     }
-
+//Synonyms from both sides are shown to the user side by side
 }
 
+
+/******************************************
+ ******************spacing*****************
+ * The spacing method is used to separate
+ * words without losing organization
+ * @param word
+ */
 void cwplayer::spacing(int word)
 {
     for(int i = 0; i < (50 - word); i++)
@@ -58,6 +76,12 @@ void cwplayer::spacing(int word)
     }
 }
 
+/****************************************
+ **************sepWords******************
+ * The sepWords method is used to separate
+ * words into 2 groups: horizontal and
+ * vertical ones.
+ */
 void cwplayer::sepWords()
 {
     for(auto i: wordPos)
@@ -73,9 +97,14 @@ void cwplayer::sepWords()
     }
 }
 
+/******************************************
+ ******************game_show***************
+ * The game_show methos shows the board to
+ * the user
+ */
 void cwplayer::game_show()
 {
-    setcolor(RED);
+    setcolor(RED); // The color is set to red
     cout << "  ";
     for (int i2 = 0; i2 < columns; i2++) {
         cout << (char)(i2 + 97) << "  ";
@@ -95,10 +124,16 @@ void cwplayer::game_show()
         }
         setcolor(BLACK_B, BLACK_B);
         cout << endl;
-    }
+    } //The board is fully written
     setcolor(WHITE, BLACK_B);
 }
 
+/*****************************************************************
+ **********************addPlayerWord******************************
+ * @param position
+ * @param word
+ * @return if the word was added
+ */
 bool cwplayer::addPlayerWord(string position, string word)
 {
     int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
@@ -108,7 +143,7 @@ bool cwplayer::addPlayerWord(string position, string word)
     {
         if(i.second == position)
         {
-            if(i.first.size() != word.size())
+            if(i.first.size() != word.size()) //Checks if the word fits the given space
             {
                 cout << "Word is unfitting for the given space." << endl;
                 return false;
@@ -135,7 +170,7 @@ bool cwplayer::addPlayerWord(string position, string word)
                 }
                 else
                 {
-                    board[pos_h][pos_v] = i;
+                    board[pos_h][pos_v] = i; //Writes the actual word
                 }
                 pos_h++;
             }
@@ -167,18 +202,22 @@ bool cwplayer::addPlayerWord(string position, string word)
             }
         }
     }
-    userWordPos.push_back(pair<string, string>(word, position));
+    userWordPos.push_back(pair<string, string>(word, position));//The word is added to another vector of pairs
 }
 
+/**********************************************************
+ *********************checkBoard***************************
+ * @return if the board was currectly filled
+ */
 bool cwplayer::checkBoard()
 {
-    sort(userWordPos.begin(), userWordPos.end());
-    sort(wordPos.begin(), wordPos.end());
-    if(userWordPos.size()!= wordPos.size())
+    if(userWordPos.size()!= wordPos.size()) //If their size is not the same, it means it hasn't been properly filled
     {
         cout << "Not all spaces are yet filled" << endl;
         return false;
     }
+    sort(userWordPos.begin(), userWordPos.end()); //Both vectors are sorted in order to run through them
+    sort(wordPos.begin(), wordPos.end());
     bool flag = true;
     for(int i = 0; i < userWordPos.size();i++)
     {
@@ -186,7 +225,7 @@ bool cwplayer::checkBoard()
         {
             continue;
         }
-        else
+        else //If a word is not properly filled, that word is shown to the user
         {
             cout << "The word " << userWordPos[i].first << "is not correct" << endl;
             flag = false;
@@ -195,6 +234,13 @@ bool cwplayer::checkBoard()
     return flag;
 }
 
+/*******************************************************
+ ***********************removePlayerWord****************
+ * The removePlayerWord method is used to remove a word
+ * from the board
+ * @param word
+ * @return
+ */
 bool cwplayer::removePlayerWord(string word)
 {
     for(int i = 0; i < userWordPos.size(); i++)
@@ -209,6 +255,13 @@ bool cwplayer::removePlayerWord(string word)
     return false;
 }
 
+/********************************************************
+ **********************removeWord************************
+ * The removeWord method replaces all the spaces with
+ * characters with dots.
+ * @param position
+ * @param size
+ */
 void cwplayer::removeWord(string position, int size)
 {
     int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
@@ -230,9 +283,16 @@ void cwplayer::removeWord(string position, int size)
     }
 }
 
+/****************************************************
+ *********************helpPlayerword*****************
+ * The helpPlayerword method is used to give out a
+ * synonym as help for the user.
+ * @param position
+ * @return
+ */
 bool cwplayer::helpPlayerword(string position) {
 	string word;
-	NumHintsInc();
+	NumHintsInc(); // Increases the number os hints used
 	bool flag = false;
 	for (auto i : wordPos) {
 		if (i.second == position) {
@@ -245,13 +305,17 @@ bool cwplayer::helpPlayerword(string position) {
 		cout << "The word was not found." << endl;
 		return flag;
 	}
-	string randsyn = randomsynDict(word);
+	string randsyn = randomsynDict(word); //A random synonym is chosen and shown to the user
 	cout << "A clue for this word is: " << randsyn << endl;
 	return flag;
 }
 
+/*************************************************
+ ******************findPosition*******************
+ * @param word
+ * @return the position of a word
+ */
 string cwplayer::findPosition(string word) {
-	bool flag = false;
 	for (auto i : userWordPos) {
 		if (i.first == word) {
 			return i.second;
@@ -260,10 +324,18 @@ string cwplayer::findPosition(string word) {
 	return "1";
 }
 
+/****************************************
+ ******************getNumHints***********
+ * @return the number of hints already used
+ */
 int cwplayer::getNumHints() {
 	return numHints;
 }
-
+/****************************************
+ ******************getNumHints***********
+ * The method increments the number
+ * of hints used.
+ */
 void cwplayer::NumHintsInc() {
 	numHints += 1;
 }
