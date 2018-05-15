@@ -257,28 +257,33 @@ string cwcreator::getDictName() {
 	return dictName;
 }
 
+/******************************************************************
+**************************getBoardName*****************************
+* This function will check what is the name of the board that the 
+* user saves and @return it to be used in tha saving process. the name of the dictionary
+*/
 string cwcreator::getBoardName() {
-	string boardattr = giveBoardName();
-	if (!(boardattr == ""))
+	string boardattr = giveBoardName(); // if the boards has been created already and is being loaded
+	if (!(boardattr == ""))				// this part of the code will verify it
 		return boardattr;
-	string b000_009 = "b00";
+	string b000_009 = "b00";			// these strings are to be used according to the number of the board that is being created
 	string b010_099 = "b0";
 	string b100_999 = "b";
 	string ext = ".txt";
 	string cvti;
 	string filename;
 	bool flag = false;
-	for (int i = 1; i < 10; i++) {
-		cvti = to_string(i);
-		filename = b000_009 + cvti + ext;
-		ifstream checkfile(filename);
+	for (int i = 1; i < 10; i++) {				// these loops while try to open files with the format
+		cvti = to_string(i);					// the first checks from 001 to 009
+		filename = b000_009 + cvti + ext;		// if they open, it means they already exist so the number must be incremented
+		ifstream checkfile(filename);			// to prevent overwriting
 		if (checkfile.is_open())
 			continue;
 		else
 			flag = true;
 		break;
 	}
-	if (!flag) {
+	if (!flag) {								// this loop will check files from 010 to 099
 		for (int i = 10; i < 100; i++) {
 			cvti = to_string(i);
 			filename = b010_099 + cvti + ext;
@@ -290,7 +295,7 @@ string cwcreator::getBoardName() {
 			break;
 		}
 	}
-	if (!flag) {
+	if (!flag) {									// this loop will check files from 100 to 999
 		for (int i = 100; i < 1000; i++) {
 			cvti = to_string(i);
 			filename = b100_999 + cvti + ext;
@@ -302,11 +307,11 @@ string cwcreator::getBoardName() {
 			break;
 		}
 	}
-	if (flag) {
+	if (flag) {						// after the available board is found, the name will be set as boardname
 		setBoardname(filename);
 		return filename;
 	}
-	else {
+	else { // if all 1000 boards are already created, then no other is going to be created
 		cout << "A new board cannot be created, please select an already created puzzle." << endl;
 		return "error";
 	}
