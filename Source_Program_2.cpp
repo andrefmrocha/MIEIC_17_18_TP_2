@@ -2,27 +2,42 @@
 #include "cwplayer.h"
 #include "Player.h"
 #ifdef __unix__
-string eof = "CTRL - D";
+string eof = "CTRL - D";	//this special situation checks the user OS and since linux and windows have different
 #else
-string eof = "CTRL - Z";
+string eof = "CTRL - Z";	//hotkeys to do cin.eof(), when its use is necessary, the message will show the appropriate key
 #endif
 
-//String manipulation function that makes the program case insensitive by receiving the user input,
-// whether its capitalized or not and alters it so be readble by the program functions
-
+/***************************************************************************
+* *************************** UpperInput ***********************************
+* String manipulation function that makes the program case insensitive by
+* receiving the user input, whether its capitalized or not and alters it so
+* it can be read by the program functions
+* @param &input
+*/
 void UpperInput(string &input) {
 	for (int i = 0; i < input.length(); i++) {
 		input[i] = toupper(input[i]);  //goes through the string using toupper to every character belonging to the string
 	}
 }
 
+/*******************************************************************************
+* *************************** getdestination ***********************************
+* Picks up the boardname and inserts the "_p" key in the middle of string since
+* it's the desired format to save the game.
+* @param board
+*/
 string getdestination(string board) {
 	string middle = "_p";
-	string part1 = board.substr(0, 4);
-	string part2 = board.substr(4, 4);
-	return part1 + middle + part2;
+	string part1 = board.substr(0, 4); // this will catch the "bXXX" part of the name, XXX being the board number
+	string part2 = board.substr(4, 4); // this will catch the file extension ".txt"
+	return part1 + middle + part2;	   // returns the name of the file to be saved
 }
 
+/******************************************************************************
+* *************************** introduction ***********************************
+* This function is called in the beggining of the program to show the user the
+* instructions and informations about the game.
+*/
 void introduction() {
 	cout << "CROSSWORDS PLAYER" << endl;
 	for (int i = 0; i < 114; i++)
@@ -60,23 +75,46 @@ void introduction() {
 	cout << endl;
 }
 
+/***************************************************************************
+* *************************** finishplay ***********************************
+* After a game reaches its end and the user wins the game, this function will
+* call the finishing function and save the game data in the destination file
+* as specified in the Program directives.
+* @param game
+* @param p1
+* @param dest
+*/
 void finishplay(cwplayer game, Player p1,string dest) {
-	ofstream outfile(dest);
-	unsigned long duration = p1.finishGame();
-	outfile << p1.GetName() << " - Elapsed time: " << duration << " seconds. Number of hints used: " << game.getNumHints();//<< number of hints
+	ofstream outfile(dest);		// sets the output to the file desired
+	unsigned long duration = p1.finishGame(); // gets the time (in seconds) that took the user to finish the game
+	outfile << p1.GetName() << " - Elapsed time: " << duration << " seconds. Number of hints used: " << game.getNumHints();
 }
 
+/*****************************************************************************
+* ***************************** playgame *************************************
+* As the name indicates, this is the function where the game will mainly occur
+* It will be asked to the user to select where and what word he want to write
+* in the board, with all failsafes needed. Besides adding words, the user can 
+* remove a previously written word or ask for help, and receive new hint for
+* the word. After the user finishes writing words, the program will call a 
+* check function to verify if the board has been filled correctly. If not the
+* user will be able to make modifications until it is. The game is finished and
+* the game data saved.
+* @param game
+* @param p1
+* @param board
+*/
 void playgame(cwplayer game, Player p1, string board) {
-	string pos, word;
-	string confirm;
+	string pos, word; //these will hold the position and word to be added
+	string confirm;  // this will be hold the confirmation string to ensure that the user wants to leave the game
 	do {
 		cout << endl << "Position(LCD / " << eof << " = stop) ? ";
 		cin >> pos;
-		if (cin.eof()) {
+		if (cin.eof()) {   // as seen in the Program 1 this condition clear the cin status in case the user calls cin.eof() 
 			cin.clear();
 			break;
 		}
-		else if (!game.positionalCheck(pos)) {
+		else if (!game.positionalCheck(pos)) {  // will only proceed if the position entered is a valid one
 			cout << endl;
 			continue;
 		}
@@ -88,14 +126,14 @@ void playgame(cwplayer game, Player p1, string board) {
 			else if (word == "x" || word == "X") {
 				cout << "You lose all progress, are you sure you want to exit? (Enter Y to confirm): ";
 				cin >> confirm;
-				UpperInput(confirm);
-				if (confirm == "Y")
+				UpperInput(confirm);		// will only leave the program after confirmation to avoid
+				if (confirm == "Y")			// accidental exits
 					return;
 			}
 			else break;
 		} while (true);
-		if (word == "-") {
-			do {
+		if (word == "-") {					// if the user wants to remove a word, it will be asked and verified
+			do {							// before any modifications are made into the board
 				cout << endl << "Which word do you want to erase ? ( X = back ) ";
 				do {
 					cin >> word;
@@ -106,24 +144,24 @@ void playgame(cwplayer game, Player p1, string board) {
 						break;
 					}
 				} while (true);
-				if (word == "X")
+				if (word == "X")  // gives the user the option to go back, in case a mistake happened
 					break;
 				cout << endl;
-			} while (!game.removePlayerWord(word));
+			} while (!game.removePlayerWord(word)); // the loop will go on until a valid removal operation occurs
 			cout << endl << endl;
-			game.game_show();
+			game.game_show();			// then the board is shown after the update
 			cout << endl;
 			continue;
 		}
-		else if (word == "?") {
-			if (game.getNumHints() == p1.getDifficulty()) {
-				cout << "You reached the limit of hints allowed, no more help now :( " << endl;
+		else if (word == "?") {			// if the user needs help the "?" call will present hints while available
+			if (game.getNumHints() == p1.getDifficulty()) {				// if the user reaches the max number of hints set by the difficulty 
+				cout << "You reached the limit of hints allowed, no more help now :( " << endl;  // a message will appear and leave this part of the function
 				continue;
 			}
-			else if (!game.helpPlayerword(pos)) 
+			else if (!game.helpPlayerword(pos))		// then the help function will be called. if it works will return true, otherwise the loop will go on
 				continue;
 			else {
-				cout << "Word ? ";
+				cout << "Word ? ";			//after the user is presented with a new hint a word will be asked
 				do {
 					cin >> word;
 					if (cin.eof())
@@ -134,20 +172,20 @@ void playgame(cwplayer game, Player p1, string board) {
 			}
 		}
 		UpperInput(word);
-		if (!game.addPlayerWord(pos, word)) {
-			cout << endl;
+		if (!game.addPlayerWord(pos, word)) {		//normal addition and the help function converge at this point where the
+			cout << endl;							// user input word will be added if valid
 			continue;
 		}
-		game.game_show();
+		game.game_show();			// after the modification the board will be shown
 		cout << endl;
 	} while (true);
-	cin.clear();
+	cin.clear();			// this clears the cin flag after the eof call by the user
 	while (!game.checkBoard()) {
-		do {
+		do {										// this loop will go on until the board validation comes clear
 			cout << endl << "Which word do you want to replace ? ";
 			do {
-				cin >> word;
-				if (cin.eof())
+				cin >> word;					// while there are words misplaced or invalid it will be asked to the
+				if (cin.eof())					// user to replace the word indicated in checkboard function
 					cin.clear();
 				else {
 					UpperInput(word);
@@ -157,7 +195,7 @@ void playgame(cwplayer game, Player p1, string board) {
 			if (word == "X") {
 				cout << "You lose all progress, are you sure you want to exit? (Enter Y to confirm): ";
 				do {
-					cin >> confirm;
+					cin >> confirm;			// this part works as above
 					if (cin.eof())
 						cin.clear();
 					else {
@@ -171,11 +209,11 @@ void playgame(cwplayer game, Player p1, string board) {
 			cout << endl;
 		} while (!game.removePlayerWord(word));
 		cout << endl << endl;
-		pos = game.findPosition(word);
-		game.game_show();
+		pos = game.findPosition(word);  // this sets the position string to the position of the replaced word
+		game.game_show();				// then the board is shown again to help the user select the word
 		cout << "What word do you want write instead ? ";
 		do {
-			do {
+			do {						// then the user will enter the word to replace the invalid one
 				cin >> word;
 				if (cin.eof())
 					cin.clear();
@@ -191,15 +229,22 @@ void playgame(cwplayer game, Player p1, string board) {
 			else break;
 		} while (true);
 	}
-	string dest = getdestination(board);
+	string dest = getdestination(board);  // this call will get the name of the file where the game data will be saved
 	cout << " Congratulations, you won!" << endl << endl << " Your data will be saved in the file: " << dest << "." << endl;
-	finishplay(game, p1,dest);
+	finishplay(game, p1,dest);  // the ending function is now called and the game is over
 
 }
 
+/*******************************************************************************
+* ******************************** main ****************************************
+* The main function of the Program 2. Is the main menu of the game. The user will
+* be presented with the instructions and then the player name will be asked. Then
+* he/she gets to choose the difficulty: Easy, Normal or Hard. At this point the
+* user will have to give a valid board for him/her to play in.
+*/
 int main() {
-	introduction();
-	string playername;
+	introduction();		// this is where the introduction is called
+	string playername;		// this string will hold the name of the player
 	cout << "What is your name ? ";
 	do {
 		cin >> playername;
@@ -211,7 +256,7 @@ int main() {
 		else break;
 	} while (true);
 	char dif;
-	cout << "Select a difficulty: Easy(E), Normal(N), Hard(H)";
+	cout << "Select a difficulty: Easy(E), Normal(N), Hard(H)";		// the difficulty is represented by a char
 	do {
 		cin >> dif;
 		toupper(dif);
@@ -220,16 +265,16 @@ int main() {
 			cin.clear();
 			continue;
 		}
-		else if(dif == 'E' || dif == 'N' || dif == 'H')
-		    break;
+		else if(dif == 'E' || dif == 'N' || dif == 'H')			// only if a valid option is entered by the user this step
+		    break;												// will be moved on from
 		else
         {
             cout << "That is not a possible difficulty. Please enter again: ";
         }
 	} while (true);
-	Player p1(playername,dif);
+	Player p1(playername,dif);		// then a new player is created with the attributes needed: name and difficulty
 	string board;
-	cwplayer game1;
+	cwplayer game1;					// and new game as well, the board and dictionary will be loaded into this game
 	cout << endl << "What board do you want play in ? ";
 	do {
 		cin >> board;
@@ -242,20 +287,20 @@ int main() {
 			cout << "The game is over. Hope you had fun!" << endl;
 			return 0;
 		}
-		else if (!game1.readFile(board)) {
+		else if (!game1.readFile(board)) {		// after the user enters a board name, it will be loaded if valid or this step will be repeated (Board contents)
 			cout << "Try again : ";
 			continue;
 		}
 		else {
-			game1.getDict(board);
-			if (!game1.checkFinished()) {
-				cout << endl << "This board isn't finished, you can't play in it." << endl;
+			game1.getDict(board);		// after the board has been validated the dictionary will be loaded too (Dictionary contents)
+			if (!game1.checkFinished()) {		// if the board wasn't finished before, the program won't allow the game to play and ask for another board
+				cout << endl << "This board isn't finished, you can't play in it. Write again: " << endl;
 				continue; 
 			}
 			break;
 		}
 	} while (true);
-	game1.startGame();
-	playgame(game1, p1,board);
+	game1.startGame();		// after everything's checked out the game is setup
+	playgame(game1, p1,board); // and the user plays in it
 	cout << endl << "The game is over. Hope you had fun!" << endl;
 }
