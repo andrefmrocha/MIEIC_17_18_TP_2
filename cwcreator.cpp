@@ -98,6 +98,7 @@ bool cwcreator::helpWord(string position)
 			} while (true); //If the option is not valid, the user is asked again
         }while(flag);
     }
+    return true;
 }
 /*****************************************************************
  ***************************wildcardMatch*************************

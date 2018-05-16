@@ -173,11 +173,11 @@ void Board::clear()
  * delete a selected word from vector of pairs.
  * @param word
  */
-bool Board::eraseWord(string word)
+bool Board::eraseWord(string position)
 {
     for (int i = 0; i < wordPos.size(); ++i)
     {
-        if(wordPos[i].first == word)
+        if(wordPos[i].second == position)
         {
             wordPos.erase(wordPos.begin() + i);
 			return true;
@@ -335,7 +335,7 @@ bool Board::positionalCheck(string position)
         cout << "Invalid position." << endl << endl;
         return false;
     }
-
+    return true;
 }
 /***********************************************
  *********************setBoardname**************

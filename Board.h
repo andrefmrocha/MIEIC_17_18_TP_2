@@ -25,7 +25,7 @@ public:
     void finishBoard();
     bool positionalCheck(string position);
     void board_show();
-    bool eraseWord(string word);
+    bool eraseWord(string position);
     bool readFile(string iname);
 	void fillBoard();
 	void setBoardname(string bname);

@@ -65,26 +65,18 @@ void constructboard(cwcreator brd) {
 			else break;
 		} while (true);
 		if (word == "-") {
-			string toerase;		//this string will hold the word to be erased from the board
-			do {
-				cout << endl << "Which word do you want to erase ? ( X = back ) ";			// if the user wants to remove a word, the word given by the user must be verified before deletion
-				do {
-					cin >> toerase;
-					if (cin.eof())
-						cin.clear();
-					else {
-						UpperInput(toerase);
-						break;
-					}
-				} while (true);
-				if (toerase == "X")
-					break;
 				cout << endl;
-			} while (!brd.eraseWord(toerase)); // this cycle will repeat itself while the eraseWord isn't able to run properly. the error messages are embedded in the function itself, like in most cases
-			cout << endl << endl;
-			brd.board_show();		// as said previously, after a effective change, the board will be presented to the user, so he/she can keep track of the board status
-			cout << endl;
-			continue;
+			if(!brd.eraseWord(pos))
+			{
+				cout <<"No word was found on that position." << endl;
+			}// this cycle will repeat itself while the eraseWord isn't able to run properly. the error messages are embedded in the function itself, like in most cases
+			else
+			{
+				cout << endl << endl;
+				brd.board_show();		// as said previously, after a effective change, the board will be presented to the user, so he/she can keep track of the board status
+				cout << endl;
+				continue;
+			}
 		}
 		else if (word == "?") {              // when the user needs help bulding the board, he can call the help and have a reloadable list of possible words to fit in the desired position
 			if (!brd.helpWord(pos))			// since the help function is a boolean function, already helping when a error occurs, 
