@@ -317,9 +317,9 @@ bool Board::readFile(string iname)
  */
 bool Board::positionalCheck(string position)
 {
-    if(position.size() == 3) //Checks if the position argument was passed correctly
+    if(position.size() != 3) //Checks if the position argument was passed correctly
     {
-        cout  << endl << "Insufficient positional arguments." <<endl << endl;
+        cout  << endl << "Invalid number of positional arguments." <<endl << endl;
         return false;
     }
     int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
@@ -327,12 +327,12 @@ bool Board::positionalCheck(string position)
     char direc = position[2];   // The direction is saved as a char
     if(pos_h > lines || pos_v > columns || (direc != 'V' && direc !='H'))   //Checks if all the arguments are valid for the given board
     {
-        cout << endl << "Wrong Position" << endl << endl;
+        cout << endl << "Wrong Position." << endl << endl;
         return false;
     }
     if(board[pos_h][pos_v] == '#')
     {
-        cout << "Invalid postion" << endl << endl;
+        cout << "Invalid position." << endl << endl;
         return false;
     }
 
