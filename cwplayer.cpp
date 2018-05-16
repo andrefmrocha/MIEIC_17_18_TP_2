@@ -282,6 +282,10 @@ void cwplayer::removeWord(string position, int size)
             board[pos_h][pos_v+i] = '.';
         }
     }
+    for(auto i: userWordPos)
+    {
+        addPlayerWord(i.second, i.first);
+    }
 }
 
 /****************************************************
