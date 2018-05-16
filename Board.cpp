@@ -177,7 +177,7 @@ bool Board::eraseWord(string position)
 {
     for (int i = 0; i < wordPos.size(); ++i)
     {
-        if(wordPos[i].second == position)
+        if(wordPos[i].second.substr(0,3) == position)
         {
             wordPos.erase(wordPos.begin() + i);
 			return true;

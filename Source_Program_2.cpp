@@ -2,9 +2,9 @@
 #include "cwplayer.h"
 #include "Player.h"
 #ifdef __unix__
-string eof = "CTRL - D";	//this special situation checks the user OS and since linux and windows have different
+#define EOF_COMMAND "CTRL - D"	//this special situation checks the user OS and since linux and windows have different
 #else
-string eof = "CTRL - Z";	//hotkeys to do cin.eof(), when its use is necessary, the message will show the appropriate key
+#define EOF_COMMAND "CTRL - Z"	//hotkeys to do cin.eof(), when its use is necessary, the message will show the appropriate key
 #endif
 
 /***************************************************************************
@@ -109,7 +109,9 @@ void playgame(cwplayer game, Player p1, string board) {
 	string confirm;  // this will be hold the confirmation string to ensure that the user wants to leave the game
 	do {
 		do {
-			cout << endl << "Position(LCD / " << eof << " = stop) ? ";
+			cout << endl << "Position(LCD /";
+			cout << EOF_COMMAND;
+            cout <<"= stop) ? ";
 			cin >> pos;
 			if (cin.eof()) {   // as seen in the Program 1 this condition clear the cin status in case the user calls cin.eof()
 				cin.clear();
@@ -262,4 +264,5 @@ int main() {
 	game1.startGame();		// after everything's checked out the game is setup
 	playgame(game1, p1,board); // and the user plays in it
 	cout << endl << "The game is over. Hope you had fun!" << endl;
+	getchar();
 }

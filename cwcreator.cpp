@@ -13,7 +13,7 @@
  */
 bool cwcreator::helpWord(string position)
 {
-    if(position.size() > 3) //Checks if the position argument was passed correctly
+    if(position.size() != 3) //Checks if the position argument was passed correctly
     {
         cout << endl << "Too many positional arguments." << endl << endl;
         return false;
@@ -72,6 +72,11 @@ bool cwcreator::helpWord(string position)
         do
         {   do
             {
+                if(possibleWords.size() == 0)
+                {
+                    cout << "There are no more options." << endl;
+                    return true;
+                }
                 srand(time(NULL)+i);
                 unsigned long index = rand() % possibleWords.size();
                 cout << i << "-" << possibleWords[index] << endl;
@@ -97,8 +102,12 @@ bool cwcreator::helpWord(string position)
 				cout << endl << "Not a valid option. Please choose again(Y/N)";
 			} while (true); //If the option is not valid, the user is asked again
         }while(flag);
+        return true;
+    } else
+    {
+        cout << "There are no options available for this position" << endl;
+        return false;
     }
-    return true;
 }
 /*****************************************************************
  ***************************wildcardMatch*************************

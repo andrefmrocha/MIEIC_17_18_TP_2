@@ -2,9 +2,9 @@
 #include "stdafx.h"
 #include "cwcreator.h"
 #ifdef __unix__
-string eof = "CTRL - D";     //this special situation checks the user OS and since linux and windows have different
+#define EOF_COMMAND "CTRL - D"    //this special situation checks the user OS and since linux and windows have different
 #else                        //hotkeys to do cin.eof(), when its use is necessary, the message will show the appropriate key
-string eof = "CTRL - Z";
+#define EOF_COMMAND "CTRL - Z"
 #endif
 
 /***************************************************************************
@@ -45,9 +45,11 @@ void constructboard(cwcreator brd) {
 	cout << endl;
 	string pos, word;	// these strings as the name indicates, will hold the position and the word(or the special functions)
 	do {
-		cout << endl << "Position(LCD / " << eof <<" = stop) ? ";           //asks for position according to the specific format (LCD). 
+		cout << endl << "Position(LCD /";
+		cout << EOF_COMMAND;
+		cout <<"= stop) ? ";          //asks for position according to the specific format (LCD).
 		cin >> pos;													
-		if (cin.eof()) {													//eof is a string that shows the hot-key to call cin.eof() in the different OS
+		if (cin.eof()) {													//EOF_COMMAND is a string that shows the hot-key to call cin.EOF_COMMAND() in the different OS
 			cin.clear();
 			break;
 		}
@@ -96,7 +98,7 @@ void constructboard(cwcreator brd) {
 		brd.board_show();              // again, the board is shown updated to the user
 		cout << endl;
 	} while (true);				// and so this goes on until the user doesn't want to edit the words in the board anymore
-	cin.clear();            // this cin.clear() allows more input from the user since the cin.eof() sets the cin flag to bad
+	cin.clear();            // this cin.clear() allows more input from the user since the cin.EOF_COMMAND() sets the cin flag to bad
 	cout << endl << "Do you wish to save your board, finish the board or exit without saving (and lose all progress) ?" << endl;
 	cout << " (S = save and resume later / F = finish / X = exit) ";				// At this point the user can either save the board to be resumed later, 
 	string ans;			//this string will hold the user answer						// finish the board (after that no more modifications are allowed)
@@ -220,7 +222,7 @@ void introduction() {
 	cout << " Specify the text file where the dictionary is from." << endl;
 	cout << "2 - Board size (lines columns):" << endl;
 	cout << " Choose how many lines and columns the board will have." << endl;
-	cout << "3 - Position (LcD / " << eof << " = stop ):" << endl;
+	cout << "3 - Position (LcD / " << EOF_COMMAND << " = stop ):" << endl;
 	cout << " LCD stands for Line column and Direction." << endl;
 	cout << " E.g.: AaV - Line A, column a and vertical direction." << endl;
 	cout << "4 - Word ( - = remove / ? = help ):" << endl;
