@@ -108,127 +108,84 @@ void playgame(cwplayer game, Player p1, string board) {
 	string pos, word; //these will hold the position and word to be added
 	string confirm;  // this will be hold the confirmation string to ensure that the user wants to leave the game
 	do {
-		cout << endl << "Position(LCD / " << eof << " = stop) ? ";
-		cin >> pos;
-		if (cin.eof()) {   // as seen in the Program 1 this condition clear the cin status in case the user calls cin.eof() 
-			cin.clear();
-			break;
-		}
-		else if (!game.positionalCheck(pos)) {  // will only proceed if the position entered is a valid one
-			cout << endl;
-			continue;
-		}
-		cout << endl << "Word ( - = remove / ? = help ) ? ";
 		do {
-			cin >> word;
-			if (cin.eof())
+			cout << endl << "Position(LCD / " << eof << " = stop) ? ";
+			cin >> pos;
+			if (cin.eof()) {   // as seen in the Program 1 this condition clear the cin status in case the user calls cin.eof()
 				cin.clear();
-			else if (word == "x" || word == "X") {
-				cout << "You lose all progress, are you sure you want to exit? (Enter Y to confirm): ";
-				cin >> confirm;
-				UpperInput(confirm);		// will only leave the program after confirmation to avoid
-				if (confirm == "Y")			// accidental exits
-					return;
-			}
-			else break;
-		} while (true);
-		if (word == "-") {					// if the user wants to remove a word, it will be asked and verified
-			do {							// before any modifications are made into the board
-				cout << endl << "Which word do you want to erase ? ( X = back ) ";
-				do {
-					cin >> word;
-					if (cin.eof())
-						cin.clear();
-					else {
-						UpperInput(word);
-						break;
-					}
-				} while (true);
-				if (word == "X")  // gives the user the option to go back, in case a mistake happened
-					break;
+				break;
+			} else if (!game.positionalCheck(pos)) {  // will only proceed if the position entered is a valid one
 				cout << endl;
-			} while (!game.removePlayerWord(word)); // the loop will go on until a valid removal operation occurs
-			cout << endl << endl;
-			game.game_show();			// then the board is shown after the update
-			cout << endl;
-			continue;
-		}
-		else if (word == "?") {			// if the user needs help the "?" call will present hints while available
-			if (game.getNumHints() == p1.getDifficulty()) {				// if the user reaches the max number of hints set by the difficulty 
-				cout << "You reached the limit of hints allowed, no more help now :( " << endl;  // a message will appear and leave this part of the function
 				continue;
 			}
-			else if (!game.helpPlayerword(pos))		// then the help function will be called. if it works will return true, otherwise the loop will go on
-				continue;
-			else {
-				cout << "Word ? ";			//after the user is presented with a new hint a word will be asked
-				do {
-					cin >> word;
-					if (cin.eof())
-						cin.clear();
-					else break;
-				} while (true);
-				cout << endl;
-			}
-		}
-		UpperInput(word);
-		if (!game.addPlayerWord(pos, word)) {		//normal addition and the help function converge at this point where the
-			cout << endl;							// user input word will be added if valid
-			continue;
-		}
-		game.game_show();			// after the modification the board will be shown
-		cout << endl;
-	} while (true);
-	cin.clear();			// this clears the cin flag after the eof call by the user
-	while (!game.checkBoard()) {
-		do {										// this loop will go on until the board validation comes clear
-			cout << endl << "Which word do you want to replace ? ";
+			cout << endl << "Word ( - = remove / ? = help ) ? ";
 			do {
-				cin >> word;					// while there are words misplaced or invalid it will be asked to the
-				if (cin.eof())					// user to replace the word indicated in checkboard function
-					cin.clear();
-				else {
-					UpperInput(word);
-					break;
-				}
-			} while (true);
-			if (word == "X") {
-				cout << "You lose all progress, are you sure you want to exit? (Enter Y to confirm): ";
-				do {
-					cin >> confirm;			// this part works as above
-					if (cin.eof())
-						cin.clear();
-					else {
-						UpperInput(confirm);
-						break;
-					}
-				} while (true);
-				if (confirm == "Y")
-					return;
-			}
-			cout << endl;
-		} while (!game.removePlayerWord(word));
-		cout << endl << endl;
-		pos = game.findPosition(word);  // this sets the position string to the position of the replaced word
-		game.game_show();				// then the board is shown again to help the user select the word
-		cout << "What word do you want write instead ? ";
-		do {
-			do {						// then the user will enter the word to replace the invalid one
 				cin >> word;
 				if (cin.eof())
 					cin.clear();
-				else {
-					UpperInput(word);
-					break;
-				}
+				else if (word == "x" || word == "X") {
+					cout << "You lose all progress, are you sure you want to exit? (Enter Y to confirm): ";
+					cin >> confirm;
+					UpperInput(confirm);        // will only leave the program after confirmation to avoid
+					if (confirm == "Y")            // accidental exits
+						return;
+				} else break;
 			} while (true);
-			if (!game.addPlayerWord(pos, word)) {
-				cout << endl;
+			if (word == "-") {                    // if the user wants to remove a word, it will be asked and verified
+/*					if (word == "X")  // gives the user the option to go back, in case a mistake happened
+						break;*/
+					cout << endl;
+				if(game.removePlayerWord(pos)) // the loop will go on until a valid removal operation occurs
+				{
+					cout << endl << endl;
+					game.game_show();            // then the board is shown after the update
+					cout << endl;
+					continue;
+				}
+				else
+				{
+					continue;
+				}
+			} if (word ==
+					   "?") {            // if the user needs help the "?" call will present hints while available
+				if (game.getNumHints() ==
+					p1.getDifficulty()) {                // if the user reaches the max number of hints set by the difficulty
+					cout << "You reached the limit of hints allowed, no more help now :( "
+						 << endl;  // a message will appear and leave this part of the function
+					continue;
+				} else if (!game.helpPlayerword(
+						pos))        // then the help function will be called. if it works will return true, otherwise the loop will go on
+					continue;
+				else {
+					cout << "Word ? ";            //after the user is presented with a new hint a word will be asked
+					do {
+						cin >> word;
+						if (cin.eof())
+							cin.clear();
+						else break;
+					} while (true);
+					cout << endl;
+				}
+			}
+			UpperInput(word);
+			if (!game.addPlayerWord(pos,
+									word)) {        //normal addition and the help function converge at this point where the
+				cout << endl;                            // user input word will be added if valid
 				continue;
 			}
-			else break;
-		} while (true);
+			game.game_show();            // after the modification the board will be shown
+			cout << endl;
+		}while(true);
+	cin.clear();			// this clears the cin flag after the eof call by the user
+	if(!game.checkBoard())
+	{
+		cout << "The board was not sucessfully finished. Press X if you would like to leave" << endl;
+	} else
+	{
+		break;
 	}
+	}while(true);
+	cin.clear();
 	string dest = getdestination(board);  // this call will get the name of the file where the game data will be saved
 	cout << " Congratulations, you won!" << endl << endl << " Your data will be saved in the file: " << dest << "." << endl;
 	finishplay(game, p1,dest);  // the ending function is now called and the game is over
@@ -265,7 +222,7 @@ int main() {
 			cin.clear();
 			continue;
 		}
-		else if(dif == 'E' || dif == 'N' || dif == 'H')			// only if a valid option is entered by the user this step
+		else if(dif == 'E' || dif == 'N' || dif == 'H' || dif == 'e' || dif == 'n' || dif =='h')			// only if a valid option is entered by the user this step
 		    break;												// will be moved on from
 		else
         {

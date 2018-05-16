@@ -13,10 +13,19 @@ Player::Player(string name, char difficulty)
         case 'E':
             this->difficulty = 5;
             break;
+        case 'e':
+            this->difficulty = 5;
+            break;
         case 'N':
             this->difficulty = 3;
             break;
+        case 'n':
+            this->difficulty = 3;
+            break;
         case 'H':
+            this->difficulty = 1;
+            break;
+        case 'h':
             this->difficulty = 1;
             break;
     }

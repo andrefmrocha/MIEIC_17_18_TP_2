@@ -42,8 +42,8 @@ void cwplayer::startGame()
     {
         if(i < horiWord.size())
         {
-            cout << horiWord[i].second << "-";
             string syn = randomsynDict(horiWord[i].first);
+            syn = string(horiWord[i].second) + '-' + syn;
             cout << syn;
             spacing(syn.size());
         }
@@ -203,6 +203,7 @@ bool cwplayer::addPlayerWord(string position, string word)
         }
     }
     userWordPos.push_back(pair<string, string>(word, position));//The word is added to another vector of pairs
+    return true;
 }
 
 /**********************************************************
@@ -238,16 +239,16 @@ bool cwplayer::checkBoard()
  ***********************removePlayerWord****************
  * The removePlayerWord method is used to remove a word
  * from the board
- * @param word
+ * @param position
  * @return
  */
-bool cwplayer::removePlayerWord(string word)
+bool cwplayer::removePlayerWord(string position)
 {
     for(int i = 0; i < userWordPos.size(); i++)
     {
-        if(userWordPos[i].first == word)
+        if(userWordPos[i].second == position)
         {
-            removeWord(userWordPos[i].second, word.size());
+            removeWord(userWordPos[i].second, userWordPos[i].first.size());
             userWordPos.erase(userWordPos.begin() + i);
             return true;
         }

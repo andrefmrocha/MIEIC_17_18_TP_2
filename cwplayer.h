@@ -22,7 +22,7 @@ public:
     bool addPlayerWord(string position, string word);
     void game_show();
     bool checkBoard();
-    bool removePlayerWord(string word);
+    bool removePlayerWord(string position);
 	bool helpPlayerword(string position);
 	string findPosition(string word);
 	int getNumHints();

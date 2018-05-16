@@ -69,6 +69,7 @@ void constructboard(cwcreator brd) {
 			if(!brd.eraseWord(pos))
 			{
 				cout <<"No word was found on that position." << endl;
+				continue;
 			}// this cycle will repeat itself while the eraseWord isn't able to run properly. the error messages are embedded in the function itself, like in most cases
 			else
 			{
