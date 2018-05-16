@@ -2,6 +2,16 @@
 // Created by joaom on 02-05-2018.
 //
 #ifdef __unix__
+#include "unix_colors.h"
+
+// Set text color
+void setcolor(string color) {
+	cout << color;
+}
+// Set text color & background
+void setcolor(string color, string background_color) {
+	cout << color << background_color;
+}
 #else
 #include "stdafx.h"
 #include "windows_colors.h"
