@@ -11,7 +11,7 @@ using namespace std;
 class Player
 {
 public:
-    Player(string name, char difficulty);
+    Player(string name, string difficulty);
     unsigned long finishGame();
     void updateTime();
 	string GetName();

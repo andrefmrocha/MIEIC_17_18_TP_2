@@ -1,9 +1,8 @@
 #include <climits>
-#include "stdafx.h"
 #include "cwcreator.h"
 #ifdef __unix__
-#define EOF_COMMAND "CTRL - D"    //this special situation checks the user OS and since linux and windows have different
-#else                        //hotkeys to do cin.eof(), when its use is necessary, the message will show the appropriate key
+#define EOF_COMMAND "CTRL - D"    // this special situation checks the user OS and since linux and windows have different
+#else							  // hotkeys to do cin.eof(), when its use is necessary, the message will show the appropriate key
 #define EOF_COMMAND "CTRL - Z"
 #endif
 
@@ -49,7 +48,7 @@ void constructboard(cwcreator brd) {
 		cout << EOF_COMMAND;
 		cout <<"= stop) ? ";          //asks for position according to the specific format (LCD).
 		cin >> pos;													
-		if (cin.eof()) {													//EOF_COMMAND is a string that shows the hot-key to call cin.EOF_COMMAND() in the different OS
+		if (cin.eof()) {													
 			cin.clear();
 			break;
 		}
@@ -93,12 +92,14 @@ void constructboard(cwcreator brd) {
 			} while (true);
 		}
 		UpperInput(word);
-		if (!brd.addWord(pos, word))		// this point is reached through normal addition of word or when the help function is called
+		if (word == "X")
+			continue;
+		else if (!brd.addWord(pos, word))		// this point is reached through normal addition of word or when the help function is called
 			continue;						// then the add function is called, being a boolean function, allowing again a non-stop flow of the program interactions
 		brd.board_show();              // again, the board is shown updated to the user
 		cout << endl;
 	} while (true);				// and so this goes on until the user doesn't want to edit the words in the board anymore
-	cin.clear();            // this cin.clear() allows more input from the user since the cin.EOF_COMMAND() sets the cin flag to bad
+	cin.clear();            // this cin.clear() allows more input from the user since the cin.eof() sets the cin flag to bad
 	cout << endl << "Do you wish to save your board, finish the board or exit without saving (and lose all progress) ?" << endl;
 	cout << " (S = save and resume later / F = finish / X = exit) ";				// At this point the user can either save the board to be resumed later, 
 	string ans;			//this string will hold the user answer						// finish the board (after that no more modifications are allowed)

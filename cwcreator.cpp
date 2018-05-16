@@ -1,7 +1,6 @@
 //
 // Created by andrefmrocha on 02-05-2018.
 //
-#include "stdafx.h"
 #include "cwcreator.h"
 
 /************************************************

@@ -32,7 +32,6 @@ using namespace std;
 #define YELLOW 14
 #define WHITE 15
 
-void gotoxy(int x, int y);
 void setcolor(unsigned int color);
 void setcolor(unsigned int color, unsigned int background_color);
 

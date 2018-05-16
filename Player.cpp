@@ -1,34 +1,18 @@
 //
 // Created by andrefmrocha on 06-05-2018.
 //
-#include "stdafx.h"
 #include "Player.h"
 
-Player::Player(string name, char difficulty)
+Player::Player(string name, string difficulty)
 {
     playerName = name;
     playerTime = time(NULL);
-    switch (difficulty) //The difficulty is chosen
-    {
-        case 'E':
-            this->difficulty = 5;
-            break;
-        case 'e':
-            this->difficulty = 5;
-            break;
-        case 'N':
-            this->difficulty = 3;
-            break;
-        case 'n':
-            this->difficulty = 3;
-            break;
-        case 'H':
-            this->difficulty = 1;
-            break;
-        case 'h':
-            this->difficulty = 1;
-            break;
-    }
+	if (difficulty == "E")			//The difficulty is chosen
+		this->difficulty = 5;
+	else if (difficulty == "N")
+		this->difficulty = 3;
+	else
+		this->difficulty = 1;
 }
 
 /***************************************

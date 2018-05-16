@@ -38,8 +38,7 @@ using namespace std;
 #define MAGENTA_B "\033[0;45m"
 #define CYAN_B "\033[0;46m"
 #define LIGHTGRAY "\033[1;47m"
-void gotoxy(int x, int y);
-void clrscr(void);
+
 void setcolor(string color);
 void setcolor(string color, string background_color);
 #endif //PROJETO_2_UNIX_COLORS_H

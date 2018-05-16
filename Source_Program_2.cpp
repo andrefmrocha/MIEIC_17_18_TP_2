@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "cwplayer.h"
 #include "Player.h"
 #ifdef __unix__
@@ -134,9 +133,7 @@ void playgame(cwplayer game, Player p1, string board) {
 				} else break;
 			} while (true);
 			if (word == "-") {                    // if the user wants to remove a word, it will be asked and verified
-/*					if (word == "X")  // gives the user the option to go back, in case a mistake happened
-						break;*/
-					cout << endl;
+				cout << endl;
 				if(game.removePlayerWord(pos)) // the loop will go on until a valid removal operation occurs
 				{
 					cout << endl << endl;
@@ -216,17 +213,17 @@ int main() {
 		}
 		else break;
 	} while (true);
-	char dif;
+	string dif;
 	cout << "Select a difficulty: Easy(E), Normal(N), Hard(H) ";		// the difficulty is represented by a char
 	do {
 		cin >> dif;
-		//toupper(dif);
+		UpperInput(dif);
 		if (cin.eof())
 		{
 			cin.clear();
 			continue;
 		}
-		else if (dif == 'E' || dif == 'N' || dif == 'H' || dif == 'e' || dif == 'n' || dif == 'h')			// only if a valid option is entered by the user this step
+		else if (dif == "E" || dif == "N" || dif == "H")			// only if a valid option is entered by the user this step
 		    break;												// will be moved on from
 		else
         {
