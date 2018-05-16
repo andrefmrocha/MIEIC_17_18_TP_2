@@ -168,7 +168,9 @@ void playgame(cwplayer game, Player p1, string board) {
 				}
 			}
 			UpperInput(word);
-			if (!game.addPlayerWord(pos,
+			if (word == "X")
+				continue;
+			else if (!game.addPlayerWord(pos,
 									word)) {        //normal addition and the help function converge at this point where the
 				cout << endl;                            // user input word will be added if valid
 				continue;
