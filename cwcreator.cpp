@@ -352,7 +352,7 @@ void cwcreator::board_save()
 	clear(); //The actual board is cleared
 	if (checkFinished())
 		cout << endl << "Finished! " << endl;
-	else cout << endl << "Saved successfuly! " << endl;
+	else cout << endl << "The board was saved, but not finished. " << endl;
 }
 
 /********************************************************

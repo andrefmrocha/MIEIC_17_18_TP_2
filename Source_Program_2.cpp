@@ -187,7 +187,7 @@ void playgame(cwplayer game, Player p1, string board) {
 	}while(true);
 	cin.clear();
 	string dest = getdestination(board);  // this call will get the name of the file where the game data will be saved
-	cout << " Congratulations, you won!" << endl << endl << " Your data will be saved in the file: " << dest << "." << endl;
+	cout << endl << " Congratulations, you won!" <<  endl << " Your data will be saved in the file: " << dest << "." << endl << endl;
 	finishplay(game, p1,dest);  // the ending function is now called and the game is over
 
 }
@@ -213,16 +213,16 @@ int main() {
 		else break;
 	} while (true);
 	char dif;
-	cout << "Select a difficulty: Easy(E), Normal(N), Hard(H)";		// the difficulty is represented by a char
+	cout << "Select a difficulty: Easy(E), Normal(N), Hard(H) ";		// the difficulty is represented by a char
 	do {
 		cin >> dif;
-		toupper(dif);
+		//toupper(dif);
 		if (cin.eof())
 		{
 			cin.clear();
 			continue;
 		}
-		else if(dif == 'E' || dif == 'N' || dif == 'H' || dif == 'e' || dif == 'n' || dif =='h')			// only if a valid option is entered by the user this step
+		else if (dif == 'E' || dif == 'N' || dif == 'H' || dif == 'e' || dif == 'n' || dif == 'h')			// only if a valid option is entered by the user this step
 		    break;												// will be moved on from
 		else
         {

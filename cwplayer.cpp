@@ -222,13 +222,13 @@ bool cwplayer::checkBoard()
     bool flag = true;
     for(int i = 0; i < userWordPos.size();i++)
     {
-        if(userWordPos[i].first == userWordPos[i].first)
+        if(userWordPos[i].first == wordPos[i].first)
         {
             continue;
         }
         else //If a word is not properly filled, that word is shown to the user
         {
-            cout << "The word " << userWordPos[i].first << "is not correct" << endl;
+            cout << "The word " << userWordPos[i].first << " is not correct" << endl;
             flag = false;
         }
     }
