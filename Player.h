@@ -17,6 +17,8 @@ public:
 	string GetName();
 	void updateDifficulty(int number);
 	int getDifficulty();
+	int getTime();
+	string nameDifficulty();
 private:
     string playerName;
     unsigned long playerTime;

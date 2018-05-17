@@ -53,10 +53,39 @@ void Player::updateDifficulty(int number)
 }
 
 /***********************************
- ***************GetName*************
+ ***************getDifficulty*************
  * @return the difficulty chosen
  */
 int Player::getDifficulty()
 {
     return difficulty;
+}
+
+/**********************************
+**********nameDifficulty***********
+* @return the difficulty chosen in
+* a string
+*/
+string Player::nameDifficulty()
+{
+	int difficulty = getDifficulty(); // gets the number of hints specific of each difficulty
+	switch (difficulty)
+	{
+	case 5:
+		return "Easy.";
+	case 3:
+		return "Normal.";
+	case 1:
+		return "Hard.";
+	}
+}
+
+/**************************************
+***************getTime*****************
+* @return the actual time of the player
+* game
+*/
+int Player::getTime()
+{
+	return playerTime;
 }

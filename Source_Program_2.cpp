@@ -84,9 +84,9 @@ void introduction() {
 * @param dest
 */
 void finishplay(cwplayer game, Player p1,string dest) {
-	ofstream outfile(dest);		// sets the output to the file desired
-	unsigned long duration = p1.finishGame(); // gets the time (in seconds) that took the user to finish the game
-	outfile << p1.GetName() << " - Elapsed time: " << duration << " seconds. Number of hints used: " << game.getNumHints();
+	fstream outfile(dest, ios::app);		// sets the output to the file desired
+	unsigned long duration = p1.getTime(); // gets the time (in seconds) that took the user to finish the game
+	outfile << p1.GetName() << " - Elapsed time: " << duration << " seconds. Number of hints used: " << game.getNumHints() << ". Difficulty: " << p1.nameDifficulty() << endl;
 }
 
 /*****************************************************************************
@@ -188,7 +188,9 @@ void playgame(cwplayer game, Player p1, string board) {
 	}while(true);
 	cin.clear();
 	string dest = getdestination(board);  // this call will get the name of the file where the game data will be saved
-	cout << endl << " Congratulations, you won!" <<  endl << " Your data will be saved in the file: " << dest << "." << endl << endl;
+	cout << " Congratulations, you won!" << endl;
+	cout << "You took " << p1.finishGame() << " seconds to finish the puzzle." << endl;
+	cout << "Your data will be saved in the file : " << dest << "." << endl << endl;
 	finishplay(game, p1,dest);  // the ending function is now called and the game is over
 
 }
