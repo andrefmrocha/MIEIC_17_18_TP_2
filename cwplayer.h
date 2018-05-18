@@ -120,6 +120,14 @@ private:
 	std::vector<std::pair<std::string, std::string>> vertiWord;
     std::vector<std::pair<std::string, std::string>> horiWord;
     std::vector<std::pair<std::string, std::string>> userWordPos;
+    /********************************************************
+    **********************writePlayerWord************************
+    * The removeWord method replaces all the spaces with
+    * characters with dots.
+    * @param position
+    * @param size
+    * @return if the word was added
+    */
     bool writePlayerWord(std::string position, std::string word);
 	int numHints;
 };
