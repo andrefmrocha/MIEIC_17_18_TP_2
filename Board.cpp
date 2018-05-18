@@ -2,7 +2,7 @@
 // Created by joaom on 26-04-2018.
 //
 #include "Board.h"
-
+using namespace std;
 Board::Board()
 {
     lines = 0;

@@ -2,7 +2,7 @@
 // Created by andrefmrocha on 02-05-2018.
 //
 #include "cwcreator.h"
-
+using namespace std;
 
 bool cwcreator::helpWord(string position)
 {

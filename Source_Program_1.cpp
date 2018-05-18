@@ -6,6 +6,8 @@
 #define EOF_COMMAND "CTRL - Z"
 #endif
 
+using namespace std;
+
 /***************************************************************************
 * *************************** UpperInput ***********************************
 * String manipulation function that makes the program case insensitive by 

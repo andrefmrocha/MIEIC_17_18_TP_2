@@ -7,11 +7,10 @@
 
 #include <ctime>
 #include <string>
-using namespace std;
 class Player
 {
 public:
-    Player(string name, string difficulty);
+    Player(std::string name, std::string difficulty);
 	/***************************************
  	****************finishGame*************
  	* Method to finish the user's game.
@@ -27,7 +26,7 @@ public:
  	***************GetName*************
  	* @return the name of the player
  	*/
-	string GetName();
+	std::string GetName();
 	/***************************************
  	****************updateDifficulty*******
  	* Method to update Player Difficulty.
@@ -49,9 +48,9 @@ public:
 	* @return the difficulty chosen in
 	* a string
 	*/
-	string nameDifficulty();
+	std::string nameDifficulty();
 private:
-    string playerName;
+    std::string playerName;
     unsigned long playerTime;
     int difficulty;
 };

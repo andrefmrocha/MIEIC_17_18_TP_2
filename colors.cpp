@@ -4,6 +4,7 @@
 
 #ifdef __unix__
 #include "unix_colors.h"
+using namespace std;
 
 // Set text color
 void setcolor(string color) {
@@ -16,6 +17,7 @@ void setcolor(string color, string background_color) {
 #else
 
 #include "windows_colors.h"
+using namespace std;
 
 	// Set text color
 	void setcolor(unsigned int color) {

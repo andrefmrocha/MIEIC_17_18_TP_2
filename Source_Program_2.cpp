@@ -6,6 +6,8 @@
 #define EOF_COMMAND "CTRL - Z"	//hotkeys to do cin.eof(), when its use is necessary, the message will show the appropriate key
 #endif
 
+using namespace std;
+
 /***************************************************************************
 * *************************** UpperInput ***********************************
 * String manipulation function that makes the program case insensitive by
@@ -52,20 +54,22 @@ void introduction() {
 	cout << " If you want others to know who is the Crosswords King, you have to put your name in it." << endl;
 	cout << endl << "2 - Write the name of the board you want to play." << endl;
 	cout << " To call a board, write: bXXX.txt (e.g.: b001.txt or b420.txt)." << endl;
-	cout << endl << "3 - Then you'll be shown an empty board, followed by hints to the words separated " << endl;
+	cout << endl << "3 - Then you can test your skills choosing the Hard mode, obviously, in the difficulty settings." << endl;
+	cout << " In Easy mode you get 5 hints, in Normal mode you get 3 and in Hard only 1!" << endl;
+	cout << endl << "4 - Then you'll be shown an empty board, followed by hints to the words separated " << endl;
 	cout << " by their position and direction." << endl;
 	cout << " We wouldn't want to make things too hard for you, so now there's no excuses " << endl;
 	cout << " for a perfect game!" << endl;
-	cout << "4 - Indicate the position where you want to insert a word using the format LcD." << endl;
+	cout << "5 - Indicate the position where you want to insert a word using the format LcD." << endl;
 	cout << " This stands for Line, column and Direction. Remember, the case is important!" << endl;
-	cout << endl << "5 - You choose where do you want to insert a word or if you want to remove" << endl;
+	cout << endl << "6 - You choose where do you want to insert a word or if you want to remove" << endl;
 	cout << " a previously inserted word. " << endl;
 	cout << " Don't worry if you mess up, we have your back! Use '-' to remove a word." << endl;
-	cout << endl << "6 - If you need help, you can call it writing '?' when asked for a word." << endl;
+	cout << endl << "7 - If you need help, you can call it writing '?' when asked for a word." << endl;
 	cout << " If the first hint wasn't enough, here you go. But attention, "<< endl;
 	cout << " we are keeping an eye on the number of hints you use so watch out!" << endl;
-	cout << endl << "7 - If you want to go back enter X, but be careful you might lose all progress!" << endl;
-	cout << endl << "8 - When you finish the board, we'll check if all words are valid." << endl;
+	cout << endl << "8 - If you want to go back enter X, but be careful you might lose all progress!" << endl;
+	cout << endl << "9 - When you finish the board, we'll check if all words are valid." << endl;
 	cout << " If so, your performance will be saved, with your name, time spent of the board and number of hints used." << endl;
 	cout << " Otherwise you get to erase the invalid words and try again " << endl;
 	cout << endl << "HAVE FUN!" << endl;
@@ -115,7 +119,10 @@ void playgame(cwplayer game, Player p1, string board) {
 			if (cin.eof()) {   // as seen in the Program 1 this condition clear the cin status in case the user calls cin.eof()
 				cin.clear();
 				break;
-			} else if (!game.positionalCheck(pos)) {  // will only proceed if the position entered is a valid one
+			}
+			else if (pos == "x" || pos == "X")
+				return;
+			else if (!game.positionalCheck(pos)) {  // will only proceed if the position entered is a valid one
 				cout << endl;
 				continue;
 			}

@@ -12,7 +12,6 @@
 #include <windows.h>
 #endif
 
-using namespace std;
 //COLOR CODES: 
 #define BLACK 0
 #define BLACK_B 0

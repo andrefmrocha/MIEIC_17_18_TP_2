@@ -2,6 +2,7 @@
 // Created by andrefmrocha on 06-05-2018.
 //
 #include "Player.h"
+using namespace std;
 
 Player::Player(string name, string difficulty)
 {

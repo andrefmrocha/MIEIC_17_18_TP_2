@@ -12,12 +12,11 @@
 #include <fstream>
 #include <ctime>
 
-using namespace std;
 
 class Dictionary {
 public:
     Dictionary();
-    Dictionary(string name);
+    Dictionary(std::string name);
 
     /**************************************
     ******************getWords************
@@ -33,7 +32,7 @@ public:
     * all of its words in map.
      * @param name
     */
-    void openDict(string name);
+    void openDict(std::string name);
     /*********************************************
     ******************getDict********************
     * The getDict method grabs the name of the
@@ -41,29 +40,29 @@ public:
     * opens it.
     * @param iname
     */
-    void getDict(string iname);
-    map<string, vector<string>> synonymDict;
+    void getDict(std::string iname);
+    std::map<std::string, std::vector<std::string>> synonymDict;
 protected:
     /********************************************
     *****************toUpper********************
     * Places a whole word to capital letters.
     * @param word
      */
-    void toUpper(string &word);
+    void toUpper(std::string &word);
 
     /*********************************************************
     **********************isWordinDict***********************
     * @param word
      * @return if the word is in the Dictionary
     */
-    bool isWordinDict(string word);
+    bool isWordinDict(std::string word);
     /********************************************
     *******************randomsynDict************
     * @param word
     * @return a random synonym of the given word
     */
-    string randomsynDict(string word);
-    string dictName;
+    std::string randomsynDict(std::string word);
+    std::string dictName;
 private:
     long words;
 };

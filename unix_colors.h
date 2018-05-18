@@ -10,7 +10,6 @@
 #ifdef __unix__
 #include <unistd.h>
 #endif
-using namespace std;
 // TEXT COLOR CODES
 #define NO_COLOR "\033[0m"
 #define BLACK "\033[0;30m"
@@ -39,6 +38,6 @@ using namespace std;
 #define CYAN_B "\033[0;46m"
 #define LIGHTGRAY "\033[1;47m"
 
-void setcolor(string color);
-void setcolor(string color, string background_color);
+void setcolor(std::string color);
+void setcolor(std::string color, std::string background_color);
 #endif //PROJETO_2_UNIX_COLORS_H

@@ -15,7 +15,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
 
 class Board {
 public:
@@ -35,6 +34,7 @@ public:
 	 * @param columns
  	*/
     Board(unsigned int lines, unsigned int columns);
+	
 	/****************************************************************
  	**************************resizeBoard***************************
  	* resizeBoard method is used to create a board to fit the
@@ -57,20 +57,23 @@ public:
  	* @param position
  	* @return if a positional is valid to add a word
  	*/
-    bool positionalCheck(string position);
+    bool positionalCheck(std::string position);
+	
 	/******************************************************
  	********************board_show************************
  	* board_show methos is used to show the board to the
  	* user.
  	*/
     void board_show();
+	
 	/*************************************************************
 	 *************************** eraseWord************************
  	* The eraseWord method gives the possibility to the user to
  	* delete a selected word from vector of pairs.
  	* @param word
  	*/
-    bool eraseWord(string position);
+    bool eraseWord(std::string position);
+	
 	/**********************************************
  	******************readFile********************
  	* The readFile method is used to read a given
@@ -78,24 +81,28 @@ public:
  	* @param iname
  	* @return if the word was saved
  	*/
-    bool readFile(string iname);
+    bool readFile(std::string iname);
+	
 	/************************************************************
 	 ***********************fillBoard****************************
 	 * The fillBoard method is used to fill the Board as a means
  	* of preparing it with all the given rules.
 	 */
 	void fillBoard();
+	
 	/***********************************************
 	 *********************setBoardname**************
  	* Method to changed the board name.
  	* @param bname
  	*/
-	void setBoardname(string bname);
+	void setBoardname(std::string bname);
+	
 	/***********************************************
  	******************giveBoardName****************
  	* @return the name of the board
  	*/
-	string giveBoardName();
+	std::string giveBoardName();
+	
 	/***********************************************
 	 ******************checkFinished****************
  	* @return if the board is finished
@@ -104,8 +111,9 @@ public:
 protected:
     int lines;
     int columns;
-    vector<vector <char>> board;
-    vector<pair<string, string>> wordPos;
+	std::vector<std::vector <char>> board;
+    std::vector<std::pair<std::string, std::string>> wordPos;
+	
 	/*********************************************************
 	 ********************* writeAllWords *********************
  	* writeAllWords method is used to run the vector of pairs
@@ -113,6 +121,7 @@ protected:
  	* write.
 	 */
     void writeAllWords();
+	
 	/*************************************************************
  	*************************** clear ***************************
  	* The clear method is used to clean the board after analyzing
@@ -120,15 +129,18 @@ protected:
  	* operation.
  	*/
     void clear();
+	
 	/*********************************************
 	 **************countColumn*******************
  	* @param savingString
  	* @return number of columns in a board
  	*/
-    int countColumn(string savingString);
+    int countColumn(std::string savingString);
+	
 	bool finished;
 private:
-	string boardname;
+	std::string boardname;
+	
 	/***************************************************************************
 	* *************************** writeWord ***********************************
  	* writeWord method is used to actually write a Word a word in the board
@@ -136,7 +148,7 @@ private:
  	* @param position
  	* @param word
  	*/
-    void writeWord(string position, string word);
+    void writeWord(std::string position, std::string word);
 };
 
 
