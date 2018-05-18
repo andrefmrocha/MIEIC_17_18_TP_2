@@ -106,7 +106,7 @@ void cwplayer::game_show()
 }
 
 
-bool cwplayer::addPlayerWord(string position, string word)
+bool cwplayer::writePlayerWord(string position, string word)
 {
     int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
     int pos_h = static_cast<int>(position[0]-'A');
@@ -124,15 +124,7 @@ bool cwplayer::addPlayerWord(string position, string word)
     }
     if(direc == 'V')
     {
-        if((pos_h + word.size()) > lines )  //In case there isn't enough space on the board, the word is ignored
-        {
-            cout << endl << "Not enough space" << endl << endl;
-            clear();
-            return false;
-        }
-        else
-        {
-            for(auto i: word)
+        for(auto i: word)
             {
                 if(board[pos_h][pos_v] != '.' && board[pos_h][pos_v] != i)    //If any of positions of the board are
                 {                                                           // taken with letters different from the word
@@ -146,19 +138,11 @@ bool cwplayer::addPlayerWord(string position, string word)
                 }
                 pos_h++;
             }
-        }
+
     }
     else    //The same process is repeated for an horizontal word
     {
-        if((pos_v + word.size()) > columns)
-        {
-            cout << endl << "Not enough space." << endl << endl;
-            clear();
-            return false;
-        }
-        else
-        {
-            for(auto i: word)
+        for(auto i: word)
             {
                 if(board[pos_h][pos_v] != '.' && board[pos_h][pos_v]!= i)
                 {
@@ -172,9 +156,8 @@ bool cwplayer::addPlayerWord(string position, string word)
                 }
                 pos_v++;
             }
-        }
+
     }
-    userWordPos.push_back(pair<string, string>(word, position));//The word is added to another vector of pairs
     return true;
 }
 
@@ -213,6 +196,10 @@ bool cwplayer::removePlayerWord(string position)
         {
             removeWord(userWordPos[i].second, userWordPos[i].first.size());
             userWordPos.erase(userWordPos.begin() + i);
+            for(auto i: userWordPos)
+            {
+                writePlayerWord(i.second, i.first);
+            }
             return true;
         }
     }
@@ -238,10 +225,6 @@ void cwplayer::removeWord(string position, int size)
         {
             board[pos_h][pos_v+i] = '.';
         }
-    }
-    for(auto i: userWordPos)
-    {
-        addPlayerWord(i.second, i.first);
     }
 }
 
@@ -283,4 +266,17 @@ int cwplayer::getNumHints() {
 
 void cwplayer::NumHintsInc() {
 	numHints += 1;
+}
+
+bool cwplayer::addPlayerWord(string position, string word)
+{
+    if(writePlayerWord(position, word))
+    {
+        userWordPos.push_back(pair<string, string>(word, position));//The word is added to another vector of pairs
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

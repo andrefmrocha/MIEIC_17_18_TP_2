@@ -104,6 +104,7 @@ private:
     * @param size
     */
     void removeWord(string position, int size);
+    bool writePlayerWord(string position, string word);
     vector<pair<string, string>> vertiWord;
     vector<pair<string, string>> horiWord;
     vector<pair<string, string>> userWordPos;
