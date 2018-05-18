@@ -15,57 +15,37 @@ Player::Player(string name, string difficulty)
 		this->difficulty = 1;
 }
 
-/***************************************
- ****************updateTime*************
- * Method to update user Time.
- */
+
 void Player::updateTime()
 {
     playerTime = time(NULL) - playerTime;
 }
 
-/***************************************
- ****************updateTime*************
- * Method to finish the user's game.
- * @return the number of seconds used
- */
+
 unsigned long Player::finishGame()
 {
     updateTime();
     return playerTime;
 }
 
-/***********************************
- ***************GetName*************
- * @return the name of the player
- */
+
 string Player:: GetName() {
 	return playerName;
 }
 
-/***************************************
- ****************updateTime*************
- * Method to update Player Difficulty.
- */
+
 void Player::updateDifficulty(int number)
 {
     difficulty = number;
 }
 
-/***********************************
- ***************getDifficulty*************
- * @return the difficulty chosen
- */
+
 int Player::getDifficulty()
 {
     return difficulty;
 }
 
-/**********************************
-**********nameDifficulty***********
-* @return the difficulty chosen in
-* a string
-*/
+
 string Player::nameDifficulty()
 {
 	int difficulty = getDifficulty(); // gets the number of hints specific of each difficulty
@@ -80,11 +60,7 @@ string Player::nameDifficulty()
 	}
 }
 
-/**************************************
-***************getTime*****************
-* @return the actual time of the player
-* game
-*/
+
 int Player::getTime()
 {
 	return playerTime;

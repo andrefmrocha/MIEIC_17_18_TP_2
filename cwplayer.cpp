@@ -2,11 +2,7 @@
 // Created by andrefmrocha on 04-05-2018.
 //
 #include "cwplayer.h"
-/*****************************************
- ****************prepareBoard*************
- * The prepareBoard method prepares the
- * the board for the beggining of the game
- */
+
 void cwplayer::prepareBoard()
 {
     fillBoard();
@@ -22,11 +18,7 @@ void cwplayer::prepareBoard()
     }
 }
 
-/*******************************************
- ****************startGame******************
- * The startGame method is used to first
- * initiliaze a game for the user to play.
- */
+
 
 void cwplayer::startGame()
 {
@@ -61,12 +53,7 @@ void cwplayer::startGame()
 }
 
 
-/******************************************
- ******************spacing*****************
- * The spacing method is used to separate
- * words without losing organization
- * @param word
- */
+
 void cwplayer::spacing(int word)
 {
     for(int i = 0; i < (50 - word); i++)
@@ -75,12 +62,7 @@ void cwplayer::spacing(int word)
     }
 }
 
-/****************************************
- **************sepWords******************
- * The sepWords method is used to separate
- * words into 2 groups: horizontal and
- * vertical ones.
- */
+
 void cwplayer::sepWords()
 {
     for(auto i: wordPos)
@@ -96,11 +78,7 @@ void cwplayer::sepWords()
     }
 }
 
-/******************************************
- ******************game_show***************
- * The game_show methos shows the board to
- * the user
- */
+
 void cwplayer::game_show()
 {
     setcolor(RED); // The color is set to red
@@ -127,12 +105,7 @@ void cwplayer::game_show()
     setcolor(WHITE, BLACK_B);
 }
 
-/*****************************************************************
- **********************addPlayerWord******************************
- * @param position
- * @param word
- * @return if the word was added
- */
+
 bool cwplayer::addPlayerWord(string position, string word)
 {
     int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
@@ -205,10 +178,7 @@ bool cwplayer::addPlayerWord(string position, string word)
     return true;
 }
 
-/**********************************************************
- *********************checkBoard***************************
- * @return if the board was currectly filled
- */
+
 bool cwplayer::checkBoard()
 {
     if(userWordPos.size()!= wordPos.size()) //If their size is not the same, it means it hasn't been properly filled
@@ -234,13 +204,7 @@ bool cwplayer::checkBoard()
     return flag;
 }
 
-/*******************************************************
- ***********************removePlayerWord****************
- * The removePlayerWord method is used to remove a word
- * from the board
- * @param position
- * @return
- */
+
 bool cwplayer::removePlayerWord(string position)
 {
     for(int i = 0; i < userWordPos.size(); i++)
@@ -255,13 +219,7 @@ bool cwplayer::removePlayerWord(string position)
     return false;
 }
 
-/********************************************************
- **********************removeWord************************
- * The removeWord method replaces all the spaces with
- * characters with dots.
- * @param position
- * @param size
- */
+
 void cwplayer::removeWord(string position, int size)
 {
     int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
@@ -287,13 +245,7 @@ void cwplayer::removeWord(string position, int size)
     }
 }
 
-/****************************************************
- *********************helpPlayerword*****************
- * The helpPlayerword method is used to give out a
- * synonym as help for the user.
- * @param position
- * @return
- */
+
 bool cwplayer::helpPlayerword(string position) {
 	string word;
 	NumHintsInc(); // Increases the number os hints used
@@ -314,11 +266,7 @@ bool cwplayer::helpPlayerword(string position) {
 	return flag;
 }
 
-/*************************************************
- ******************findPosition*******************
- * @param word
- * @return the position of a word
- */
+
 string cwplayer::findPosition(string word) {
 	for (auto i : userWordPos) {
 		if (i.first == word) {
@@ -328,18 +276,11 @@ string cwplayer::findPosition(string word) {
 	return "1";
 }
 
-/****************************************
- ******************getNumHints***********
- * @return the number of hints already used
- */
+
 int cwplayer::getNumHints() {
 	return numHints;
 }
-/****************************************
- ******************getNumHints***********
- * The method increments the number
- * of hints used.
- */
+
 void cwplayer::NumHintsInc() {
 	numHints += 1;
 }

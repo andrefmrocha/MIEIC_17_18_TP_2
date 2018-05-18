@@ -12,12 +12,7 @@ Dictionary::Dictionary(string name)
     openDict(name);
 }
 
-/*******************************************************
- **********************openDict*************************
- * The openDict method opens a dictionary and stores
- * all of its words in map.
- * @param name
- */
+
 void Dictionary::openDict(string name)
 {
     ifstream infile(name); //Opens the file
@@ -66,11 +61,7 @@ void Dictionary::openDict(string name)
     }
     dictName = name; //The name of the dictionary used is stored
 }
-/*********************************************************
- **********************isWordinDict***********************
- * @param word
- * @return if the word is in the Dictionary
- */
+
 bool Dictionary::isWordinDict(string word)
 {
 //    toUpper(word);
@@ -84,11 +75,7 @@ bool Dictionary::isWordinDict(string word)
     return false;
 }
 
-/********************************************
- *****************toUpper********************
- * Places a whole word to capital letters.
- * @param word
- */
+
 void Dictionary::toUpper(string &word)
 {
     for(auto &i: word)
@@ -98,20 +85,12 @@ void Dictionary::toUpper(string &word)
 }
 
 
-/**************************************
- ******************getWords************
- * @return the number of words in the
- * dictionary
- */
+
 long Dictionary::getWords() {
 	return words;
 }
 
-/********************************************
- *******************randomsynDict************
- * @param word
- * @return a random synonym of the given word
- */
+
 string Dictionary::randomsynDict(string word)
 {
     vector<string> synonymVec = synonymDict[word]; //The vector of synonyms is grabbed
@@ -120,13 +99,7 @@ string Dictionary::randomsynDict(string word)
     return synonymVec[index]; //The synonym is returned
 }
 
-/*********************************************
- ******************getDict********************
- * The getDict method grabs the name of the
- * dictionary from the .txt stored file and
- * opens it.
- * @param iname
- */
+
 void Dictionary::getDict(string iname)
 {
     ifstream infile(iname);

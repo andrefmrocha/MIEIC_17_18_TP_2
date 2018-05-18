@@ -3,13 +3,7 @@
 //
 #include "cwcreator.h"
 
-/************************************************
- **********************helpWord******************
- * The helpWord method is used to check for
- * possible words to be used in the given space
- * @param position
- * @return if it's a fitting position
- */
+
 bool cwcreator::helpWord(string position)
 {
     if(position.size() != 3) //Checks if the position argument was passed correctly
@@ -108,15 +102,7 @@ bool cwcreator::helpWord(string position)
         return false;
     }
 }
-/*****************************************************************
- ***************************wildcardMatch*************************
- * The wildcardMatch method was given in the previous work and
- * its function is to compare if a string meets the criteria given
- * by a sequence of '?', '*', or letters.
- * @param str
- * @param strWild
- * @return if a word is valid
- */
+
 bool cwcreator::wildcardMatch(const char *str, const char *strWild)
 {
     // We have a special case where string is empty ("") and the mask is "*".
@@ -165,13 +151,7 @@ bool cwcreator::wildcardMatch(const char *str, const char *strWild)
     // Have a match? Only if both are at the end...
     return !*str && !*strWild;
 }
-/*********************************************************************
- *****************************wildcardWords***************************
- * The wildcardWords is used to run the wildcardMatch method through
- * all the words in the dictionary.
- * @param word
- * @param possiblewords
- */
+
 void cwcreator::wildcardWords(string word, vector<string> &possiblewords)
 {
     for(auto i: synonymDict)
@@ -186,16 +166,7 @@ void cwcreator::wildcardWords(string word, vector<string> &possiblewords)
 
 
 
-/*************************************************************
- * ******************** addWord ******************************
- * addWord method has the purpose of checking if a word is valid for the given position by the user
- * A word is never added to the board itself, it is stored on our vector of pairs where we only store the word and the string
- * related to its position
- * @param position
- * @param word
- * @return true if word
- * is valid for the selected position
- **************************************************************/
+
 bool cwcreator::addWord(string position, string word)    // Adds the word to the board, returns false if it can't
 {
     if(isWordinDict(word))
@@ -258,19 +229,12 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
     clear();    //The words are removed from the board once again
     return true; //A true boolean is passed on, in order for it to know the word was stored
 }
-/******************************************************************
- **************************getDictName*****************************
- * @return the name of the dictionary
- */
+
 string cwcreator::getDictName() {
 	return dictName;
 }
 
-/******************************************************************
-**************************getBoardName*****************************
-* This function will check what is the name of the board that the 
-* user saves and @return it to be used in tha saving process. the name of the dictionary
-*/
+
 string cwcreator::getBoardName() {
 	string boardattr = giveBoardName(); // if the boards has been created already and is being loaded
 	if (!(boardattr == ""))				// this part of the code will verify it
@@ -326,11 +290,7 @@ string cwcreator::getBoardName() {
 	}
 }
 
-/******************************************************************
- **************************board_save******************************
- * The board_save method saves the board, the dictionary and the
- * the words used in a .txt file for future use.
- */
+
 void cwcreator::board_save()
 {
 	fillBoard(); // The board is prepared to be written
@@ -363,11 +323,7 @@ void cwcreator::board_save()
 	else cout << endl << "The board was saved, but not finished. " << endl;
 }
 
-/********************************************************
- ***********************checkWords***********************
- * The checkWords method checks which words are valid
- * or not given the dictionary.
- */
+
 void cwcreator::checkWords()
 {
     for(auto i: wordPos)

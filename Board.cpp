@@ -2,24 +2,14 @@
 // Created by joaom on 26-04-2018.
 //
 #include "Board.h"
-/*************************************************************
- *************************Board*******************************
- * Board constructor creates class, usually for prompting
- * the method readFile.
- */
+
 Board::Board()
 {
     lines = 0;
     columns = 0;
     finished = false;
 }
-/************************************************************
- **********************Board*********************************
- * Board constructor when the measures of the board are
- * already known.
- * @param lines
- * @param columns
- */
+
 Board::Board(unsigned int lines, unsigned int columns) {
     this->lines=lines; //Updates lines
     this->columns=columns; //Updates columns
@@ -34,13 +24,7 @@ Board::Board(unsigned int lines, unsigned int columns) {
 	boardname = ""; //The name of the board is saved as an empty string
 }
 
-/****************************************************************
- **************************resizeBoard***************************
- * resizeBoard method is used to create a board to fit the
- * criteria given by the file.
- * @param lines
- * @param columns
- */
+
 void Board::resizeBoard(unsigned int lines, unsigned int columns)
 {
     this->lines=lines; //Updates lines
@@ -55,11 +39,7 @@ void Board::resizeBoard(unsigned int lines, unsigned int columns)
     } // Creates the new vector
 }
 
-/******************************************************
- ********************board_show************************
- * board_show methos is used to show the board to the
- * user.
- */
+
 void Board::board_show()    //All the words are written in their positions in order to show it to the user
 {
     fillBoard(); //Prepares the board to be shown
@@ -88,13 +68,7 @@ void Board::board_show()    //All the words are written in their positions in or
     clear();            //After showing it, the board itself is cleared
 }
 
-/***************************************************************************
- * *************************** writeWord ***********************************
- * writeWord method is used to actually write a Word a word in the board
- * Various methods require a filled board to analyze and make several decisions
- * @param position
- * @param word
- */
+
 void Board::writeWord(string position, string word)
 {
     int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
@@ -137,12 +111,7 @@ void Board::writeWord(string position, string word)
         }
     }
 }
-/*********************************************************
- ********************* writeAllWords *********************
- * writeAllWords method is used to run the vector of pairs
- * and indicate to writeWord, the parameters for it to
- * write.
- */
+
 void Board::writeAllWords()
 {
     for(auto i: wordPos)
@@ -150,12 +119,7 @@ void Board::writeAllWords()
         writeWord(i.second, i.first);
     }
 }
-/*************************************************************
- *************************** clear ***************************
- * The clear method is used to clean the board after analyzing
- * it. Our board has a standard to be left clean after each
- * operation.
- */
+
 void Board::clear()
 {
     for (auto& i: board)
@@ -166,12 +130,7 @@ void Board::clear()
         }
     }
 }
-/*************************************************************
- *************************** eraseWord************************
- * The eraseWord method gives the possibility to the user to
- * delete a selected word from vector of pairs.
- * @param word
- */
+
 bool Board::eraseWord(string position)
 {
     for (int i = 0; i < wordPos.size(); ++i)
@@ -184,12 +143,7 @@ bool Board::eraseWord(string position)
     }
 	return false;
 }
-/***********************************************************
- ***********************finishBoard*************************
- * The finishBoard method searches for the 'F' character on
- * the position string which indicates if a word is valid or
- * not
- */
+
 void Board::finishBoard()
 {
     for (auto i: wordPos)
@@ -201,11 +155,7 @@ void Board::finishBoard()
     }
     finished = true; //Updates finished if all words are valid
 }
-/************************************************************
- ***********************fillBoard****************************
- * The fillBoard method is used to fill the Board as a means
- * of preparing it with all the given rules.
- */
+
 void Board::fillBoard()
 {
     writeAllWords();
@@ -223,11 +173,7 @@ void Board::fillBoard()
     }
 }
 
-/*********************************************
- **************countColumn*******************
- * @param savingString
- * @return number of columns in a board
- */
+
 int Board::countColumn(string savingString)
 {
     int num = 0;
@@ -239,13 +185,7 @@ int Board::countColumn(string savingString)
     return num;
 }
 
-/**********************************************
- ******************readFile********************
- * The readFile method is used to read a given
- * .txt file and prepare a board accordingly
- * @param iname
- * @return if the word was saved
- */
+
 bool Board::readFile(string iname)
 {
     ifstream infile(iname); //Opens the file
@@ -309,11 +249,7 @@ bool Board::readFile(string iname)
 	boardname = iname; //Updates all the information regarding the board
 	return true;
 }
-/**************************************************
- *******************positionalCheck****************
- * @param position
- * @return if a positional is valid to add a word
- */
+
 bool Board::positionalCheck(string position)
 {
     if(position.size() != 3) //Checks if the position argument was passed correctly
@@ -336,27 +272,17 @@ bool Board::positionalCheck(string position)
     }
     return true;
 }
-/***********************************************
- *********************setBoardname**************
- * Method to changed the board name.
- * @param bname
- */
+
 void Board::setBoardname(string bname) {
 	boardname = bname;
 }
 
-/***********************************************
- ******************giveBoardName****************
- * @return the name of the board
- */
+
 string Board::giveBoardName() {
 	return boardname;
 }
 
-/***********************************************
- ******************checkFinished****************
- * @return if the board is finished
- */
+
 bool Board::checkFinished()
 {
     return finished;
