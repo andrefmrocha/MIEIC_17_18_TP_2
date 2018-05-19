@@ -70,7 +70,7 @@ bool cwcreator::helpWord(string position)
                     cout << "There are no more options." << endl;
                     return true;
                 }
-                srand(time(NULL)+i);
+                srand((unsigned int)(time(NULL)+i));
                 unsigned long index = rand() % possibleWords.size();
                 cout << i << "-" << possibleWords[index] << endl;
                 possibleWords.erase(possibleWords.begin()+index);
@@ -177,13 +177,13 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
     {
         position.push_back('F'); //If the word is not in the dictionary, a 'F is added to the positional string
     }
-    int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
-    int pos_h = static_cast<int>(position[0]-'A');
+    unsigned int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
+    unsigned int pos_h = static_cast<int>(position[0]-'A');
     char direc = position[2];   // The direction is saved as a char
     fillBoard();    //Writes the words in the board in order to analyze if the new word was given a valid position
     if(direc == 'V')
     {
-        if((pos_h + word.size()) > lines )  //In case there isn't enough space on the board, the word is ignored
+        if((pos_h + word.size()) > (unsigned int) (lines) )  //In case there isn't enough space on the board, the word is ignored
         {
             cout << endl << "Not enough space" << endl << endl;
             clear();
@@ -205,7 +205,7 @@ bool cwcreator::addWord(string position, string word)    // Adds the word to the
     }
     else    //The same process is repeated for an horizontal word
     {
-        if((pos_v + word.size()) > columns)
+        if((pos_v + word.size()) > (unsigned int) (columns))
         {
             cout << endl << "Not enough space." << endl << endl;
             clear();
@@ -314,7 +314,7 @@ void cwcreator::board_save()
 		outfile << endl; //The board is written on the file
 	}
 	outfile << endl;
-	for (int i2 = 0; i2 < wordPos.size(); i2++) {
+	for (unsigned int i2 = 0; i2 < wordPos.size(); i2++) {
 		outfile << wordPos.at(i2).second.substr(0,3) << " " << wordPos.at(i2).first << endl;
 	} //The words are written on the file
 	clear(); //The actual board is cleared

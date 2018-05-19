@@ -29,7 +29,7 @@ void cwplayer::startGame()
     spacing(10);
     cout << "VERTICAL" << endl;
     sepWords(); //The words are separated into two groups: horizontal and vertical
-    for(int i = 0; i < vertiWord.size() || i < horiWord.size(); i++)
+    for(unsigned int i = 0; i < vertiWord.size() || i < horiWord.size(); i++)
     {
         if(i < horiWord.size())
         {
@@ -172,7 +172,7 @@ bool cwplayer::checkBoard()
     sort(userWordPos.begin(), userWordPos.end()); //Both vectors are sorted in order to run through them
     sort(wordPos.begin(), wordPos.end());
     bool flag = true;
-    for(int i = 0; i < userWordPos.size();i++)
+    for(unsigned int i = 0; i < userWordPos.size();i++)
     {
         if(userWordPos[i].first == wordPos[i].first)
         {
@@ -190,7 +190,7 @@ bool cwplayer::checkBoard()
 
 bool cwplayer::removePlayerWord(string position)
 {
-    for(int i = 0; i < userWordPos.size(); i++)
+    for(unsigned int i = 0; i < userWordPos.size(); i++)
     {
         if(userWordPos[i].second == position)
         {

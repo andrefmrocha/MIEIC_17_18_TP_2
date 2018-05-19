@@ -16,7 +16,7 @@ public:
  	* Method to finish the user's game.
  	* @return the number of seconds used
  	*/
-    unsigned long finishGame();
+   std::time_t finishGame();
 	/***************************************
  	****************updateTime*************
  	* Method to update user Time.
@@ -42,7 +42,7 @@ public:
 	* @return the actual time of the player
 	* game
 	*/
-	int getTime();
+	std::time_t getTime();
 	/**********************************
 	**********nameDifficulty***********
 	* @return the difficulty chosen in
@@ -51,7 +51,7 @@ public:
 	std::string nameDifficulty();
 private:
     std::string playerName;
-    unsigned long playerTime;
+    std::time_t playerTime;
     int difficulty;
 };
 

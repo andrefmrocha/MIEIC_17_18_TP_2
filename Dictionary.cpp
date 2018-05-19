@@ -95,7 +95,7 @@ long Dictionary::getWords() {
 string Dictionary::randomsynDict(string word)
 {
     vector<string> synonymVec = synonymDict[word]; //The vector of synonyms is grabbed
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
     size_t index = rand() % synonymVec.size(); //A random index from it is chosen
     return synonymVec[index]; //The synonym is returned
 }

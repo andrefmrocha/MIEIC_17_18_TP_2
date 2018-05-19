@@ -16,7 +16,7 @@ using namespace std;
 * @param &input
 */
 void UpperInput(string &input) {
-	for (int i = 0; i < input.length(); i++) {
+	for (unsigned int i = 0; i < input.length(); i++) {
 		input[i] = toupper(input[i]);  //goes through the string using toupper to every character belonging to the string
 	}
 }
@@ -89,7 +89,7 @@ void introduction() {
 */
 void finishplay(cwplayer game, Player p1,string dest) {
 	fstream outfile(dest, ios::app);		// sets the output to the file desired
-	unsigned long duration = p1.getTime(); // gets the time (in seconds) that took the user to finish the game
+	time_t duration = p1.getTime(); // gets the time (in seconds) that took the user to finish the game
 	outfile << p1.GetName() << " - Elapsed time: " << duration << " seconds. Number of hints used: " << game.getNumHints() << ". Difficulty: " << p1.nameDifficulty() << endl;
 }
 

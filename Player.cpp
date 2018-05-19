@@ -23,7 +23,7 @@ void Player::updateTime()
 }
 
 
-unsigned long Player::finishGame()
+time_t Player::finishGame()
 {
     updateTime();
     return playerTime;
@@ -59,10 +59,11 @@ string Player::nameDifficulty()
 	case 1:
 		return "Hard.";
 	}
+	return "Not found";
 }
 
 
-int Player::getTime()
+time_t Player::getTime()
 {
 	return playerTime;
 }

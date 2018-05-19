@@ -14,10 +14,10 @@ Board::Board(unsigned int lines, unsigned int columns) {
     this->lines=lines; //Updates lines
     this->columns=columns; //Updates columns
     vector<char> vec_columns;
-     for (int i = 0; i < columns; i++) {
+     for (unsigned int i = 0; i < columns; i++) {
         vec_columns.push_back('.');
     }
-    for (int j = 0; j < lines; j++){ // Creates the vector of char vectors
+    for (unsigned int j = 0; j < lines; j++){ // Creates the vector of char vectors
         board.push_back(vec_columns);
     }
     finished = false;
@@ -31,10 +31,10 @@ void Board::resizeBoard(unsigned int lines, unsigned int columns)
     this->columns=columns; //Updates columns
     board.clear();
     vector<char> cenas;
-    for (int i = 0; i < columns; i++) {
+    for (unsigned int i = 0; i < columns; i++) {
         cenas.push_back('.');
     }
-    for (int j = 0; j < lines; j++){
+    for (unsigned int j = 0; j < lines; j++){
         board.push_back(cenas);
     } // Creates the new vector
 }
@@ -71,8 +71,8 @@ void Board::board_show()    //All the words are written in their positions in or
 
 void Board::writeWord(string position, string word)
 {
-    int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
-    int pos_h = static_cast<int>(position[0]-'A');
+    unsigned int pos_v = static_cast<int>(position[1]-'a');  //Save both positions as integers
+    unsigned int pos_h = static_cast<int>(position[0]-'A');
     char direc = position[2];   //Saves the direction as a char
     if(direc == 'V')
     {
@@ -81,7 +81,7 @@ void Board::writeWord(string position, string word)
             if(board[pos_h-1][pos_v] =='.')
                 board[pos_h-1][pos_v] = '#';    //Checks if there's space before the word to write a '#'
         }
-        if((pos_h + word.size()) < lines)
+        if((pos_h + word.size()) < (unsigned int) (lines))
         {
             if(board[pos_h+(word.size())][pos_v] == '.')
                 board[pos_h+(word.size())][pos_v] = '#';    //Checks if there's space after the word to write a '#
@@ -99,7 +99,7 @@ void Board::writeWord(string position, string word)
             if(board[pos_h][pos_v-1] == '.')
                 board[pos_h][pos_v-1] = '#';
         }
-        if((pos_v + word.size()) < columns)
+        if((pos_v + word.size()) < (unsigned int) (columns))
         {
             if(board[pos_h][pos_v+(word.size())] =='.')
                 board[pos_h][pos_v+(word.size())] = '#';
@@ -124,7 +124,7 @@ void Board::clear()
 {
     for (auto& i: board)
     {
-        for(int i2 = 0; i2 < i.size(); i2++)
+        for(unsigned int i2 = 0; i2 < i.size(); i2++)
         {
             i[i2] = '.';
         }
@@ -133,7 +133,7 @@ void Board::clear()
 
 bool Board::eraseWord(string position)
 {
-    for (int i = 0; i < wordPos.size(); ++i)
+    for (unsigned int i = 0; i < wordPos.size(); ++i)
     {
         if(wordPos[i].second.substr(0,3) == position)
         {
