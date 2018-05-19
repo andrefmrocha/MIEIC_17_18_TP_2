@@ -83,6 +83,12 @@ public:
     * of hints used.
     */
 	void NumHintsInc();
+    /**************************************************
+    *******************positionalCheck****************
+    * @param position
+    * @return if a positional is valid to add a word
+    */
+	bool positionalCheck(std::string position);
 private:
    
 	/******************************************

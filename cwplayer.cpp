@@ -280,3 +280,19 @@ bool cwplayer::addPlayerWord(string position, string word)
         return false;
     }
 }
+
+bool cwplayer::positionalCheck(std::string position)
+{
+    if(Board::positionalCheck(position))
+    {
+        for(auto i: wordPos)
+        {
+            if(i.second == position)
+            {
+                return true;
+            }
+        }
+    }
+    cout << "Not a possible position." << endl;
+    return false;
+}
